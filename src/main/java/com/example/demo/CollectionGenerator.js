@@ -163,7 +163,8 @@ db.createCollection("messages",
             "description": "Author must be objectId and is required"
           },
           "seen":{
-            "bsonType": "boolean"
+            "bsonType": "bool",
+            "description": "Seen must be boolean"
           }
         },
       }
@@ -218,7 +219,7 @@ db.createCollection("comments",
             "description": "Post must be objectId"
           },
           "flaggedAsSpam":{
-            "bsonType": "boolean",
+            "bsonType": "bool",
             "description": "FlaggedAsSpam must be boolean"
           },
           "replies" : {
