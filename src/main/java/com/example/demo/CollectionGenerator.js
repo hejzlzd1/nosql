@@ -222,11 +222,11 @@ db.createCollection("comments",
             "description": "FlaggedAsSpam must be boolean"
           },
           "replies" : {
-            bsonType: [ "array" ],
-            items: {
-              bsonType: "objectId"
+            "bsonType": [ "array" ],
+            "items": {
+              "bsonType": "objectId"
             },
-            description: "Replies must be an array of Comment"
+            "description": "Replies must be an array of Comment"
           },
 
         },
