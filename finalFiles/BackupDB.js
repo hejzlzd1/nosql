@@ -1,0 +1,1 @@
+mongodump --user "admin" --password "admin" --db "FriendWorker" --authenticationDatabase="admin" --out "backup"

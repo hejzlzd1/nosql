@@ -1,0 +1,2 @@
+use ('FriendWorker');
+db.dropDatabase();
