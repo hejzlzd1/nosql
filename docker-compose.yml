@@ -48,7 +48,7 @@ services:
     environment:
       ME_CONFIG_MONGODB_URL: mongodb://mongo2:27017/?readPreference=secondary
 
-
+#volumes
 volumes:
   mongoDBPrimary:
   mongoDBPrimary_config:
