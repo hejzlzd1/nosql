@@ -1,29 +1,56 @@
 version: '2.4'
 services:
-  mongo:
+  mongoPrimary:
     image: mongo
-    container_name: mongodb
+    container_name: mongodbPrimary
     restart: always
     ports:
       - '27017:27017'
+      - '27018:27017'
     volumes:
-      - mongoDB:/data/db
-      - mongodb_config:/data/configdb
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin
+      - mongoDBPrimary:/data/db
+      - mongoDBPrimary_config:/data/config
+    depends_on:
+      - mongo2
+    command: "mongod --bind_ip_all --replSet replicaSet"
 
-  mongo-express:
+  mongo-expressPrimary:
     image: mongo-express
-    container_name: mongo-express
+    container_name: mongo-expressPrimary
     restart: always
+    depends_on:
+      - mongoPrimary
     ports:
       - '8081:8081'
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
-      ME_CONFIG_MONGODB_URL: mongodb://admin:admin@mongo:27017/
+      ME_CONFIG_MONGODB_URL: mongodb://admin:admin@mongoPrimary:27017/?replicaSet=replicaSet
+
+  mongo2:
+    image: mongo
+    container_name: mongodbSecondary
+    restart: always
+    command: "mongod --bind_ip_all --replSet replicaSet"
+    ports:
+      - '27019:27017'
+    volumes:
+      - mongoDBSecondary:/data/db
+      - mongoDBSecondary_config:/data/config
+
+
+  mongo-express2:
+    image: mongo-express
+    container_name: mongo-expressSecondary
+    restart: always
+    depends_on:
+      - mongo2
+    ports:
+      - '8082:8081'
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://admin:admin@mongo2:27017/?readPreference=secondary
+
 
 volumes:
-  mongoDB:
-  mongodb_config:
+  mongoDBPrimary:
+  mongoDBPrimary_config:
+  mongoDBSecondary:
+  mongoDBSecondary_config:
