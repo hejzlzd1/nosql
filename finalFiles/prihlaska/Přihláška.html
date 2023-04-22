@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8"/>
+    <title>NoSQL Semestrální projekt</title>
+    <style>
+        body {
+            font-family: Calibri, sans-serif;
+            font-size: 100%;
+            line-height: 160%;
+        }
+
+        .border {
+            max-width: 999px;
+            margin: 0 auto;
+            box-shadow: 0 0 100px #888;
+            padding: 10px;
+        }
+
+        h1, h2, h3 {
+            padding: 5px 5px 5px 1em;
+        }
+
+        p {
+            padding: 5px 5px 5px 3em;
+        }
+
+        h1 {
+            text-align: center;
+            counter-reset: subheading;
+        }
+
+        h2 {
+            background-color: lightblue;
+            margin-top: 2em;
+            counter-reset: subheading;
+        }
+
+        h3 {
+            background-color: cadetblue;
+        }
+
+        a, a:active, a:visited {
+            color: #0031ec;
+        }
+
+        a:hover {
+            color: #ec0000;
+        }
+
+        .er-diagram-div {
+            text-align: center;
+        }
+
+        .er-diagram-img {
+            width: 100%;
+            max-width: 55em;
+        }
+
+        #page {
+            counter-reset: heading;
+        }
+
+        h2:before {
+            content: counter(heading) ") ";
+            counter-increment: heading;
+        }
+
+        h3:before {
+            content: counter(heading) "." counter(subheading) ") ";
+            counter-increment: subheading;
+        }
+
+        .description {
+            text-align: center;
+            font-size: 1.3em;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+<div class="border" id="page">
+    <h1>Přihláška semestrálního projektu</h1>
+
+
+    <div class="description">
+ 
+        <div>
+		Projekt se zaměřuje na vytvoření databáze za pomocí technologie MongoDB a Dockeru. Databáze se zaměřuje na téma sociální sítě, na kterou si uživatel může přidávat příspěvky. Každý příspěvěk lze označit jako "To se mi líbí", přidat k němu komentář či ho nahlásit jako spam. Taktéž si uživatelé mohou mezi sebou posílat textové zprávy.
+        </div>
+    </div>
+
+    <h2>Název práce</h2>
+    <p>FriendWorker - Social network</p>
+
+    <h2>Jména a odpovědnosti autorů</h2>
+    <h3>Zdeněk Hejzlar</h3>
+    <p>Příprava databázových entit, nastavení replikace a docker kontejnerů</p>
+    <h3>Jindřich Bobek</h3>
+    <p>Vytvoření návrhů API, návrh a tvorba dotazů na databázi</p>
+
+    <h2>E-R diagram</h2>
+    <div class="er-diagram-div">
+        <a href="ER_model.png">
+            <img alt="E-R diagram" class="er-diagram-img" src="ER_model.png" title="E-R diagram"/>
+        </a>
+    </div>
+</div>
+</body>
+</html>
