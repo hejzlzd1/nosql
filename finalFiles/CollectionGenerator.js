@@ -1,4 +1,4 @@
-use ('FriendWorker');
+use('FriendWorker');
 db.createCollection("users",
 {
     "validator": {
@@ -16,21 +16,25 @@ db.createCollection("users",
         "properties": {
           "firstName": {
             "bsonType": "string",
-            "maxLength": 25,
+            "maxLength": 45,
             "minLength": 2,
             "pattern": "^[A-Z][a-zA-Z ]*$",
             "description": "FirstName must be string and is required"
           },
           "lastName": {
             "bsonType": "string",
-            "maxLength": 25,
+            "maxLength": 45,
             "minLength": 2,
-            "pattern": "^[A-Z][a-zA-Z ]*$",
+            "pattern": "^[A-Z][a-zA-Z' ]*$",
             "description": "Lastname must be string and is required"
+          },
+          "password":{
+            "bsonType": "string",
+            "pattern": "^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){8,16}$"
           },
           "email": {
             "bsonType": "string",
-            "pattern": "^[a-zA-Z][\\w\\-.]{1,50}@[a-z]{1,10}[.][a-z]{1,5}$",
+            "pattern": "^((?!\\.)[\\w_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$",
             "description": "Email must be string and is required"
           },
           "address": {
@@ -40,19 +44,19 @@ db.createCollection("users",
             "properties": {
               "street": {
                 "bsonType": "string",
-                "maxLength": 30,
+                "maxLength": 50,
                 "minLength": 3,
                 "description": "Street is required string (max 30,min 3 chars)"
               },
               "city":{
                 "bsonType": "string",
-                "maxLength": 30,
+                "maxLength": 40,
                 "minLength": 2,
                 "description": "City is required string (max 30 chars,min 2)"
               },
               "country": {
                 "bsonType": "string",
-                "maxLength": 30,
+                "maxLength": 40,
                 "minLength": 3,
                 "description": "Country is required string (max 30 chars,min 3)"
               },
@@ -155,7 +159,7 @@ db.createCollection("messages",
             "description": "Text must be string and is required"
           },
            "author":{
-               "bsonType": "objectId",
+               "bsonType": "string",
                "description": "Author must be objectId and is required"
            },
           "receiver":{
@@ -182,11 +186,11 @@ db.createCollection("likes",
         ],
         "properties": {
            "post":{
-               "bsonType": "objectId",
+               "bsonType": "string",
                "description": "Post must be objectId and is required"
            },
            "author":{
-               "bsonType": "objectId",
+               "bsonType": "string",
                "description": "Author must be objectId and is required"
            }
         },
@@ -235,5 +239,3 @@ db.createCollection("comments",
     }
   }
 );
-
-

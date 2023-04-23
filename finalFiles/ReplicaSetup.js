@@ -12,6 +12,11 @@ var config = {
             "host": "mongo2:27017",
             "priority": 3
         },
+        {
+            "_id":3,
+            "host": "mongo3:27017",
+            "priority": 2
+        }
     ]
 };
 rs.initiate(config);

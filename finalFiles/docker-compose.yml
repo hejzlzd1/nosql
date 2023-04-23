@@ -51,7 +51,7 @@ services:
 
   mongo3:
     image: mongo
-    container_name: mongodbSecondary
+    container_name: mongodbThird
     restart: always
     command: "mongod --bind_ip_all --replSet replicaSet"
     ports:
@@ -63,7 +63,7 @@ services:
 
   mongo-express3:
      image: mongo-express
-     container_name: mongo-expressSecondary
+     container_name: mongo-expressThird
      restart: always
      depends_on:
      - mongo3
