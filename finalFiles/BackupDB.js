@@ -1,7 +1,25 @@
-mongodump --db "FriendWorker"  --out "backup"
+const { exec } = require('child_process');
+const fs = require('fs').promises;
 
-//full commands here:
-docker exec -it mongodbPrimary mongodump --db "FriendWorker"  --out "backup"
+// Command to execute
+var makeBackup = 'docker exec mongodbPrimary mongodump --db "FriendWorker"  --out "backup"';
 
-//copy folder with backup to backup folder (relative path)
-docker cp mongodbPrimary:backup backup
+// Execute command in the terminal
+exec(makeBackup, (err, stdout, stderr) => {
+    if (err) {
+        console.error(`Error executing command: ${err.message}`);
+        return;
+    }
+    console.log("Successfull backup of db")
+    fs.writeFile("backup/output.log",stderr)
+});
+
+var copyBackup = "docker cp mongodbPrimary:backup backup"
+
+exec(copyBackup, (err, stdout, stderr) => {
+    if (err) {
+        console.error(`Error executing command: ${err.message}`);
+        return;
+    }
+    console.log("Copying files from docker successful")
+});

@@ -75,21 +75,48 @@ db.createCollection("users",
           "friends" : {
             "bsonType": [ "array" ],
             "items": {
-              "bsonType": "objectId"
+              "bsonType": ["object"],
+              "required": ["id"],
+              "additionalProperties": false,
+              "description": "'items' must contain the stated fields.",
+              "properties": {
+                "id": {
+                  "bsonType": "string",
+                  "description": "'id' is required"
+                }
+              }
             },
             "description": "Friends must be an array of Users"
           },
           "comments" : {
             "bsonType": [ "array" ],
             "items": {
-              "bsonType": "objectId"
+              "bsonType": ["object"],
+              "required": ["id"],
+              "additionalProperties": false,
+              "description": "'items' must contain the stated fields.",
+              "properties": {
+                "id": {
+                  "bsonType": "string",
+                  "description": "'id' is required"
+                }
+              }
             },
             "description": "Comments must be an array of Comment"
           },
           "likes" : {
             "bsonType": [ "array" ],
             "items": {
-              "bsonType": "objectId"
+              "bsonType": ["object"],
+              "required": ["id"],
+              "additionalProperties": false,
+              "description": "'items' must contain the stated fields.",
+              "properties": {
+                "id": {
+                  "bsonType": "string",
+                  "description": "'id' is required"
+                }
+              }
             },
             "description": "Likes must be an array of Like"
           },
@@ -126,14 +153,32 @@ db.createCollection("posts",
           "comments" : {
             "bsonType": [ "array" ],
             "items": {
-              "bsonType": "objectId"
+              "bsonType": ["object"],
+              "required": ["id"],
+              "additionalProperties": false,
+              "description": "'items' must contain the stated fields.",
+              "properties": {
+                "id": {
+                  "bsonType": "string",
+                  "description": "'id' is required"
+                }
+              }
             },
             "description": "Comments must be an array of Comment"
           },
           "likes" : {
             "bsonType": [ "array" ],
             "items": {
-              "bsonType": "objectId"
+              "bsonType": ["object"],
+              "required": ["id"],
+              "additionalProperties": false,
+              "description": "'items' must contain the stated fields.",
+              "properties": {
+                "id": {
+                  "bsonType": "string",
+                  "description": "'id' is required"
+                }
+              }
             },
             "description": "Likes must be an array of Like"
           },
@@ -163,7 +208,7 @@ db.createCollection("messages",
                "description": "Author must be objectId and is required"
            },
           "receiver":{
-            "bsonType": "objectId",
+            "bsonType": "string",
             "description": "Author must be objectId and is required"
           },
           "seen":{
@@ -215,11 +260,11 @@ db.createCollection("comments",
             "description": "Text must be string and is required"
           },
            "author":{
-               "bsonType": "objectId",
+               "bsonType": "string",
                "description": "Author must be objectId and is required"
            },
           "post":{
-            "bsonType": "objectId",
+            "bsonType": "string",
             "description": "Post must be objectId"
           },
           "flaggedAsSpam":{
@@ -229,7 +274,16 @@ db.createCollection("comments",
           "replies" : {
             "bsonType": [ "array" ],
             "items": {
-              "bsonType": "objectId"
+              "bsonType": ["object"],
+              "required": ["id"],
+              "additionalProperties": false,
+              "description": "'items' must contain the stated fields.",
+              "properties": {
+                "id": {
+                  "bsonType": "string",
+                  "description": "'id' is required"
+                }
+              }
             },
             "description": "Replies must be an array of Comment"
           },

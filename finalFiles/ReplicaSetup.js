@@ -20,7 +20,4 @@ var config = {
     ]
 };
 rs.initiate(config);
-
-
-
 //or use rs.reconfig(config); if reconfiguration

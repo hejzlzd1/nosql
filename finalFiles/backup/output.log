@@ -1,0 +1,10 @@
+2023-04-23T19:28:12.555+0000	writing FriendWorker.posts to backup/FriendWorker/posts.bson
+2023-04-23T19:28:12.556+0000	writing FriendWorker.comments to backup/FriendWorker/comments.bson
+2023-04-23T19:28:12.556+0000	writing FriendWorker.messages to backup/FriendWorker/messages.bson
+2023-04-23T19:28:12.558+0000	done dumping FriendWorker.messages (337 documents)
+2023-04-23T19:28:12.558+0000	done dumping FriendWorker.comments (273 documents)
+2023-04-23T19:28:12.558+0000	done dumping FriendWorker.posts (380 documents)
+2023-04-23T19:28:12.558+0000	writing FriendWorker.users to backup/FriendWorker/users.bson
+2023-04-23T19:28:12.559+0000	writing FriendWorker.likes to backup/FriendWorker/likes.bson
+2023-04-23T19:28:12.562+0000	done dumping FriendWorker.likes (170 documents)
+2023-04-23T19:28:12.562+0000	done dumping FriendWorker.users (1000 documents)
