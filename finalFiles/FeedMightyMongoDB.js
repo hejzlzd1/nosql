@@ -1,44 +1,34 @@
 const { exec } = require('child_process');
 
-var datasets = ["users","posts","messages","likes","comments"];
+let datasets = ["users", "posts", "messages", "likes", "comments"];
+feedDatabase();
 
-copyFiles();
-insertData();
-
-function copyFiles(){
+//insert data into database
+function feedDatabase(){
 datasets.forEach(dataName =>{
-    var copyCommand = `docker cp mongoDatasets/${dataName}.json mongodbPrimary:/${dataName}.json`
+    var copyCommand = `docker cp mongoDatasets/${dataName}.json mongodbPrimary:/home/${dataName}.json`
     exec(copyCommand, (err,stdout,stderr) =>{
         if (err) {
-            console.error(`Error executing command: ${err.message}`);
+            console.error(`Something went wrong when copying datasets: ${err.message}`);
             return;
         }
-        console.log(stdout)
-        console.log(stderr)
         console.log("Successfull copy of dataset "+ dataName)
     });
 })
+    insertData()
 }
 
 function insertData(){
 datasets.forEach(dataName =>{
-    var insertDataCommand = `docker exec mongodbPrimary mongoimport --db FriendWorker --collection ${dataName} --jsonArray --batchSize 1 --file ./${dataName}.json`
+    var insertDataCommand = `docker exec mongodbPrimary mongoimport --db FriendWorker --collection ${dataName} --jsonArray --batchSize 1 --file ./home/${dataName}.json`
     exec(insertDataCommand, (err,stdout,stderr) =>{
         if (err) {
-            console.error(`Error executing command: ${err.message}`);
+            console.error(`Error happened when importing data to database: ${err.message}`);
             return;
         }
-        console.log(stdout)
         console.log(stderr)
         console.log("Successfull import of dataset "+ dataName)
     });
 })
 }
-
-//docker cp users.json CONTAINER_NAME:/users.json
-
-//docker exec -it CONTAINER_NAME  bash
-
-//mongoimport --db MY_DB --collection users --drop --jsonArray --batchSize 1 --file ./users.json
-
 

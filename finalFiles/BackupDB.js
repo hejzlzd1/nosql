@@ -10,7 +10,7 @@ exec(makeBackup, (err, stdout, stderr) => {
         console.error(`Error executing command: ${err.message}`);
         return;
     }
-    console.log("Successfull backup of db")
+    console.log("Successful backup of FriendWorker database! Log created at backup folder. Location ./backup/output.log")
     fs.writeFile("backup/output.log",stderr)
 });
 
@@ -21,5 +21,5 @@ exec(copyBackup, (err, stdout, stderr) => {
         console.error(`Error executing command: ${err.message}`);
         return;
     }
-    console.log("Copying files from docker successful")
+    console.log("Copying files from docker successful, backup folder created with all backup files")
 });

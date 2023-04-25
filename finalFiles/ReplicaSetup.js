@@ -1,23 +1,27 @@
-var config = {
-    "_id": "replicaSet",
-    "version": 1,
-    "members": [
-        {
-            "_id": 1,
-            "host": "mongoPrimary:27017",
-            "priority": 4
-        },
-        {
-            "_id": 2,
-            "host": "mongo2:27017",
-            "priority": 3
-        },
-        {
-            "_id":3,
-            "host": "mongo3:27017",
-            "priority": 2
-        }
-    ]
-};
-rs.initiate(config);
-//or use rs.reconfig(config); if reconfiguration
+const { spawn } = require('child_process');
+
+setupReplica()
+function setupReplica(){
+// Command to execute MongoDB command using docker exec
+    const copy = spawn('docker', ['cp', './replication.js', 'mongodbPrimary:/home/replication']);
+    // Listen for exit event
+    copy.on('exit', (code) => {
+        code===0?console.log(`Replication config copied to docker container successfully!`):console.log("Replication config copy to docker container failed");
+    });
+    replicaConfig()
+}
+
+function replicaConfig(){
+// Command to execute MongoDB command using docker exec
+const replicationSetup = spawn('docker', ['exec', 'mongodbPrimary', 'mongosh',"--file", '/home/replication']);
+
+// Listen for stderr data
+    replicationSetup.stderr.on('data', (data) => {
+        console.error(`Replication failed: ${data}`);
+    });
+// Listen for exit event
+replicationSetup.on('exit', (code) => {
+    code===0?console.log(`Replication setup was successful!`):console.log("Replication setup failed somehow!");
+    console.log("Please wait few seconds for database reinitialize to primary node");
+});
+}
