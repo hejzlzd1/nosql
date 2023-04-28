@@ -1,0 +1,15 @@
+1. Smazání příspěvku.
+- uložení id příspěvku do proměnné
+- smazání všech záznamů v kolekci likes, kde post obsahuje id příspěvku.
+- nalezení všech id komentářů (kolekce comments), kde post obsahuje id příspěvku
+- rekurzivní smazání všech komentářů, které mají id v replies
+- smazání všech komentářů, kde post obsahuje id příspěvku
+
+2. Přidání kamaráda.
+- uložení id aktuálního uživatele
+- nalezení požadovaného uživatele
+- u požadovaného přidání id aktuálního uživatele do atributu friends
+- u aktuálního uživatele přidání id aktuálního požadovaného do atributu friends
+
+
+
