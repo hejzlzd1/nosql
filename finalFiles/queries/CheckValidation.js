@@ -1,5 +1,6 @@
 use('FriendWorker');
-const outputUser = db.users.insertOne(
+try{
+db.users.insertOne(
     {
         "firstName": "",
         "lastName": "",
@@ -13,18 +14,16 @@ const outputUser = db.users.insertOne(
             "street": "311 American Alley",
             "country": "France"
         }
-    },
-    (err, result) => {
-        if (err) {
-            console.error(err);
-        } else {
-            console.log(`New user inserted with _id: ${result.insertedId}`);
-        }
     }
-)
-printjson(outputUser);
+)}
+catch (e){
+    console.log("User validator error");
+    printjson(e.errInfo)
+    console.log("\n");
+}
 
-const outputPost = db.posts.insertOne(
+try{
+db.posts.insertOne(
     {
         "_id": "post_1",
         "text": "ipsum ullamco esse dolore dolor commodo nisi amet sit fugiat",
@@ -42,53 +41,42 @@ const outputPost = db.posts.insertOne(
                 "id": "like_428"
             }
         ]
-    },
-    (err, result) => {
-        if (err) {
-            console.error(err);
-        } else {
-            console.log(`New post inserted with _id: ${result.insertedId}`);
+    })
+}catch (e){
+    console.log("Post validator error");
+        printjson(e.errInfo)
+    console.log("\n");
+}
+
+try{
+    db.messages.insertOne(
+        {
+            "author": "user_570",
+            "receiver": "user_8",
+            "seen": true
         }
-    }
-)
+    )
+} catch (e){
+    console.log("Message validator error");
+    printjson(e.errInfo)
+    console.log("\n");
+}
 
-printjson(outputPost);
-
-const outputMesage = db.messages.insertOne(
-    {
-        "author": "user_570",
-        "receiver": "user_8",
-        "seen": true
-    },
-    (err, result) => {
-        if (err) {
-            console.error(err);
-        } else {
-            console.log(`New message inserted with _id: ${result.insertedId}`);
-        }
-    }
-)
-
-printjson(outputMesage);
-
-
-const outputLike = db.likes.insertOne(
+try{
+    db.likes.insertOne(
     {
         "_id": "like_8",
         "author": "user_788"
-    },
-    (err, result) => {
-        if (err) {
-            console.error(err);
-        } else {
-            console.log(`New like inserted with _id: ${result.insertedId}`);
-        }
     }
 )
+}catch (e){
+    console.log("Like validator error");
+    printjson(e.errInfo)
+    console.log("\n");
+}
 
-printjson(outputLike);
-
-const outputComment = db.comments.insertOne(
+try{
+db.comments.insertOne(
     {
         "_id": "comment_5",
         "author": "user_276",
@@ -100,14 +88,10 @@ const outputComment = db.comments.insertOne(
             }
         ],
         "flaggedAsSpam": true
-    },
-    (err, result) => {
-        if (err) {
-            console.error(err);
-        } else {
-            console.log(`New comment inserted with _id: ${result.insertedId}`);
-        }
     }
 )
-
-printjson(outputComment);
+}catch (e){
+    console.log("Comment validator error");
+    printjson(e.errInfo)
+    console.log("\n");
+}

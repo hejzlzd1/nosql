@@ -20,6 +20,7 @@ function run() {
             console.error(`Error happened when running file CheckValidation.js: ${err.message}`);
             return;
         }
+        console.log(stdout); //output errorů - TODO: Save to file + copy to local machine
         console.log(`Successfull running file CheckValidation.js`)
     });
 }
