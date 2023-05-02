@@ -1,0 +1,463 @@
+Current Mongosh Log ID:	6450ec654d0e84e06bed9f4e
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0
+Using MongoDB:		6.0.5
+Using Mongosh:		1.8.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-05-02T10:11:02.264+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2023-05-02T10:11:03.349+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-05-02T10:11:03.350+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
+   2023-05-02T10:11:03.350+00:00: vm.max_map_count is too low
+------
+
+------
+   Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+   metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+   
+   The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+   and anyone you share the URL with. MongoDB may use this information to make product
+   improvements and to suggest MongoDB products and deployment options to you.
+   
+   To enable free monitoring, run the following command: db.enableFreeMonitoring()
+   To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+------
+
+Loading file: home/CheckValidation.js
+User validator error (value validation)
+{
+  failingDocumentId: ObjectId("6450ec668b24d376949236c6"),
+  details: {
+    operatorName: '$jsonSchema',
+    title: 'User validator',
+    schemaRulesNotSatisfied: [
+      {
+        operatorName: 'properties',
+        propertiesNotSatisfied: [
+          {
+            propertyName: 'firstName',
+            description: 'FirstName must be string and is required',
+            details: [
+              {
+                operatorName: 'pattern',
+                specifiedAs: {
+                  pattern: '^[A-Z][a-zA-Z ]*$'
+                },
+                reason: 'regular expression did not match',
+                consideredValue: 'arnold'
+              }
+            ]
+          },
+          {
+            propertyName: 'lastName',
+            description: 'Lastname must be string and is required',
+            details: [
+              {
+                operatorName: 'pattern',
+                specifiedAs: {
+                  pattern: "^[A-Z][a-zA-Z' ]*$"
+                },
+                reason: 'regular expression did not match',
+                consideredValue: 'netrefil validaci'
+              }
+            ]
+          },
+          {
+            propertyName: 'password',
+            details: [
+              {
+                operatorName: 'pattern',
+                specifiedAs: {
+                  pattern: '^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){8,16}$'
+                },
+                reason: 'regular expression did not match',
+                consideredValue: 'testovaci heslo, ktere absolutne nesplnuje validaci :) Tato validace me naprosto odmitne a neprijme dokument'
+              }
+            ]
+          },
+          {
+            propertyName: 'address',
+            title: 'Address validation',
+            details: [
+              {
+                operatorName: 'properties',
+                propertiesNotSatisfied: [
+                  {
+                    propertyName: 'city',
+                    description: 'City is required string (max 30 chars,min 2)',
+                    details: [
+                      {
+                        operatorName: 'maxLength',
+                        specifiedAs: {
+                          maxLength: 40
+                        },
+                        reason: 'specified string length was not satisfied',
+                        consideredValue: 'Cagnes-sur-Mer (long text validation error)'
+                      }
+                    ]
+                  },
+                  {
+                    propertyName: 'country',
+                    description: 'Country is required string (max 30 chars,min 3)',
+                    details: [
+                      {
+                        operatorName: 'maxLength',
+                        specifiedAs: {
+                          maxLength: 40
+                        },
+                        reason: 'specified string length was not satisfied',
+                        consideredValue: 'France is great country (long text validation error)'
+                      }
+                    ]
+                  },
+                  {
+                    propertyName: 'postal',
+                    description: 'Postal is required string (max 8 chars,min 3)',
+                    details: [
+                      {
+                        operatorName: 'maxLength',
+                        specifiedAs: {
+                          maxLength: 8
+                        },
+                        reason: 'specified string length was not satisfied',
+                        consideredValue: '629 392 (long text validation error)'
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            propertyName: 'dateOfBirth',
+            description: 'Date of birth is required date',
+            details: [
+              {
+                operatorName: 'bsonType',
+                specifiedAs: {
+                  bsonType: 'date'
+                },
+                reason: 'type did not match',
+                consideredValue: {
+                  '$date': 'No-one expects string on date field!'
+                },
+                consideredType: 'object'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+
+
+User validator error (missing required)
+{
+  failingDocumentId: ObjectId("6450ec668b24d376949236c7"),
+  details: {
+    operatorName: '$jsonSchema',
+    title: 'User validator',
+    schemaRulesNotSatisfied: [
+      {
+        operatorName: 'required',
+        specifiedAs: {
+          required: [
+            'firstName',
+            'lastName',
+            'email',
+            'password',
+            'address',
+            'dateOfBirth'
+          ]
+        },
+        missingProperties: [
+          'dateOfBirth',
+          'email',
+          'firstName',
+          'lastName',
+          'password'
+        ]
+      }
+    ]
+  }
+}
+
+
+Post validator error (value validation)
+{
+  failingDocumentId: 'post_1',
+  details: {
+    operatorName: '$jsonSchema',
+    title: 'Post validator',
+    schemaRulesNotSatisfied: [
+      {
+        operatorName: 'required',
+        specifiedAs: {
+          required: [
+            'text',
+            'author'
+          ]
+        },
+        missingProperties: [
+          'author'
+        ]
+      }
+    ]
+  }
+}
+
+
+Post validator error (missing required)
+{
+  failingDocumentId: ObjectId("6450ec668b24d376949236c8"),
+  details: {
+    operatorName: '$jsonSchema',
+    title: 'Post validator',
+    schemaRulesNotSatisfied: [
+      {
+        operatorName: 'required',
+        specifiedAs: {
+          required: [
+            'text',
+            'author'
+          ]
+        },
+        missingProperties: [
+          'author',
+          'text'
+        ]
+      }
+    ]
+  }
+}
+
+
+Message validator error (value validation)
+{
+  failingDocumentId: ObjectId("6450ec668b24d376949236c9"),
+  details: {
+    operatorName: '$jsonSchema',
+    title: 'Message validator',
+    schemaRulesNotSatisfied: [
+      {
+        operatorName: 'properties',
+        propertiesNotSatisfied: [
+          {
+            propertyName: 'author',
+            description: 'Author must be objectId and is required',
+            details: [
+              {
+                operatorName: 'bsonType',
+                specifiedAs: {
+                  bsonType: 'string'
+                },
+                reason: 'type did not match',
+                consideredValue: 10,
+                consideredType: 'int'
+              }
+            ]
+          },
+          {
+            propertyName: 'receiver',
+            description: 'Author must be objectId and is required',
+            details: [
+              {
+                operatorName: 'bsonType',
+                specifiedAs: {
+                  bsonType: 'string'
+                },
+                reason: 'type did not match',
+                consideredValue: true,
+                consideredType: 'bool'
+              }
+            ]
+          },
+          {
+            propertyName: 'seen',
+            description: 'Seen must be boolean',
+            details: [
+              {
+                operatorName: 'bsonType',
+                specifiedAs: {
+                  bsonType: 'bool'
+                },
+                reason: 'type did not match',
+                consideredValue: 'I saw this one!',
+                consideredType: 'string'
+              }
+            ]
+          }
+        ]
+      },
+      {
+        operatorName: 'required',
+        specifiedAs: {
+          required: [
+            'text',
+            'author',
+            'receiver'
+          ]
+        },
+        missingProperties: [
+          'text'
+        ]
+      }
+    ]
+  }
+}
+
+
+Message validator error (missing required)
+{
+  failingDocumentId: ObjectId("6450ec668b24d376949236ca"),
+  details: {
+    operatorName: '$jsonSchema',
+    title: 'Message validator',
+    schemaRulesNotSatisfied: [
+      {
+        operatorName: 'required',
+        specifiedAs: {
+          required: [
+            'text',
+            'author',
+            'receiver'
+          ]
+        },
+        missingProperties: [
+          'receiver',
+          'text'
+        ]
+      }
+    ]
+  }
+}
+
+
+Like validator error (value validation)
+{
+  failingDocumentId: 'like_8',
+  details: {
+    operatorName: '$jsonSchema',
+    title: 'Like validator',
+    schemaRulesNotSatisfied: [
+      {
+        operatorName: 'properties',
+        propertiesNotSatisfied: [
+          {
+            propertyName: 'author',
+            description: 'Author must be objectId and is required',
+            details: [
+              {
+                operatorName: 'bsonType',
+                specifiedAs: {
+                  bsonType: 'string'
+                },
+                reason: 'type did not match',
+                consideredValue: 10,
+                consideredType: 'int'
+              }
+            ]
+          }
+        ]
+      },
+      {
+        operatorName: 'required',
+        specifiedAs: {
+          required: [
+            'post',
+            'author'
+          ]
+        },
+        missingProperties: [
+          'post'
+        ]
+      }
+    ]
+  }
+}
+
+
+Like validator error (missing required)
+{
+  failingDocumentId: 'like_8',
+  details: {
+    operatorName: '$jsonSchema',
+    title: 'Like validator',
+    schemaRulesNotSatisfied: [
+      {
+        operatorName: 'required',
+        specifiedAs: {
+          required: [
+            'post',
+            'author'
+          ]
+        },
+        missingProperties: [
+          'author',
+          'post'
+        ]
+      }
+    ]
+  }
+}
+
+
+Comment validator error (value validation)
+{
+  failingDocumentId: 'comment_5',
+  details: {
+    operatorName: '$jsonSchema',
+    title: 'Comments validator',
+    schemaRulesNotSatisfied: [
+      {
+        operatorName: 'properties',
+        propertiesNotSatisfied: [
+          {
+            propertyName: 'text',
+            description: 'Text must be string and is required',
+            details: [
+              {
+                operatorName: 'bsonType',
+                specifiedAs: {
+                  bsonType: 'string'
+                },
+                reason: 'type did not match',
+                consideredValue: true,
+                consideredType: 'bool'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+
+
+Comment validator error (missing required)
+{
+  failingDocumentId: 'comment_5',
+  details: {
+    operatorName: '$jsonSchema',
+    title: 'Comments validator',
+    schemaRulesNotSatisfied: [
+      {
+        operatorName: 'required',
+        specifiedAs: {
+          required: [
+            'text',
+            'author'
+          ]
+        },
+        missingProperties: [
+          'author'
+        ]
+      }
+    ]
+  }
+}
+
+

@@ -1,4 +1,5 @@
 const { exec } = require('child_process');
+const fs = require('fs');
 
 copy();
 function copy() {
@@ -20,7 +21,8 @@ function run() {
             console.error(`Error happened when running file CheckValidation.js: ${err.message}`);
             return;
         }
-        console.log(stdout); //output console - TODO: Save to file + copy to local machine
-        console.log(`Successfull running file CheckValidation.js`)
+        console.log(stdout);
+        console.log(`Successfull running file CheckValidation.js, output is saved in validation.log`)
+        fs.writeFileSync("validation.log",stdout)
     });
 }

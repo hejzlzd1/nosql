@@ -1,5 +1,5 @@
 const { exec } = require('child_process');
-const fs = require('fs').promises;
+const fs = require('fs');
 
 // Command to execute
 var makeBackup = 'docker exec mongodbPrimary mongodump --db "FriendWorker"  --out "backup"';
@@ -11,7 +11,7 @@ exec(makeBackup, (err, stdout, stderr) => {
         return;
     }
     console.log("Successful backup of FriendWorker database! Log created at backup folder. Location ./backup/output.log")
-    fs.writeFile("backup/output.log",stderr)
+    fs.writeFileSync("backup/output.log",stderr)
 });
 
 var copyBackup = "docker cp mongodbPrimary:backup backup"
