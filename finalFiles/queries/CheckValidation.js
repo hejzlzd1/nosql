@@ -1,5 +1,5 @@
 use('FriendWorker');
-const outputUser = db.user.insertOne(
+const outputUser = db.users.insertOne(
     {
         "firstName": "",
         "lastName": "",
@@ -22,7 +22,6 @@ const outputUser = db.user.insertOne(
         }
     }
 )
-
 printjson(outputUser);
 
 const outputPost = db.posts.insertOne(
