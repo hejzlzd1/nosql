@@ -15,7 +15,9 @@ datasets.forEach(dataName =>{
         console.log("Successfull copy of dataset "+ dataName)
     });
 })
-    insertData()
+    setTimeout(function () {
+        insertData()
+    },10000)
 }
 
 function insertData(){
