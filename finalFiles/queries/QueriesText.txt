@@ -1,5 +1,5 @@
-1. Získání všech příspěvků, které byly napsány určitým uživatelem.
-- všechny příspěvky, kde uživatel splňuje nějakou podmínku (jméno)
+1. Získání všech příspěvků, které byly napsány přáteli určitého uživatele.
+- id uživatele ve friends jeho přátek
 2. Získání všech uživatelů, kteří napsali alespoň jeden příspěvek, spolu s počtem příspěvků.
 - v posts musí existovat více záznamů
 - agregace počtu záznamů v posts
