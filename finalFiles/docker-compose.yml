@@ -10,10 +10,21 @@ services:
     volumes:
       - mongoDBPrimary:/data/db
       - mongoDBPrimary_config:/data/config
+      - ./replicaSetSecurity.key:/replicaSetSecurity.key
     depends_on:
       - mongo2
       - mongo3
-    command: "mongod --bind_ip_all --replSet replicaSet"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    entrypoint:
+      - bash
+      - -c
+      - |
+        chmod 400 /replicaSetSecurity.key
+        chown 999:999 /replicaSetSecurity.key
+        exec docker-entrypoint.sh $$@
+    command: "mongod --bind_ip_all --replSet replicaSet --keyFile /replicaSetSecurity.key"
 
   mongo-expressPrimary:
     image: mongo-express
@@ -30,12 +41,23 @@ services:
     image: mongo
     container_name: mongodbSecondary
     restart: always
-    command: "mongod --bind_ip_all --replSet replicaSet"
     ports:
       - '27019:27017'
     volumes:
       - mongoDBSecondary:/data/db
       - mongoDBSecondary_config:/data/config
+      - ./replicaSetSecurity.key:/replicaSetSecurity.key
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    entrypoint:
+      - bash
+      - -c
+      - |
+        chmod 400 /replicaSetSecurity.key
+        chown 999:999 /replicaSetSecurity.key
+        exec docker-entrypoint.sh $$@
+    command: "mongod --bind_ip_all --replSet replicaSet --keyFile /replicaSetSecurity.key"
 
 
   mongo-express2:
@@ -53,12 +75,23 @@ services:
     image: mongo
     container_name: mongodbThird
     restart: always
-    command: "mongod --bind_ip_all --replSet replicaSet"
     ports:
       - '27020:27017'
     volumes:
       - mongoDBThird:/data/db
       - mongoDBThird_config:/data/config
+      - ./replicaSetSecurity.key:/replicaSetSecurity.key
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    entrypoint:
+      - bash
+      - -c
+      - |
+        chmod 400 /replicaSetSecurity.key
+        chown 999:999 /replicaSetSecurity.key
+        exec docker-entrypoint.sh $$@
+    command: "mongod --bind_ip_all --replSet replicaSet --keyFile /replicaSetSecurity.key"
 
 
   mongo-express3:
