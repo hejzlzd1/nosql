@@ -1,0 +1,603 @@
+Current Mongosh Log ID:	645253477b2f0476ac6d9fb7
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0
+Using MongoDB:		6.0.5
+Using Mongosh:		1.8.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-05-03T12:27:32.324+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2023-05-03T12:27:33.117+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-05-03T12:27:33.117+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
+   2023-05-03T12:27:33.117+00:00: vm.max_map_count is too low
+------
+
+------
+   Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+   metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+   
+   The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+   and anyone you share the URL with. MongoDB may use this information to make product
+   improvements and to suggest MongoDB products and deployment options to you.
+   
+   To enable free monitoring, run the following command: db.enableFreeMonitoring()
+   To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+------
+
+Loading file: home/5_userMessages.js
+{
+  explainVersion: '1',
+  stages: [
+    {
+      '$cursor': {
+        queryPlanner: {
+          namespace: 'FriendWorker.users',
+          indexFilterSet: false,
+          parsedQuery: {},
+          queryHash: 'F1314F6A',
+          planCacheKey: 'F1314F6A',
+          maxIndexedOrSolutionsReached: false,
+          maxIndexedAndSolutionsReached: false,
+          maxScansToExplodeReached: false,
+          winningPlan: {
+            stage: 'PROJECTION_SIMPLE',
+            transformBy: {
+              _id: 1,
+              address: 1,
+              dateOfBirth: 1,
+              email: 1,
+              firstName: 1,
+              friends: 1,
+              lastName: 1,
+              messages: 1
+            },
+            inputStage: {
+              stage: 'COLLSCAN',
+              direction: 'forward'
+            }
+          },
+          rejectedPlans: []
+        },
+        executionStats: {
+          executionSuccess: true,
+          nReturned: 1000,
+          executionTimeMillis: 212,
+          totalKeysExamined: 0,
+          totalDocsExamined: 1000,
+          executionStages: {
+            stage: 'PROJECTION_SIMPLE',
+            nReturned: 1000,
+            executionTimeMillisEstimate: 0,
+            works: 1002,
+            advanced: 1000,
+            needTime: 1,
+            needYield: 0,
+            saveState: 2,
+            restoreState: 2,
+            isEOF: 1,
+            transformBy: {
+              _id: 1,
+              address: 1,
+              dateOfBirth: 1,
+              email: 1,
+              firstName: 1,
+              friends: 1,
+              lastName: 1,
+              messages: 1
+            },
+            inputStage: {
+              stage: 'COLLSCAN',
+              nReturned: 1000,
+              executionTimeMillisEstimate: 0,
+              works: 1002,
+              advanced: 1000,
+              needTime: 1,
+              needYield: 0,
+              saveState: 2,
+              restoreState: 2,
+              isEOF: 1,
+              direction: 'forward',
+              docsExamined: 1000
+            }
+          },
+          allPlansExecution: []
+        }
+      },
+      nReturned: Long("1000"),
+      executionTimeMillisEstimate: Long("1")
+    },
+    {
+      '$lookup': {
+        from: 'messages',
+        as: 'messages',
+        let: {
+          user_id: '$_id'
+        },
+        pipeline: [
+          {
+            '$match': {
+              '$expr': {
+                '$and': [
+                  {
+                    '$or': [
+                      {
+                        '$eq': [
+                          '$author',
+                          '$$user_id'
+                        ]
+                      },
+                      {
+                        '$eq': [
+                          '$receiver',
+                          '$$user_id'
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      totalDocsExamined: Long("337000"),
+      totalKeysExamined: Long("0"),
+      collectionScans: Long("2000"),
+      indexesUsed: [],
+      nReturned: Long("1000"),
+      executionTimeMillisEstimate: Long("210")
+    },
+    {
+      '$project': {
+        _id: true,
+        firstName: true,
+        email: true,
+        dateOfBirth: true,
+        friends: true,
+        lastName: true,
+        address: true,
+        sent_messages_count: {
+          '$size': [
+            {
+              '$filter': {
+                input: '$messages',
+                as: 'this',
+                cond: {
+                  '$eq': [
+                    '$$this.author',
+                    '$_id'
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        received_messages_count: {
+          '$size': [
+            {
+              '$filter': {
+                input: '$messages',
+                as: 'this',
+                cond: {
+                  '$eq': [
+                    '$$this.receiver',
+                    '$_id'
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      nReturned: Long("1000"),
+      executionTimeMillisEstimate: Long("212")
+    }
+  ],
+  serverInfo: {
+    host: '197490493c42',
+    port: 27017,
+    version: '6.0.5',
+    gitVersion: 'c9a99c120371d4d4c52cbb15dac34a36ce8d3b1d'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600
+  },
+  command: {
+    aggregate: 'users',
+    pipeline: [
+      {
+        '$lookup': {
+          from: 'messages',
+          let: {
+            user_id: '$_id'
+          },
+          pipeline: [
+            {
+              '$match': {
+                '$expr': {
+                  '$and': [
+                    {
+                      '$or': [
+                        {
+                          '$eq': [
+                            '$author',
+                            '$$user_id'
+                          ]
+                        },
+                        {
+                          '$eq': [
+                            '$receiver',
+                            '$$user_id'
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          as: 'messages'
+        }
+      },
+      {
+        '$project': {
+          firstName: 1,
+          lastName: 1,
+          email: 1,
+          address: 1,
+          dateOfBirth: 1,
+          friends: 1,
+          sent_messages_count: {
+            '$size': {
+              '$filter': {
+                input: '$messages',
+                cond: {
+                  '$eq': [
+                    '$$this.author',
+                    '$_id'
+                  ]
+                }
+              }
+            }
+          },
+          received_messages_count: {
+            '$size': {
+              '$filter': {
+                input: '$messages',
+                cond: {
+                  '$eq': [
+                    '$$this.receiver',
+                    '$_id'
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    cursor: {},
+    '$db': 'FriendWorker'
+  },
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1683116871, i: 2 }),
+    signature: {
+      hash: Binary(Buffer.from("0000000000000000000000000000000000000000", "hex"), 0),
+      keyId: Long("0")
+    }
+  },
+  operationTime: Timestamp({ t: 1683116871, i: 2 })
+}
+[
+  {
+    _id: 'user_3',
+    firstName: 'Miller',
+    lastName: 'Weller',
+    email: 'mweller2@purevolume.com',
+    dateOfBirth: ISODate("2014-05-13T07:35:50.000Z"),
+    address: {
+      city: 'Doblas',
+      postal: '971 904',
+      street: '745 Bunker Hill Avenue',
+      country: 'Argentina'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_9',
+    firstName: 'Raquela',
+    lastName: 'Jerg',
+    email: 'rjerg8@aol.com',
+    dateOfBirth: ISODate("2018-07-31T13:27:18.000Z"),
+    address: {
+      city: 'Palagao Norte',
+      postal: '020 884',
+      street: '90 Chive Court',
+      country: 'Philippines'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_17',
+    firstName: 'Daphene',
+    lastName: 'Worts',
+    email: 'dwortsg@addtoany.com',
+    dateOfBirth: ISODate("2003-06-25T21:58:35.000Z"),
+    address: {
+      city: 'Lakki Marwat',
+      postal: '335 544',
+      street: '42632 Harper Crossing',
+      country: 'Pakistan'
+    },
+    sent_messages_count: 1,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_16',
+    firstName: 'Aubry',
+    lastName: 'Overton',
+    email: 'aovertonf@loc.gov',
+    dateOfBirth: ISODate("2015-06-27T14:34:26.000Z"),
+    address: {
+      city: 'Cascavel',
+      postal: '660 276',
+      street: '805 Lakewood Gardens Place',
+      country: 'Brazil'
+    },
+    sent_messages_count: 1,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_18',
+    firstName: 'Malorie',
+    lastName: 'Sandercock',
+    email: 'msandercockh@intel.com',
+    dateOfBirth: ISODate("1999-05-14T01:53:57.000Z"),
+    address: {
+      city: 'Sacramento',
+      postal: '062 914',
+      street: '43 Surrey Lane',
+      country: 'United States'
+    },
+    sent_messages_count: 1,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_19',
+    firstName: 'Jereme',
+    lastName: 'Guerriero',
+    email: 'jguerrieroi@goo.ne.jp',
+    dateOfBirth: ISODate("2004-05-27T00:57:41.000Z"),
+    address: {
+      city: 'VĂłlos',
+      postal: '442 832',
+      street: '5 Schlimgen Crossing',
+      country: 'Greece'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_20',
+    firstName: 'Catharina',
+    lastName: 'Punchard',
+    email: 'cpunchardj@addtoany.com',
+    dateOfBirth: ISODate("2011-01-25T05:01:06.000Z"),
+    address: {
+      city: 'Tianxing',
+      postal: '788 339',
+      street: '5 Messerschmidt Circle',
+      country: 'China'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_21',
+    firstName: 'Malissa',
+    lastName: 'Bevir',
+    email: 'mbevirk@cnet.com',
+    dateOfBirth: ISODate("2021-12-08T02:07:44.000Z"),
+    address: {
+      city: 'Cabiguan',
+      postal: '583 784',
+      street: '8640 Sundown Drive',
+      country: 'Philippines'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_22',
+    firstName: 'Pammi',
+    lastName: "Maggill'Andreis",
+    email: 'pmaggillandreisl@wunderground.com',
+    dateOfBirth: ISODate("2010-02-24T16:27:15.000Z"),
+    address: {
+      city: 'Mqabba',
+      postal: '803 073',
+      street: '12090 Burning Wood Plaza',
+      country: 'Malta'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_23',
+    firstName: 'Kassey',
+    lastName: 'Shailer',
+    email: 'kshailerm@scientificamerican.com',
+    dateOfBirth: ISODate("2021-05-22T00:25:46.000Z"),
+    address: {
+      city: 'Ulaan-Ereg',
+      postal: '323 021',
+      street: '18022 Del Sol Way',
+      country: 'Mongolia'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 1
+  },
+  {
+    _id: 'user_24',
+    firstName: 'Elmo',
+    lastName: 'Fincke',
+    email: 'efincken@icio.us',
+    dateOfBirth: ISODate("2009-05-27T11:35:32.000Z"),
+    address: {
+      city: 'Gucheng',
+      postal: '218 755',
+      street: '4 Novick Court',
+      country: 'China'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_25',
+    firstName: 'Ddene',
+    lastName: 'Curror',
+    email: 'dcurroro@fastcompany.com',
+    dateOfBirth: ISODate("2006-03-21T03:36:56.000Z"),
+    address: {
+      city: 'Porto Salvo',
+      postal: '184 103',
+      street: '57806 Porter Junction',
+      country: 'Portugal'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_26',
+    firstName: 'Langston',
+    lastName: 'Yuryatin',
+    email: 'lyuryatinp@telegraph.co.uk',
+    dateOfBirth: ISODate("2006-11-05T22:37:14.000Z"),
+    address: {
+      city: 'Kambing',
+      postal: '319 386',
+      street: '16849 Boyd Center',
+      country: 'Philippines'
+    },
+    sent_messages_count: 1,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_27',
+    firstName: 'Ashlie',
+    lastName: 'Peckham',
+    email: 'apeckhamq@photobucket.com',
+    dateOfBirth: ISODate("2020-08-04T23:20:56.000Z"),
+    address: {
+      city: 'Shipu',
+      postal: '878 953',
+      street: '6864 Carey Junction',
+      country: 'China'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 1
+  },
+  {
+    _id: 'user_28',
+    firstName: 'Stu',
+    lastName: 'Payze',
+    email: 'spayzer@amazon.co.jp',
+    dateOfBirth: ISODate("2015-09-30T16:58:10.000Z"),
+    address: {
+      city: 'Dodol',
+      postal: '216 065',
+      street: '65 Corscot Junction',
+      country: 'Indonesia'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_29',
+    firstName: 'Kessiah',
+    lastName: 'Gonet',
+    email: 'kgonets@sina.com.cn',
+    dateOfBirth: ISODate("2012-01-12T11:13:16.000Z"),
+    address: {
+      city: 'Gaoyao',
+      postal: '383 615',
+      street: '96195 Grayhawk Plaza',
+      country: 'China'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_31',
+    firstName: 'Hazlett',
+    lastName: 'Tysack',
+    email: 'htysacku@google.com',
+    dateOfBirth: ISODate("2020-09-23T00:43:52.000Z"),
+    address: {
+      city: 'Rayevskiy',
+      postal: '462 771',
+      street: '4258 Service Street',
+      country: 'Russia'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_30',
+    firstName: 'Edvard',
+    lastName: 'Sircomb',
+    email: 'esircombt@unicef.org',
+    dateOfBirth: ISODate("2013-07-07T22:00:20.000Z"),
+    address: {
+      city: 'Al Jawf',
+      postal: '546 441',
+      street: '5 Melvin Pass',
+      country: 'Libya'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_12',
+    firstName: 'Israel',
+    lastName: 'Kyncl',
+    email: 'ikynclb@flavors.me',
+    dateOfBirth: ISODate("2005-01-27T01:03:35.000Z"),
+    address: {
+      city: 'Char BhadrÄ\x81san',
+      postal: '484 277',
+      street: '14526 Goodland Terrace',
+      country: 'Bangladesh'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_33',
+    firstName: 'Sara',
+    lastName: 'Santino',
+    email: 'ssantinow@usda.gov',
+    dateOfBirth: ISODate("2011-04-14T17:17:31.000Z"),
+    address: {
+      city: 'Lunao',
+      postal: '275 938',
+      street: '8 Elmside Pass',
+      country: 'Philippines'
+    },
+    sent_messages_count: 2,
+    received_messages_count: 0
+  }
+]
+Type "it" for more

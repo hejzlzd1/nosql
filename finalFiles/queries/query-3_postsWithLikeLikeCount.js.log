@@ -1,0 +1,937 @@
+Current Mongosh Log ID:	645253473333145b741dc283
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0
+Using MongoDB:		6.0.5
+Using Mongosh:		1.8.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-05-03T12:27:32.324+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2023-05-03T12:27:33.117+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-05-03T12:27:33.117+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
+   2023-05-03T12:27:33.117+00:00: vm.max_map_count is too low
+------
+
+------
+   Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+   metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+   
+   The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+   and anyone you share the URL with. MongoDB may use this information to make product
+   improvements and to suggest MongoDB products and deployment options to you.
+   
+   To enable free monitoring, run the following command: db.enableFreeMonitoring()
+   To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+------
+
+Loading file: home/3_postsWithLikeLikeCount.js
+{
+  explainVersion: '2',
+  stages: [
+    {
+      '$cursor': {
+        queryPlanner: {
+          namespace: 'FriendWorker.posts',
+          indexFilterSet: false,
+          parsedQuery: {},
+          queryHash: '983D4EB0',
+          planCacheKey: '983D4EB0',
+          maxIndexedOrSolutionsReached: false,
+          maxIndexedAndSolutionsReached: false,
+          maxScansToExplodeReached: false,
+          winningPlan: {
+            queryPlan: {
+              stage: 'EQ_LOOKUP',
+              planNodeId: 3,
+              foreignCollection: 'FriendWorker.likes',
+              localField: '_id',
+              foreignField: 'post',
+              asField: 'likes',
+              strategy: 'HashJoin',
+              inputStage: {
+                stage: 'PROJECTION_SIMPLE',
+                planNodeId: 2,
+                transformBy: {
+                  _id: true,
+                  attachmentPath: true,
+                  author: true,
+                  comments: true,
+                  likes: true,
+                  text: true
+                },
+                inputStage: {
+                  stage: 'COLLSCAN',
+                  planNodeId: 1,
+                  filter: {},
+                  direction: 'forward'
+                }
+              }
+            },
+            slotBasedPlan: {
+              slots: '$$RESULT=s25 env: { s3 = Timestamp(1683116871, 2) (CLUSTER_TIME), s4 = 1683116872371 (NOW), s1 = TimeZoneDatabase(America/Goose_Bay...America/Porto_Acre) (timeZoneDB), s2 = Nothing (SEARCH_META) }',
+              stages: '[3] mkobj s25 s7 [] drop [likes = s24] true false \n' +
+                '[3] project [s24 = fillEmpty (s23, [])] \n' +
+                '[3] hash_lookup [s23 = addToArray (s8)] \n' +
+                '    outer s15 \n' +
+                '        [3] nlj [s7] [s7] \n' +
+                '            left \n' +
+                '                [2] mkbson s7 s5 [_id, attachmentPath, author, comments, likes, text] keep [] true false \n' +
+                '                [1] scan s5 s6 none none none none [] @"7be1d7d2-1ff0-4c52-bb41-84180c0cbf1c" true false \n' +
+                '            right \n' +
+                '                [3] project [s15 = if (getArraySize (s13) > 0, s13, [null])] \n' +
+                '                [3] group [] [s13 = addToSet (s11)] spillSlots[s14] mergingExprs[aggSetUnion (s14)] \n' +
+                '                [3] unwind s11 s12 s10 true \n' +
+                '                [3] project [s10 = getField (s7, "_id")] \n' +
+                '                [3] limit 1 \n' +
+                '                [3] coscan \n' +
+                '            \n' +
+                '        \n' +
+                '    inner s21 [s8] \n' +
+                '        [3] nlj [s8] [s8] \n' +
+                '            left \n' +
+                '                [3] scan s8 s9 none none none none [] @"f70cf398-0449-4042-9d6a-d5f6fe3853f0" true false \n' +
+                '            right \n' +
+                '                [3] group [] [s21 = addToSet (s20)] spillSlots[s22] mergingExprs[aggSetUnion (s22)] \n' +
+                '                [3] nlj [] [s16] \n' +
+                '                    left \n' +
+                '                        [3] project [s16 = fillEmpty (getField (s8, "post"), null)] \n' +
+                '                        [3] limit 1 \n' +
+                '                        [3] coscan \n' +
+                '                    right \n' +
+                '                        [3] branch {isArray (s16)} [s20] \n' +
+                '                        [s19] [3] union [s19] [\n' +
+                '                            [s17] [3] unwind s17 s18 s16 true \n' +
+                '                            [3] limit 1 \n' +
+                '                            [3] coscan , \n' +
+                '                            [s16] [3] limit 1 \n' +
+                '                            [3] coscan \n' +
+                '                       ] \n' +
+                '                        [s16] [3] limit 1 \n' +
+                '                        [3] coscan \n' +
+                '                    \n' +
+                '                \n' +
+                '            \n' +
+                '        \n' +
+                '    \n'
+            }
+          },
+          rejectedPlans: []
+        },
+        executionStats: {
+          executionSuccess: true,
+          nReturned: 380,
+          executionTimeMillis: 6,
+          totalKeysExamined: 0,
+          totalDocsExamined: 550,
+          executionStages: {
+            stage: 'mkobj',
+            planNodeId: 3,
+            nReturned: 380,
+            executionTimeMillisEstimate: 4,
+            opens: 1,
+            closes: 1,
+            saveState: 1,
+            restoreState: 1,
+            isEOF: 1,
+            objSlot: 25,
+            rootSlot: 7,
+            fieldBehavior: 'drop',
+            fields: [],
+            projectFields: [
+              'likes'
+            ],
+            projectSlots: [
+              Long("24")
+            ],
+            forceNewObject: true,
+            returnOldObject: false,
+            inputStage: {
+              stage: 'project',
+              planNodeId: 3,
+              nReturned: 380,
+              executionTimeMillisEstimate: 4,
+              opens: 1,
+              closes: 1,
+              saveState: 1,
+              restoreState: 1,
+              isEOF: 1,
+              projections: {
+                '24': 'fillEmpty (s23, []) '
+              },
+              inputStage: {
+                stage: 'hash_lookup',
+                planNodeId: 3,
+                nReturned: 380,
+                executionTimeMillisEstimate: 4,
+                opens: 1,
+                closes: 1,
+                saveState: 1,
+                restoreState: 1,
+                isEOF: 1,
+                totalDocsExamined: 550,
+                totalKeysExamined: 0,
+                collectionScans: 2,
+                collectionSeeks: 0,
+                indexScans: 0,
+                indexSeeks: 0,
+                indexesUsed: [],
+                usedDisk: false,
+                spilledRecords: 0,
+                spilledBytesApprox: 0,
+                inputStages: [
+                  {
+                    stage: 'nlj',
+                    planNodeId: 3,
+                    nReturned: 380,
+                    executionTimeMillisEstimate: 2,
+                    opens: 1,
+                    closes: 1,
+                    saveState: 1,
+                    restoreState: 1,
+                    isEOF: 1,
+                    totalDocsExamined: 380,
+                    totalKeysExamined: 0,
+                    collectionScans: 1,
+                    collectionSeeks: 0,
+                    indexScans: 0,
+                    indexSeeks: 0,
+                    indexesUsed: [],
+                    innerOpens: 380,
+                    innerCloses: 1,
+                    outerProjects: [
+                      Long("7")
+                    ],
+                    outerCorrelated: [
+                      Long("7")
+                    ],
+                    outerStage: {
+                      stage: 'mkbson',
+                      planNodeId: 2,
+                      nReturned: 380,
+                      executionTimeMillisEstimate: 1,
+                      opens: 1,
+                      closes: 1,
+                      saveState: 1,
+                      restoreState: 1,
+                      isEOF: 1,
+                      objSlot: 7,
+                      rootSlot: 5,
+                      fieldBehavior: 'keep',
+                      fields: [
+                        '_id',
+                        'attachmentPath',
+                        'author',
+                        'comments',
+                        'likes',
+                        'text'
+                      ],
+                      projectFields: [],
+                      projectSlots: [],
+                      forceNewObject: true,
+                      returnOldObject: false,
+                      inputStage: {
+                        stage: 'scan',
+                        planNodeId: 1,
+                        nReturned: 380,
+                        executionTimeMillisEstimate: 0,
+                        opens: 1,
+                        closes: 1,
+                        saveState: 1,
+                        restoreState: 1,
+                        isEOF: 1,
+                        numReads: 380,
+                        recordSlot: 5,
+                        recordIdSlot: 6,
+                        fields: [],
+                        outputSlots: []
+                      }
+                    },
+                    innerStage: {
+                      stage: 'project',
+                      planNodeId: 3,
+                      nReturned: 380,
+                      executionTimeMillisEstimate: 1,
+                      opens: 380,
+                      closes: 1,
+                      saveState: 1,
+                      restoreState: 1,
+                      isEOF: 1,
+                      projections: {
+                        '15': 'if (getArraySize (s13) > 0, s13, [null]) '
+                      },
+                      inputStage: {
+                        stage: 'group',
+                        planNodeId: 3,
+                        nReturned: 380,
+                        executionTimeMillisEstimate: 1,
+                        opens: 380,
+                        closes: 1,
+                        saveState: 1,
+                        restoreState: 1,
+                        isEOF: 1,
+                        groupBySlots: [],
+                        expressions: {
+                          '13': 'addToSet (s11) '
+                        },
+                        mergingExprs: {
+                          '14': 'aggSetUnion (s14) '
+                        },
+                        usedDisk: false,
+                        numSpills: 0,
+                        spilledRecords: 0,
+                        spilledDataStorageSize: 0,
+                        inputStage: {
+                          stage: 'unwind',
+                          planNodeId: 3,
+                          nReturned: 380,
+                          executionTimeMillisEstimate: 1,
+                          opens: 380,
+                          closes: 380,
+                          saveState: 1,
+                          restoreState: 1,
+                          isEOF: 1,
+                          inputSlot: 10,
+                          outSlot: 11,
+                          outIndexSlot: 12,
+                          preserveNullAndEmptyArrays: 1,
+                          inputStage: {
+                            stage: 'project',
+                            planNodeId: 3,
+                            nReturned: 380,
+                            executionTimeMillisEstimate: 1,
+                            opens: 380,
+                            closes: 380,
+                            saveState: 1,
+                            restoreState: 1,
+                            isEOF: 1,
+                            projections: {
+                              '10': 'getField (s7, "_id") '
+                            },
+                            inputStage: {
+                              stage: 'limit',
+                              planNodeId: 3,
+                              nReturned: 380,
+                              executionTimeMillisEstimate: 0,
+                              opens: 380,
+                              closes: 380,
+                              saveState: 1,
+                              restoreState: 1,
+                              isEOF: 1,
+                              limit: 1,
+                              inputStage: {
+                                stage: 'coscan',
+                                planNodeId: 3,
+                                nReturned: 380,
+                                executionTimeMillisEstimate: 0,
+                                opens: 380,
+                                closes: 380,
+                                saveState: 1,
+                                restoreState: 1,
+                                isEOF: 0
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    stage: 'nlj',
+                    planNodeId: 3,
+                    nReturned: 170,
+                    executionTimeMillisEstimate: 0,
+                    opens: 1,
+                    closes: 1,
+                    saveState: 1,
+                    restoreState: 1,
+                    isEOF: 1,
+                    totalDocsExamined: 170,
+                    totalKeysExamined: 0,
+                    collectionScans: 1,
+                    collectionSeeks: 0,
+                    indexScans: 0,
+                    indexSeeks: 0,
+                    indexesUsed: [],
+                    innerOpens: 170,
+                    innerCloses: 1,
+                    outerProjects: [
+                      Long("8")
+                    ],
+                    outerCorrelated: [
+                      Long("8")
+                    ],
+                    outerStage: {
+                      stage: 'scan',
+                      planNodeId: 3,
+                      nReturned: 170,
+                      executionTimeMillisEstimate: 0,
+                      opens: 1,
+                      closes: 1,
+                      saveState: 1,
+                      restoreState: 1,
+                      isEOF: 1,
+                      numReads: 170,
+                      recordSlot: 8,
+                      recordIdSlot: 9,
+                      fields: [],
+                      outputSlots: []
+                    },
+                    innerStage: {
+                      stage: 'group',
+                      planNodeId: 3,
+                      nReturned: 170,
+                      executionTimeMillisEstimate: 0,
+                      opens: 170,
+                      closes: 1,
+                      saveState: 1,
+                      restoreState: 1,
+                      isEOF: 1,
+                      groupBySlots: [],
+                      expressions: {
+                        '21': 'addToSet (s20) '
+                      },
+                      mergingExprs: {
+                        '22': 'aggSetUnion (s22) '
+                      },
+                      usedDisk: false,
+                      numSpills: 0,
+                      spilledRecords: 0,
+                      spilledDataStorageSize: 0,
+                      inputStage: {
+                        stage: 'nlj',
+                        planNodeId: 3,
+                        nReturned: 170,
+                        executionTimeMillisEstimate: 0,
+                        opens: 170,
+                        closes: 170,
+                        saveState: 1,
+                        restoreState: 1,
+                        isEOF: 1,
+                        totalDocsExamined: 0,
+                        totalKeysExamined: 0,
+                        collectionScans: 0,
+                        collectionSeeks: 0,
+                        indexScans: 0,
+                        indexSeeks: 0,
+                        indexesUsed: [],
+                        innerOpens: 170,
+                        innerCloses: 170,
+                        outerProjects: [],
+                        outerCorrelated: [
+                          Long("16")
+                        ],
+                        outerStage: {
+                          stage: 'project',
+                          planNodeId: 3,
+                          nReturned: 170,
+                          executionTimeMillisEstimate: 0,
+                          opens: 170,
+                          closes: 170,
+                          saveState: 1,
+                          restoreState: 1,
+                          isEOF: 1,
+                          projections: {
+                            '16': 'fillEmpty (getField (s8, "post"), null) '
+                          },
+                          inputStage: {
+                            stage: 'limit',
+                            planNodeId: 3,
+                            nReturned: 170,
+                            executionTimeMillisEstimate: 0,
+                            opens: 170,
+                            closes: 170,
+                            saveState: 1,
+                            restoreState: 1,
+                            isEOF: 1,
+                            limit: 1,
+                            inputStage: {
+                              stage: 'coscan',
+                              planNodeId: 3,
+                              nReturned: 170,
+                              executionTimeMillisEstimate: 0,
+                              opens: 170,
+                              closes: 170,
+                              saveState: 1,
+                              restoreState: 1,
+                              isEOF: 0
+                            }
+                          }
+                        },
+                        innerStage: {
+                          stage: 'branch',
+                          planNodeId: 3,
+                          nReturned: 170,
+                          executionTimeMillisEstimate: 0,
+                          opens: 170,
+                          closes: 170,
+                          saveState: 1,
+                          restoreState: 1,
+                          isEOF: 1,
+                          numTested: 170,
+                          thenBranchOpens: 0,
+                          thenBranchCloses: 0,
+                          elseBranchOpens: 170,
+                          elseBranchCloses: 170,
+                          filter: 'isArray (s16) ',
+                          thenSlots: [
+                            Long("19")
+                          ],
+                          elseSlots: [
+                            Long("16")
+                          ],
+                          outputSlots: [
+                            Long("20")
+                          ],
+                          thenStage: {
+                            stage: 'union',
+                            planNodeId: 3,
+                            nReturned: 0,
+                            executionTimeMillisEstimate: 0,
+                            opens: 0,
+                            closes: 0,
+                            saveState: 1,
+                            restoreState: 1,
+                            isEOF: 0,
+                            inputSlots: [
+                              Long("17"),
+                              Long("16")
+                            ],
+                            outputSlots: [
+                              Long("19")
+                            ],
+                            inputStages: [
+                              {
+                                stage: 'unwind',
+                                planNodeId: 3,
+                                nReturned: 0,
+                                executionTimeMillisEstimate: 0,
+                                opens: 0,
+                                closes: 0,
+                                saveState: 1,
+                                restoreState: 1,
+                                isEOF: 0,
+                                inputSlot: 16,
+                                outSlot: 17,
+                                outIndexSlot: 18,
+                                preserveNullAndEmptyArrays: 1,
+                                inputStage: {
+                                  stage: 'limit',
+                                  planNodeId: 3,
+                                  nReturned: 0,
+                                  executionTimeMillisEstimate: 0,
+                                  opens: 0,
+                                  closes: 0,
+                                  saveState: 1,
+                                  restoreState: 1,
+                                  isEOF: 0,
+                                  limit: 1,
+                                  inputStage: {
+                                    stage: 'coscan',
+                                    planNodeId: 3,
+                                    nReturned: 0,
+                                    executionTimeMillisEstimate: 0,
+                                    opens: 0,
+                                    closes: 0,
+                                    saveState: 1,
+                                    restoreState: 1,
+                                    isEOF: 0
+                                  }
+                                }
+                              },
+                              {
+                                stage: 'limit',
+                                planNodeId: 3,
+                                nReturned: 0,
+                                executionTimeMillisEstimate: 0,
+                                opens: 0,
+                                closes: 0,
+                                saveState: 1,
+                                restoreState: 1,
+                                isEOF: 0,
+                                limit: 1,
+                                inputStage: {
+                                  stage: 'coscan',
+                                  planNodeId: 3,
+                                  nReturned: 0,
+                                  executionTimeMillisEstimate: 0,
+                                  opens: 0,
+                                  closes: 0,
+                                  saveState: 1,
+                                  restoreState: 1,
+                                  isEOF: 0
+                                }
+                              }
+                            ]
+                          },
+                          elseStage: {
+                            stage: 'limit',
+                            planNodeId: 3,
+                            nReturned: 170,
+                            executionTimeMillisEstimate: 0,
+                            opens: 170,
+                            closes: 170,
+                            saveState: 1,
+                            restoreState: 1,
+                            isEOF: 1,
+                            limit: 1,
+                            inputStage: {
+                              stage: 'coscan',
+                              planNodeId: 3,
+                              nReturned: 170,
+                              executionTimeMillisEstimate: 0,
+                              opens: 170,
+                              closes: 170,
+                              saveState: 1,
+                              restoreState: 1,
+                              isEOF: 0
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          allPlansExecution: []
+        }
+      },
+      nReturned: Long("380"),
+      executionTimeMillisEstimate: Long("4")
+    },
+    {
+      '$match': {
+        likes: {
+          '$gt': []
+        }
+      },
+      nReturned: Long("119"),
+      executionTimeMillisEstimate: Long("4")
+    },
+    {
+      '$project': {
+        _id: true,
+        text: true,
+        author: true,
+        attachmentPath: true,
+        comments: true,
+        likes_count: {
+          '$size': [
+            '$likes'
+          ]
+        }
+      },
+      nReturned: Long("119"),
+      executionTimeMillisEstimate: Long("4")
+    }
+  ],
+  serverInfo: {
+    host: '197490493c42',
+    port: 27017,
+    version: '6.0.5',
+    gitVersion: 'c9a99c120371d4d4c52cbb15dac34a36ce8d3b1d'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600
+  },
+  command: {
+    aggregate: 'posts',
+    pipeline: [
+      {
+        '$lookup': {
+          from: 'likes',
+          localField: '_id',
+          foreignField: 'post',
+          as: 'likes'
+        }
+      },
+      {
+        '$match': {
+          likes: {
+            '$gt': []
+          }
+        }
+      },
+      {
+        '$project': {
+          text: 1,
+          attachmentPath: 1,
+          author: 1,
+          comments: 1,
+          likes_count: {
+            '$size': '$likes'
+          }
+        }
+      }
+    ],
+    cursor: {},
+    '$db': 'FriendWorker'
+  },
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1683116871, i: 2 }),
+    signature: {
+      hash: Binary(Buffer.from("0000000000000000000000000000000000000000", "hex"), 0),
+      keyId: Long("0")
+    }
+  },
+  operationTime: Timestamp({ t: 1683116871, i: 2 })
+}
+[
+  {
+    _id: 'post_17',
+    author: 'user_256',
+    text: 'labore sit ad elit officia nulla ut id minim irure',
+    attachmentPath: 'images/files/e7d0f123-64ec-4eb0-a8d3-e4279144c043.png',
+    comments: [],
+    likes_count: 1
+  },
+  {
+    _id: 'post_19',
+    author: 'user_588',
+    text: 'aute reprehenderit incididunt eiusmod est consectetur ullamco sunt dolore proident',
+    attachmentPath: 'images/files/2517461b-18f6-461b-8030-b54a359e5103.png',
+    comments: [
+      {
+        id: 'comment_454'
+      },
+      {
+        id: 'comment_326'
+      }
+    ],
+    likes_count: 1
+  },
+  {
+    _id: 'post_6',
+    author: 'user_574',
+    text: 'sunt voluptate nulla pariatur consectetur incididunt do eu qui ullamco',
+    attachmentPath: 'images/files/8cb19714-8924-4a40-bc3e-399e882a2c4c.png',
+    comments: [
+      {
+        id: 'comment_147'
+      },
+      {
+        id: 'comment_144'
+      }
+    ],
+    likes_count: 1
+  },
+  {
+    _id: 'post_20',
+    author: 'user_318',
+    text: 'officia culpa quis ullamco id culpa qui ullamco ad tempor',
+    attachmentPath: 'images/files/2c407032-7a41-4fdb-8a98-f0be879c72d4.png',
+    comments: [
+      {
+        id: 'comment_374'
+      },
+      {
+        id: 'comment_30'
+      }
+    ],
+    likes_count: 2
+  },
+  {
+    _id: 'post_11',
+    author: 'user_827',
+    text: 'incididunt laboris cillum amet excepteur reprehenderit nostrud incididunt sit amet',
+    attachmentPath: 'images/files/32f7f7f7-effc-48e7-9d25-62c8d456312c.png',
+    comments: [
+      {
+        id: 'comment_13'
+      },
+      {
+        id: 'comment_246'
+      }
+    ],
+    likes_count: 1
+  },
+  {
+    _id: 'post_25',
+    author: 'user_917',
+    text: 'nisi consectetur sunt in enim ipsum aliquip cupidatat nostrud sunt',
+    attachmentPath: 'images/files/0c4627d5-8c61-4bfd-8f6e-973445c4bf44.png',
+    comments: [
+      {
+        id: 'comment_110'
+      },
+      {
+        id: 'comment_8'
+      }
+    ],
+    likes_count: 1
+  },
+  {
+    _id: 'post_23',
+    author: 'user_753',
+    text: 'labore nostrud incididunt excepteur do ea cupidatat adipisicing ipsum ut',
+    attachmentPath: 'images/files/75696e07-23a1-4611-bd74-2559c49cb41e.png',
+    comments: [],
+    likes_count: 2
+  },
+  {
+    _id: 'post_26',
+    author: 'user_397',
+    text: 'excepteur incididunt excepteur pariatur occaecat officia nostrud dolore nisi ad',
+    attachmentPath: 'images/files/52ff6b78-f5bf-4cb3-9805-36cd91091b25.png',
+    comments: [],
+    likes_count: 1
+  },
+  {
+    _id: 'post_27',
+    author: 'user_128',
+    text: 'nisi exercitation fugiat ut pariatur labore culpa sit reprehenderit minim',
+    attachmentPath: 'images/files/110a50e4-e1e2-4789-a804-67e1a99cad9f.png',
+    comments: [
+      {
+        id: 'comment_479'
+      }
+    ],
+    likes_count: 2
+  },
+  {
+    _id: 'post_28',
+    author: 'user_538',
+    text: 'amet dolore Lorem pariatur ea officia exercitation ut qui laboris',
+    attachmentPath: 'images/files/0bd00a16-3cdb-40af-967a-cafd9be1df56.png',
+    comments: [
+      {
+        id: 'comment_299'
+      },
+      {
+        id: 'comment_310'
+      }
+    ],
+    likes_count: 1
+  },
+  {
+    _id: 'post_5',
+    author: 'user_537',
+    text: 'deserunt proident deserunt fugiat aliquip nostrud sunt aute fugiat esse',
+    attachmentPath: 'images/files/1c939a57-856f-4a58-9f42-e0832bda5883.png',
+    comments: [],
+    likes_count: 1
+  },
+  {
+    _id: 'post_29',
+    author: 'user_816',
+    text: 'do id tempor ad pariatur voluptate ipsum voluptate labore excepteur',
+    attachmentPath: 'images/files/9f10a069-e269-4277-aa73-f85864d23c7d.png',
+    comments: [
+      {
+        id: 'comment_416'
+      },
+      {
+        id: 'comment_185'
+      }
+    ],
+    likes_count: 2
+  },
+  {
+    _id: 'post_8',
+    author: 'user_737',
+    text: 'excepteur sit dolor minim ipsum occaecat tempor officia ea amet',
+    attachmentPath: 'images/files/d818cd04-4a06-47ae-a45b-7f6d261d7b27.png',
+    comments: [
+      {
+        id: 'comment_451'
+      },
+      {
+        id: 'comment_271'
+      }
+    ],
+    likes_count: 2
+  },
+  {
+    _id: 'post_30',
+    author: 'user_880',
+    text: 'adipisicing quis minim pariatur consectetur dolor duis dolor anim eiusmod',
+    attachmentPath: 'images/files/149a800e-1f3e-4a1e-971f-e01737392f0d.png',
+    comments: [
+      {
+        id: 'comment_338'
+      },
+      {
+        id: 'comment_288'
+      }
+    ],
+    likes_count: 1
+  },
+  {
+    _id: 'post_31',
+    author: 'user_652',
+    text: 'velit occaecat do elit Lorem adipisicing pariatur elit amet pariatur',
+    attachmentPath: 'images/files/ef73ff1c-d847-4b05-8868-aab5e27a75a0.png',
+    comments: [
+      {
+        id: 'comment_236'
+      }
+    ],
+    likes_count: 2
+  },
+  {
+    _id: 'post_33',
+    author: 'user_286',
+    text: 'fugiat consectetur excepteur Lorem proident non nostrud dolore adipisicing officia',
+    attachmentPath: 'images/files/b04c6382-cb57-442d-8129-08989d3f9fa0.png',
+    comments: [],
+    likes_count: 1
+  },
+  {
+    _id: 'post_7',
+    author: 'user_419',
+    text: 'amet pariatur voluptate nisi ut ut in dolor occaecat minim',
+    attachmentPath: 'images/files/ba706497-cedc-49a2-b184-aa0fe225a9d3.png',
+    comments: [
+      {
+        id: 'comment_380'
+      }
+    ],
+    likes_count: 3
+  },
+  {
+    _id: 'post_14',
+    author: 'user_526',
+    text: 'fugiat mollit occaecat fugiat voluptate cupidatat excepteur commodo cupidatat sit',
+    attachmentPath: 'images/files/eb23fe91-0347-4354-8e98-216b6b75594c.png',
+    comments: [
+      {
+        id: 'comment_441'
+      }
+    ],
+    likes_count: 3
+  },
+  {
+    _id: 'post_21',
+    author: 'user_387',
+    text: 'et Lorem nostrud in ullamco magna pariatur minim esse est',
+    attachmentPath: 'images/files/6d249f72-f604-4970-a939-6790700321e9.png',
+    comments: [],
+    likes_count: 1
+  },
+  {
+    _id: 'post_10',
+    author: 'user_785',
+    text: 'elit minim velit ullamco sint incididunt ullamco excepteur ad elit',
+    attachmentPath: 'images/files/ddb1d4db-766b-42bb-a708-953dcf02d42c.png',
+    comments: [
+      {
+        id: 'comment_387'
+      },
+      {
+        id: 'comment_461'
+      }
+    ],
+    likes_count: 2
+  }
+]
+Type "it" for more

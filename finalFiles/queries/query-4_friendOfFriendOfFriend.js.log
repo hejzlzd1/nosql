@@ -1,0 +1,319 @@
+Current Mongosh Log ID:	6452534787d99605f0ec1306
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0
+Using MongoDB:		6.0.5
+Using Mongosh:		1.8.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-05-03T12:27:32.324+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2023-05-03T12:27:33.117+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-05-03T12:27:33.117+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
+   2023-05-03T12:27:33.117+00:00: vm.max_map_count is too low
+------
+
+------
+   Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+   metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+   
+   The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+   and anyone you share the URL with. MongoDB may use this information to make product
+   improvements and to suggest MongoDB products and deployment options to you.
+   
+   To enable free monitoring, run the following command: db.enableFreeMonitoring()
+   To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+------
+
+Loading file: home/4_friendOfFriendOfFriend.js
+{
+  explainVersion: '1',
+  stages: [
+    {
+      '$cursor': {
+        queryPlanner: {
+          namespace: 'FriendWorker.users',
+          indexFilterSet: false,
+          parsedQuery: {
+            _id: {
+              '$eq': '$friends_of_friends._id'
+            }
+          },
+          queryHash: 'BA868392',
+          planCacheKey: 'E8FC653B',
+          maxIndexedOrSolutionsReached: false,
+          maxIndexedAndSolutionsReached: false,
+          maxScansToExplodeReached: false,
+          winningPlan: {
+            stage: 'PROJECTION_SIMPLE',
+            transformBy: {
+              _id: 1,
+              address: 1,
+              dateOfBirth: 1,
+              email: 1,
+              firstName: 1,
+              friends: 1,
+              lastName: 1
+            },
+            inputStage: {
+              stage: 'FETCH',
+              inputStage: {
+                stage: 'IXSCAN',
+                keyPattern: {
+                  _id: 1
+                },
+                indexName: '_id_',
+                isMultiKey: false,
+                multiKeyPaths: {
+                  _id: []
+                },
+                isUnique: true,
+                isSparse: false,
+                isPartial: false,
+                indexVersion: 2,
+                direction: 'forward',
+                indexBounds: {
+                  _id: [
+                    '["$friends_of_friends._id", "$friends_of_friends._id"]'
+                  ]
+                }
+              }
+            }
+          },
+          rejectedPlans: []
+        },
+        executionStats: {
+          executionSuccess: true,
+          nReturned: 0,
+          executionTimeMillis: 0,
+          totalKeysExamined: 0,
+          totalDocsExamined: 0,
+          executionStages: {
+            stage: 'PROJECTION_SIMPLE',
+            nReturned: 0,
+            executionTimeMillisEstimate: 0,
+            works: 1,
+            advanced: 0,
+            needTime: 0,
+            needYield: 0,
+            saveState: 1,
+            restoreState: 1,
+            isEOF: 1,
+            transformBy: {
+              _id: 1,
+              address: 1,
+              dateOfBirth: 1,
+              email: 1,
+              firstName: 1,
+              friends: 1,
+              lastName: 1
+            },
+            inputStage: {
+              stage: 'FETCH',
+              nReturned: 0,
+              executionTimeMillisEstimate: 0,
+              works: 1,
+              advanced: 0,
+              needTime: 0,
+              needYield: 0,
+              saveState: 1,
+              restoreState: 1,
+              isEOF: 1,
+              docsExamined: 0,
+              alreadyHasObj: 0,
+              inputStage: {
+                stage: 'IXSCAN',
+                nReturned: 0,
+                executionTimeMillisEstimate: 0,
+                works: 1,
+                advanced: 0,
+                needTime: 0,
+                needYield: 0,
+                saveState: 1,
+                restoreState: 1,
+                isEOF: 1,
+                keyPattern: {
+                  _id: 1
+                },
+                indexName: '_id_',
+                isMultiKey: false,
+                multiKeyPaths: {
+                  _id: []
+                },
+                isUnique: true,
+                isSparse: false,
+                isPartial: false,
+                indexVersion: 2,
+                direction: 'forward',
+                indexBounds: {
+                  _id: [
+                    '["$friends_of_friends._id", "$friends_of_friends._id"]'
+                  ]
+                },
+                keysExamined: 0,
+                seeks: 1,
+                dupsTested: 0,
+                dupsDropped: 0
+              }
+            }
+          },
+          allPlansExecution: []
+        }
+      },
+      nReturned: Long("0"),
+      executionTimeMillisEstimate: Long("0")
+    },
+    {
+      '$lookup': {
+        from: 'users',
+        as: 'friends',
+        localField: 'friends',
+        foreignField: '_id',
+        unwinding: {
+          preserveNullAndEmptyArrays: false
+        }
+      },
+      totalDocsExamined: Long("0"),
+      totalKeysExamined: Long("0"),
+      collectionScans: Long("0"),
+      indexesUsed: [],
+      nReturned: Long("0"),
+      executionTimeMillisEstimate: Long("0")
+    },
+    {
+      '$lookup': {
+        from: 'users',
+        as: 'friends_of_friends',
+        localField: 'friends.friends',
+        foreignField: '_id',
+        unwinding: {
+          preserveNullAndEmptyArrays: false
+        }
+      },
+      totalDocsExamined: Long("0"),
+      totalKeysExamined: Long("0"),
+      collectionScans: Long("0"),
+      indexesUsed: [],
+      nReturned: Long("0"),
+      executionTimeMillisEstimate: Long("0")
+    },
+    {
+      '$group': {
+        _id: '$_id',
+        firstName: {
+          '$first': '$firstName'
+        },
+        lastName: {
+          '$first': '$lastName'
+        },
+        email: {
+          '$first': '$email'
+        },
+        address: {
+          '$first': '$address'
+        },
+        dateOfBirth: {
+          '$first': '$dateOfBirth'
+        }
+      },
+      maxAccumulatorMemoryUsageBytes: {
+        firstName: Long("0"),
+        lastName: Long("0"),
+        email: Long("0"),
+        address: Long("0"),
+        dateOfBirth: Long("0")
+      },
+      totalOutputDataSizeBytes: Long("0"),
+      usedDisk: false,
+      spills: Long("0"),
+      nReturned: Long("0"),
+      executionTimeMillisEstimate: Long("0")
+    }
+  ],
+  serverInfo: {
+    host: '197490493c42',
+    port: 27017,
+    version: '6.0.5',
+    gitVersion: 'c9a99c120371d4d4c52cbb15dac34a36ce8d3b1d'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600
+  },
+  command: {
+    aggregate: 'users',
+    pipeline: [
+      {
+        '$lookup': {
+          from: 'users',
+          localField: 'friends',
+          foreignField: '_id',
+          as: 'friends'
+        }
+      },
+      {
+        '$unwind': '$friends'
+      },
+      {
+        '$lookup': {
+          from: 'users',
+          localField: 'friends.friends',
+          foreignField: '_id',
+          as: 'friends_of_friends'
+        }
+      },
+      {
+        '$unwind': '$friends_of_friends'
+      },
+      {
+        '$match': {
+          '$and': [
+            {
+              _id: {
+                '$eq': '$friends_of_friends._id'
+              }
+            }
+          ]
+        }
+      },
+      {
+        '$group': {
+          _id: '$_id',
+          firstName: {
+            '$first': '$firstName'
+          },
+          lastName: {
+            '$first': '$lastName'
+          },
+          email: {
+            '$first': '$email'
+          },
+          address: {
+            '$first': '$address'
+          },
+          dateOfBirth: {
+            '$first': '$dateOfBirth'
+          }
+        }
+      }
+    ],
+    cursor: {},
+    '$db': 'FriendWorker'
+  },
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1683116871, i: 2 }),
+    signature: {
+      hash: Binary(Buffer.from("0000000000000000000000000000000000000000", "hex"), 0),
+      keyId: Long("0")
+    }
+  },
+  operationTime: Timestamp({ t: 1683116871, i: 2 })
+}
+

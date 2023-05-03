@@ -1,0 +1,1136 @@
+Current Mongosh Log ID:	64525347428f17392cef5efd
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0
+Using MongoDB:		6.0.5
+Using Mongosh:		1.8.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-05-03T12:27:32.324+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2023-05-03T12:27:33.117+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-05-03T12:27:33.117+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
+   2023-05-03T12:27:33.117+00:00: vm.max_map_count is too low
+------
+
+------
+   Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+   metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+   
+   The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+   and anyone you share the URL with. MongoDB may use this information to make product
+   improvements and to suggest MongoDB products and deployment options to you.
+   
+   To enable free monitoring, run the following command: db.enableFreeMonitoring()
+   To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+------
+
+Loading file: home/1_postsByAuthor.js
+{
+  explainVersion: '2',
+  stages: [
+    {
+      '$cursor': {
+        queryPlanner: {
+          namespace: 'FriendWorker.posts',
+          indexFilterSet: false,
+          parsedQuery: {},
+          queryHash: '17830885',
+          planCacheKey: '17830885',
+          maxIndexedOrSolutionsReached: false,
+          maxIndexedAndSolutionsReached: false,
+          maxScansToExplodeReached: false,
+          winningPlan: {
+            queryPlan: {
+              stage: 'EQ_LOOKUP',
+              planNodeId: 2,
+              foreignCollection: 'FriendWorker.users',
+              localField: 'author',
+              foreignField: '_id',
+              asField: 'author_info',
+              strategy: 'IndexedLoopJoin',
+              indexName: '_id_',
+              indexKeyPattern: {
+                _id: 1
+              },
+              inputStage: {
+                stage: 'COLLSCAN',
+                planNodeId: 1,
+                filter: {},
+                direction: 'forward'
+              }
+            },
+            slotBasedPlan: {
+              slots: '$$RESULT=s38 env: { s3 = Timestamp(1683116871, 2) (CLUSTER_TIME), s4 = 1683116872335 (NOW), s1 = TimeZoneDatabase(America/Goose_Bay...America/Porto_Acre) (timeZoneDB), s2 = Nothing (SEARCH_META) }',
+              stages: '[2] mkobj s38 s5 [] drop [author_info = s37] true false \n' +
+                '[2] nlj [s5] [s12] \n' +
+                '    left \n' +
+                '        [2] nlj [s5] [s5] \n' +
+                '            left \n' +
+                '                [1] scan s5 s6 none none none none [] @"7be1d7d2-1ff0-4c52-bb41-84180c0cbf1c" true false \n' +
+                '            right \n' +
+                '                [2] project [s12 = if (getArraySize (s10) > 0, s10, [null])] \n' +
+                '                [2] group [] [s10 = addToSet (s8)] spillSlots[s11] mergingExprs[aggSetUnion (s11)] \n' +
+                '                [2] unwind s8 s9 s7 true \n' +
+                '                [2] project [s7 = getField (s5, "author")] \n' +
+                '                [2] limit 1 \n' +
+                '                [2] coscan \n' +
+                '            \n' +
+                '        \n' +
+                '    right \n' +
+                '        [2] limit 1 \n' +
+                '        [2] union [s37] [\n' +
+                '            [s35] [2] project [s35 = getElement (s33, 0)] \n' +
+                '            [2] group [] [s33 = addToArrayCapped (s26, 104857600)] spillSlots[s34] mergingExprs[aggConcatArraysCapped (s34, 104857600)] \n' +
+                '            [2] nlj [s26] [s26] \n' +
+                '                left \n' +
+                '                    [2] nlj [] [s23, s25, s21, s24, s22] \n' +
+                '                        left \n' +
+                '                            [2] nlj [s21, s22] [s19, s20] \n' +
+                '                                left \n' +
+                '                                    [2] nlj [] [s13] \n' +
+                '                                        left \n' +
+                '                                            [2] unwind s13 s14 s12 true \n' +
+                '                                            [2] limit 1 \n' +
+                '                                            [2] coscan \n' +
+                '                                        right \n' +
+                '                                            [2] project [s19 = ks (1, 0, s18, 1), s20 = ks (1, 0, s18, 2), s21 = "_id_", s22 = {"_id" : 1}] \n' +
+                '                                            [2] union [s18] [\n' +
+                '                                                [s15] [2] cfilter {isNull (s13)} \n' +
+                '                                                [2] project [s15 = undefined] \n' +
+                '                                                [2] limit 1 \n' +
+                '                                                [2] coscan , \n' +
+                '                                                [s16] [2] filter {isArray (s13) && ! isMember (s16, s12)} \n' +
+                '                                                [2] project [s16 = fillEmpty (getElement (s13, 0), undefined)] \n' +
+                '                                                [2] limit 1 \n' +
+                '                                                [2] coscan , \n' +
+                '                                                [s17] [2] project [s17 = s13] \n' +
+                '                                                [2] limit 1 \n' +
+                '                                                [2] coscan \n' +
+                '                                           ] \n' +
+                '                                        \n' +
+                '                                    \n' +
+                '                                right \n' +
+                '                                    [2] ixseek s19 s20 s24 s23 s25 [] @"3ad17674-a63b-4ed4-a018-ac21a8229477" @"_id_" true \n' +
+                '                                \n' +
+                '                            \n' +
+                '                        right \n' +
+                '                            [2] limit 1 \n' +
+                '                            [2] seek s23 s26 s27 s25 s21 s24 s22 [] @"3ad17674-a63b-4ed4-a018-ac21a8229477" true false \n' +
+                '                        \n' +
+                '                    \n' +
+                '                right \n' +
+                '                    [2] limit 1 \n' +
+                '                    [2] filter {isMember (s32, s12)} \n' +
+                '                    [2] nlj [] [s28] \n' +
+                '                        left \n' +
+                '                            [2] project [s28 = fillEmpty (getField (s26, "_id"), null)] \n' +
+                '                            [2] limit 1 \n' +
+                '                            [2] coscan \n' +
+                '                        right \n' +
+                '                            [2] branch {isArray (s28)} [s32] \n' +
+                '                            [s31] [2] union [s31] [\n' +
+                '                                [s29] [2] unwind s29 s30 s28 true \n' +
+                '                                [2] limit 1 \n' +
+                '                                [2] coscan , \n' +
+                '                                [s28] [2] limit 1 \n' +
+                '                                [2] coscan \n' +
+                '                           ] \n' +
+                '                            [s28] [2] limit 1 \n' +
+                '                            [2] coscan \n' +
+                '                        \n' +
+                '                    \n' +
+                '                \n' +
+                '            , \n' +
+                '            [s36] [2] project [s36 = []] \n' +
+                '            [2] limit 1 \n' +
+                '            [2] coscan \n' +
+                '       ] \n' +
+                '    \n'
+            }
+          },
+          rejectedPlans: []
+        },
+        executionStats: {
+          executionSuccess: true,
+          nReturned: 380,
+          executionTimeMillis: 14,
+          totalKeysExamined: 380,
+          totalDocsExamined: 760,
+          executionStages: {
+            stage: 'mkobj',
+            planNodeId: 2,
+            nReturned: 380,
+            executionTimeMillisEstimate: 11,
+            opens: 1,
+            closes: 1,
+            saveState: 2,
+            restoreState: 2,
+            isEOF: 1,
+            objSlot: 38,
+            rootSlot: 5,
+            fieldBehavior: 'drop',
+            fields: [],
+            projectFields: [
+              'author_info'
+            ],
+            projectSlots: [
+              Long("37")
+            ],
+            forceNewObject: true,
+            returnOldObject: false,
+            inputStage: {
+              stage: 'nlj',
+              planNodeId: 2,
+              nReturned: 380,
+              executionTimeMillisEstimate: 11,
+              opens: 1,
+              closes: 1,
+              saveState: 2,
+              restoreState: 2,
+              isEOF: 1,
+              totalDocsExamined: 760,
+              totalKeysExamined: 380,
+              collectionScans: 1,
+              collectionSeeks: 380,
+              indexScans: 0,
+              indexSeeks: 380,
+              indexesUsed: [
+                '_id_'
+              ],
+              innerOpens: 380,
+              innerCloses: 1,
+              outerProjects: [
+                Long("5")
+              ],
+              outerCorrelated: [
+                Long("12")
+              ],
+              outerStage: {
+                stage: 'nlj',
+                planNodeId: 2,
+                nReturned: 380,
+                executionTimeMillisEstimate: 3,
+                opens: 1,
+                closes: 1,
+                saveState: 2,
+                restoreState: 2,
+                isEOF: 1,
+                totalDocsExamined: 380,
+                totalKeysExamined: 0,
+                collectionScans: 1,
+                collectionSeeks: 0,
+                indexScans: 0,
+                indexSeeks: 0,
+                indexesUsed: [],
+                innerOpens: 380,
+                innerCloses: 1,
+                outerProjects: [
+                  Long("5")
+                ],
+                outerCorrelated: [
+                  Long("5")
+                ],
+                outerStage: {
+                  stage: 'scan',
+                  planNodeId: 1,
+                  nReturned: 380,
+                  executionTimeMillisEstimate: 3,
+                  opens: 1,
+                  closes: 1,
+                  saveState: 2,
+                  restoreState: 2,
+                  isEOF: 1,
+                  numReads: 380,
+                  recordSlot: 5,
+                  recordIdSlot: 6,
+                  fields: [],
+                  outputSlots: []
+                },
+                innerStage: {
+                  stage: 'project',
+                  planNodeId: 2,
+                  nReturned: 380,
+                  executionTimeMillisEstimate: 0,
+                  opens: 380,
+                  closes: 1,
+                  saveState: 2,
+                  restoreState: 2,
+                  isEOF: 1,
+                  projections: {
+                    '12': 'if (getArraySize (s10) > 0, s10, [null]) '
+                  },
+                  inputStage: {
+                    stage: 'group',
+                    planNodeId: 2,
+                    nReturned: 380,
+                    executionTimeMillisEstimate: 0,
+                    opens: 380,
+                    closes: 1,
+                    saveState: 2,
+                    restoreState: 2,
+                    isEOF: 1,
+                    groupBySlots: [],
+                    expressions: {
+                      '10': 'addToSet (s8) '
+                    },
+                    mergingExprs: {
+                      '11': 'aggSetUnion (s11) '
+                    },
+                    usedDisk: false,
+                    numSpills: 0,
+                    spilledRecords: 0,
+                    spilledDataStorageSize: 0,
+                    inputStage: {
+                      stage: 'unwind',
+                      planNodeId: 2,
+                      nReturned: 380,
+                      executionTimeMillisEstimate: 0,
+                      opens: 380,
+                      closes: 380,
+                      saveState: 2,
+                      restoreState: 2,
+                      isEOF: 1,
+                      inputSlot: 7,
+                      outSlot: 8,
+                      outIndexSlot: 9,
+                      preserveNullAndEmptyArrays: 1,
+                      inputStage: {
+                        stage: 'project',
+                        planNodeId: 2,
+                        nReturned: 380,
+                        executionTimeMillisEstimate: 0,
+                        opens: 380,
+                        closes: 380,
+                        saveState: 2,
+                        restoreState: 2,
+                        isEOF: 1,
+                        projections: {
+                          '7': 'getField (s5, "author") '
+                        },
+                        inputStage: {
+                          stage: 'limit',
+                          planNodeId: 2,
+                          nReturned: 380,
+                          executionTimeMillisEstimate: 0,
+                          opens: 380,
+                          closes: 380,
+                          saveState: 2,
+                          restoreState: 2,
+                          isEOF: 1,
+                          limit: 1,
+                          inputStage: {
+                            stage: 'coscan',
+                            planNodeId: 2,
+                            nReturned: 380,
+                            executionTimeMillisEstimate: 0,
+                            opens: 380,
+                            closes: 380,
+                            saveState: 2,
+                            restoreState: 2,
+                            isEOF: 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              innerStage: {
+                stage: 'limit',
+                planNodeId: 2,
+                nReturned: 380,
+                executionTimeMillisEstimate: 8,
+                opens: 380,
+                closes: 1,
+                saveState: 2,
+                restoreState: 2,
+                isEOF: 1,
+                limit: 1,
+                inputStage: {
+                  stage: 'union',
+                  planNodeId: 2,
+                  nReturned: 380,
+                  executionTimeMillisEstimate: 8,
+                  opens: 380,
+                  closes: 1,
+                  saveState: 2,
+                  restoreState: 2,
+                  isEOF: 0,
+                  inputSlots: [
+                    Long("35"),
+                    Long("36")
+                  ],
+                  outputSlots: [
+                    Long("37")
+                  ],
+                  inputStages: [
+                    {
+                      stage: 'project',
+                      planNodeId: 2,
+                      nReturned: 380,
+                      executionTimeMillisEstimate: 8,
+                      opens: 380,
+                      closes: 380,
+                      saveState: 2,
+                      restoreState: 2,
+                      isEOF: 0,
+                      projections: {
+                        '35': 'getElement (s33, 0) '
+                      },
+                      inputStage: {
+                        stage: 'group',
+                        planNodeId: 2,
+                        nReturned: 380,
+                        executionTimeMillisEstimate: 8,
+                        opens: 380,
+                        closes: 380,
+                        saveState: 2,
+                        restoreState: 2,
+                        isEOF: 0,
+                        groupBySlots: [],
+                        expressions: {
+                          '33': 'addToArrayCapped (s26, 104857600) '
+                        },
+                        mergingExprs: {
+                          '34': 'aggConcatArraysCapped (s34, 104857600) '
+                        },
+                        usedDisk: false,
+                        numSpills: 0,
+                        spilledRecords: 0,
+                        spilledDataStorageSize: 0,
+                        inputStage: {
+                          stage: 'nlj',
+                          planNodeId: 2,
+                          nReturned: 380,
+                          executionTimeMillisEstimate: 6,
+                          opens: 380,
+                          closes: 380,
+                          saveState: 2,
+                          restoreState: 2,
+                          isEOF: 1,
+                          totalDocsExamined: 380,
+                          totalKeysExamined: 380,
+                          collectionScans: 0,
+                          collectionSeeks: 380,
+                          indexScans: 0,
+                          indexSeeks: 380,
+                          indexesUsed: [
+                            '_id_'
+                          ],
+                          innerOpens: 380,
+                          innerCloses: 380,
+                          outerProjects: [
+                            Long("26")
+                          ],
+                          outerCorrelated: [
+                            Long("26")
+                          ],
+                          outerStage: {
+                            stage: 'nlj',
+                            planNodeId: 2,
+                            nReturned: 380,
+                            executionTimeMillisEstimate: 6,
+                            opens: 380,
+                            closes: 380,
+                            saveState: 2,
+                            restoreState: 2,
+                            isEOF: 1,
+                            totalDocsExamined: 380,
+                            totalKeysExamined: 380,
+                            collectionScans: 0,
+                            collectionSeeks: 380,
+                            indexScans: 0,
+                            indexSeeks: 380,
+                            indexesUsed: [
+                              '_id_'
+                            ],
+                            innerOpens: 380,
+                            innerCloses: 380,
+                            outerProjects: [],
+                            outerCorrelated: [
+                              Long("23"),
+                              Long("25"),
+                              Long("21"),
+                              Long("24"),
+                              Long("22")
+                            ],
+                            outerStage: {
+                              stage: 'nlj',
+                              planNodeId: 2,
+                              nReturned: 380,
+                              executionTimeMillisEstimate: 5,
+                              opens: 380,
+                              closes: 380,
+                              saveState: 2,
+                              restoreState: 2,
+                              isEOF: 1,
+                              totalDocsExamined: 0,
+                              totalKeysExamined: 380,
+                              collectionScans: 0,
+                              collectionSeeks: 0,
+                              indexScans: 0,
+                              indexSeeks: 380,
+                              indexesUsed: [
+                                '_id_'
+                              ],
+                              innerOpens: 380,
+                              innerCloses: 380,
+                              outerProjects: [
+                                Long("21"),
+                                Long("22")
+                              ],
+                              outerCorrelated: [
+                                Long("19"),
+                                Long("20")
+                              ],
+                              outerStage: {
+                                stage: 'nlj',
+                                planNodeId: 2,
+                                nReturned: 380,
+                                executionTimeMillisEstimate: 2,
+                                opens: 380,
+                                closes: 380,
+                                saveState: 2,
+                                restoreState: 2,
+                                isEOF: 1,
+                                totalDocsExamined: 0,
+                                totalKeysExamined: 0,
+                                collectionScans: 0,
+                                collectionSeeks: 0,
+                                indexScans: 0,
+                                indexSeeks: 0,
+                                indexesUsed: [],
+                                innerOpens: 380,
+                                innerCloses: 380,
+                                outerProjects: [],
+                                outerCorrelated: [
+                                  Long("13")
+                                ],
+                                outerStage: {
+                                  stage: 'unwind',
+                                  planNodeId: 2,
+                                  nReturned: 380,
+                                  executionTimeMillisEstimate: 0,
+                                  opens: 380,
+                                  closes: 380,
+                                  saveState: 2,
+                                  restoreState: 2,
+                                  isEOF: 1,
+                                  inputSlot: 12,
+                                  outSlot: 13,
+                                  outIndexSlot: 14,
+                                  preserveNullAndEmptyArrays: 1,
+                                  inputStage: {
+                                    stage: 'limit',
+                                    planNodeId: 2,
+                                    nReturned: 380,
+                                    executionTimeMillisEstimate: 0,
+                                    opens: 380,
+                                    closes: 380,
+                                    saveState: 2,
+                                    restoreState: 2,
+                                    isEOF: 1,
+                                    limit: 1,
+                                    inputStage: {
+                                      stage: 'coscan',
+                                      planNodeId: 2,
+                                      nReturned: 380,
+                                      executionTimeMillisEstimate: 0,
+                                      opens: 380,
+                                      closes: 380,
+                                      saveState: 2,
+                                      restoreState: 2,
+                                      isEOF: 0
+                                    }
+                                  }
+                                },
+                                innerStage: {
+                                  stage: 'project',
+                                  planNodeId: 2,
+                                  nReturned: 380,
+                                  executionTimeMillisEstimate: 2,
+                                  opens: 380,
+                                  closes: 380,
+                                  saveState: 2,
+                                  restoreState: 2,
+                                  isEOF: 1,
+                                  projections: {
+                                    '19': 'ks (1, 0, s18, 1) ',
+                                    '20': 'ks (1, 0, s18, 2) ',
+                                    '21': '"_id_" ',
+                                    '22': '{"_id" : 1} '
+                                  },
+                                  inputStage: {
+                                    stage: 'union',
+                                    planNodeId: 2,
+                                    nReturned: 380,
+                                    executionTimeMillisEstimate: 0,
+                                    opens: 380,
+                                    closes: 380,
+                                    saveState: 2,
+                                    restoreState: 2,
+                                    isEOF: 1,
+                                    inputSlots: [
+                                      Long("15"),
+                                      Long("16"),
+                                      Long("17")
+                                    ],
+                                    outputSlots: [
+                                      Long("18")
+                                    ],
+                                    inputStages: [
+                                      {
+                                        stage: 'cfilter',
+                                        planNodeId: 2,
+                                        nReturned: 0,
+                                        executionTimeMillisEstimate: 0,
+                                        opens: 380,
+                                        closes: 760,
+                                        saveState: 2,
+                                        restoreState: 2,
+                                        isEOF: 1,
+                                        numTested: 380,
+                                        filter: 'isNull (s13) ',
+                                        inputStage: {
+                                          stage: 'project',
+                                          planNodeId: 2,
+                                          nReturned: 0,
+                                          executionTimeMillisEstimate: 0,
+                                          opens: 0,
+                                          closes: 0,
+                                          saveState: 2,
+                                          restoreState: 2,
+                                          isEOF: 0,
+                                          projections: {
+                                            '15': 'undefined '
+                                          },
+                                          inputStage: {
+                                            stage: 'limit',
+                                            planNodeId: 2,
+                                            nReturned: 0,
+                                            executionTimeMillisEstimate: 0,
+                                            opens: 0,
+                                            closes: 0,
+                                            saveState: 2,
+                                            restoreState: 2,
+                                            isEOF: 0,
+                                            limit: 1,
+                                            inputStage: {
+                                              stage: 'coscan',
+                                              planNodeId: 2,
+                                              nReturned: 0,
+                                              executionTimeMillisEstimate: 0,
+                                              opens: 0,
+                                              closes: 0,
+                                              saveState: 2,
+                                              restoreState: 2,
+                                              isEOF: 0
+                                            }
+                                          }
+                                        }
+                                      },
+                                      {
+                                        stage: 'filter',
+                                        planNodeId: 2,
+                                        nReturned: 0,
+                                        executionTimeMillisEstimate: 0,
+                                        opens: 380,
+                                        closes: 380,
+                                        saveState: 2,
+                                        restoreState: 2,
+                                        isEOF: 1,
+                                        numTested: 380,
+                                        filter: 'isArray (s13) && ! isMember (s16, s12) ',
+                                        inputStage: {
+                                          stage: 'project',
+                                          planNodeId: 2,
+                                          nReturned: 380,
+                                          executionTimeMillisEstimate: 0,
+                                          opens: 380,
+                                          closes: 380,
+                                          saveState: 2,
+                                          restoreState: 2,
+                                          isEOF: 1,
+                                          projections: {
+                                            '16': 'fillEmpty (getElement (s13, 0), undefined) '
+                                          },
+                                          inputStage: {
+                                            stage: 'limit',
+                                            planNodeId: 2,
+                                            nReturned: 380,
+                                            executionTimeMillisEstimate: 0,
+                                            opens: 380,
+                                            closes: 380,
+                                            saveState: 2,
+                                            restoreState: 2,
+                                            isEOF: 1,
+                                            limit: 1,
+                                            inputStage: {
+                                              stage: 'coscan',
+                                              planNodeId: 2,
+                                              nReturned: 380,
+                                              executionTimeMillisEstimate: 0,
+                                              opens: 380,
+                                              closes: 380,
+                                              saveState: 2,
+                                              restoreState: 2,
+                                              isEOF: 0
+                                            }
+                                          }
+                                        }
+                                      },
+                                      {
+                                        stage: 'project',
+                                        planNodeId: 2,
+                                        nReturned: 380,
+                                        executionTimeMillisEstimate: 0,
+                                        opens: 380,
+                                        closes: 380,
+                                        saveState: 2,
+                                        restoreState: 2,
+                                        isEOF: 1,
+                                        projections: {
+                                          '17': 's13 '
+                                        },
+                                        inputStage: {
+                                          stage: 'limit',
+                                          planNodeId: 2,
+                                          nReturned: 380,
+                                          executionTimeMillisEstimate: 0,
+                                          opens: 380,
+                                          closes: 380,
+                                          saveState: 2,
+                                          restoreState: 2,
+                                          isEOF: 1,
+                                          limit: 1,
+                                          inputStage: {
+                                            stage: 'coscan',
+                                            planNodeId: 2,
+                                            nReturned: 380,
+                                            executionTimeMillisEstimate: 0,
+                                            opens: 380,
+                                            closes: 380,
+                                            saveState: 2,
+                                            restoreState: 2,
+                                            isEOF: 0
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              },
+                              innerStage: {
+                                stage: 'ixseek',
+                                planNodeId: 2,
+                                nReturned: 380,
+                                executionTimeMillisEstimate: 3,
+                                opens: 380,
+                                closes: 380,
+                                saveState: 2,
+                                restoreState: 2,
+                                isEOF: 1,
+                                indexName: '_id_',
+                                keysExamined: 380,
+                                seeks: 380,
+                                numReads: 760,
+                                recordSlot: 24,
+                                recordIdSlot: 23,
+                                snapshotIdSlot: 25,
+                                seekKeySlotLow: 19,
+                                seekKeySlotHigh: 20,
+                                outputSlots: [],
+                                indexKeysToInclude: '00000000000000000000000000000000'
+                              }
+                            },
+                            innerStage: {
+                              stage: 'limit',
+                              planNodeId: 2,
+                              nReturned: 380,
+                              executionTimeMillisEstimate: 1,
+                              opens: 380,
+                              closes: 380,
+                              saveState: 2,
+                              restoreState: 2,
+                              isEOF: 1,
+                              limit: 1,
+                              inputStage: {
+                                stage: 'seek',
+                                planNodeId: 2,
+                                nReturned: 380,
+                                executionTimeMillisEstimate: 1,
+                                opens: 380,
+                                closes: 380,
+                                saveState: 2,
+                                restoreState: 2,
+                                isEOF: 0,
+                                numReads: 380,
+                                recordSlot: 26,
+                                recordIdSlot: 27,
+                                seekKeySlot: 23,
+                                snapshotIdSlot: 25,
+                                indexIdSlot: 21,
+                                indexKeySlot: 24,
+                                indexKeyPatternSlot: 22,
+                                fields: [],
+                                outputSlots: []
+                              }
+                            }
+                          },
+                          innerStage: {
+                            stage: 'limit',
+                            planNodeId: 2,
+                            nReturned: 380,
+                            executionTimeMillisEstimate: 0,
+                            opens: 380,
+                            closes: 380,
+                            saveState: 2,
+                            restoreState: 2,
+                            isEOF: 1,
+                            limit: 1,
+                            inputStage: {
+                              stage: 'filter',
+                              planNodeId: 2,
+                              nReturned: 380,
+                              executionTimeMillisEstimate: 0,
+                              opens: 380,
+                              closes: 380,
+                              saveState: 2,
+                              restoreState: 2,
+                              isEOF: 0,
+                              numTested: 380,
+                              filter: 'isMember (s32, s12) ',
+                              inputStage: {
+                                stage: 'nlj',
+                                planNodeId: 2,
+                                nReturned: 380,
+                                executionTimeMillisEstimate: 0,
+                                opens: 380,
+                                closes: 380,
+                                saveState: 2,
+                                restoreState: 2,
+                                isEOF: 0,
+                                totalDocsExamined: 0,
+                                totalKeysExamined: 0,
+                                collectionScans: 0,
+                                collectionSeeks: 0,
+                                indexScans: 0,
+                                indexSeeks: 0,
+                                indexesUsed: [],
+                                innerOpens: 380,
+                                innerCloses: 380,
+                                outerProjects: [],
+                                outerCorrelated: [
+                                  Long("28")
+                                ],
+                                outerStage: {
+                                  stage: 'project',
+                                  planNodeId: 2,
+                                  nReturned: 380,
+                                  executionTimeMillisEstimate: 0,
+                                  opens: 380,
+                                  closes: 380,
+                                  saveState: 2,
+                                  restoreState: 2,
+                                  isEOF: 0,
+                                  projections: {
+                                    '28': 'fillEmpty (getField (s26, "_id"), null) '
+                                  },
+                                  inputStage: {
+                                    stage: 'limit',
+                                    planNodeId: 2,
+                                    nReturned: 380,
+                                    executionTimeMillisEstimate: 0,
+                                    opens: 380,
+                                    closes: 380,
+                                    saveState: 2,
+                                    restoreState: 2,
+                                    isEOF: 0,
+                                    limit: 1,
+                                    inputStage: {
+                                      stage: 'coscan',
+                                      planNodeId: 2,
+                                      nReturned: 380,
+                                      executionTimeMillisEstimate: 0,
+                                      opens: 380,
+                                      closes: 380,
+                                      saveState: 2,
+                                      restoreState: 2,
+                                      isEOF: 0
+                                    }
+                                  }
+                                },
+                                innerStage: {
+                                  stage: 'branch',
+                                  planNodeId: 2,
+                                  nReturned: 380,
+                                  executionTimeMillisEstimate: 0,
+                                  opens: 380,
+                                  closes: 380,
+                                  saveState: 2,
+                                  restoreState: 2,
+                                  isEOF: 0,
+                                  numTested: 380,
+                                  thenBranchOpens: 0,
+                                  thenBranchCloses: 0,
+                                  elseBranchOpens: 380,
+                                  elseBranchCloses: 380,
+                                  filter: 'isArray (s28) ',
+                                  thenSlots: [
+                                    Long("31")
+                                  ],
+                                  elseSlots: [
+                                    Long("28")
+                                  ],
+                                  outputSlots: [
+                                    Long("32")
+                                  ],
+                                  thenStage: {
+                                    stage: 'union',
+                                    planNodeId: 2,
+                                    nReturned: 0,
+                                    executionTimeMillisEstimate: 0,
+                                    opens: 0,
+                                    closes: 0,
+                                    saveState: 2,
+                                    restoreState: 2,
+                                    isEOF: 0,
+                                    inputSlots: [
+                                      Long("29"),
+                                      Long("28")
+                                    ],
+                                    outputSlots: [
+                                      Long("31")
+                                    ],
+                                    inputStages: [
+                                      {
+                                        stage: 'unwind',
+                                        planNodeId: 2,
+                                        nReturned: 0,
+                                        executionTimeMillisEstimate: 0,
+                                        opens: 0,
+                                        closes: 0,
+                                        saveState: 2,
+                                        restoreState: 2,
+                                        isEOF: 0,
+                                        inputSlot: 28,
+                                        outSlot: 29,
+                                        outIndexSlot: 30,
+                                        preserveNullAndEmptyArrays: 1,
+                                        inputStage: {
+                                          stage: 'limit',
+                                          planNodeId: 2,
+                                          nReturned: 0,
+                                          executionTimeMillisEstimate: 0,
+                                          opens: 0,
+                                          closes: 0,
+                                          saveState: 2,
+                                          restoreState: 2,
+                                          isEOF: 0,
+                                          limit: 1,
+                                          inputStage: {
+                                            stage: 'coscan',
+                                            planNodeId: 2,
+                                            nReturned: 0,
+                                            executionTimeMillisEstimate: 0,
+                                            opens: 0,
+                                            closes: 0,
+                                            saveState: 2,
+                                            restoreState: 2,
+                                            isEOF: 0
+                                          }
+                                        }
+                                      },
+                                      {
+                                        stage: 'limit',
+                                        planNodeId: 2,
+                                        nReturned: 0,
+                                        executionTimeMillisEstimate: 0,
+                                        opens: 0,
+                                        closes: 0,
+                                        saveState: 2,
+                                        restoreState: 2,
+                                        isEOF: 0,
+                                        limit: 1,
+                                        inputStage: {
+                                          stage: 'coscan',
+                                          planNodeId: 2,
+                                          nReturned: 0,
+                                          executionTimeMillisEstimate: 0,
+                                          opens: 0,
+                                          closes: 0,
+                                          saveState: 2,
+                                          restoreState: 2,
+                                          isEOF: 0
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  elseStage: {
+                                    stage: 'limit',
+                                    planNodeId: 2,
+                                    nReturned: 380,
+                                    executionTimeMillisEstimate: 0,
+                                    opens: 380,
+                                    closes: 380,
+                                    saveState: 2,
+                                    restoreState: 2,
+                                    isEOF: 0,
+                                    limit: 1,
+                                    inputStage: {
+                                      stage: 'coscan',
+                                      planNodeId: 2,
+                                      nReturned: 380,
+                                      executionTimeMillisEstimate: 0,
+                                      opens: 380,
+                                      closes: 380,
+                                      saveState: 2,
+                                      restoreState: 2,
+                                      isEOF: 0
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      stage: 'project',
+                      planNodeId: 2,
+                      nReturned: 0,
+                      executionTimeMillisEstimate: 0,
+                      opens: 0,
+                      closes: 0,
+                      saveState: 2,
+                      restoreState: 2,
+                      isEOF: 0,
+                      projections: {
+                        '36': '[] '
+                      },
+                      inputStage: {
+                        stage: 'limit',
+                        planNodeId: 2,
+                        nReturned: 0,
+                        executionTimeMillisEstimate: 0,
+                        opens: 0,
+                        closes: 0,
+                        saveState: 2,
+                        restoreState: 2,
+                        isEOF: 0,
+                        limit: 1,
+                        inputStage: {
+                          stage: 'coscan',
+                          planNodeId: 2,
+                          nReturned: 0,
+                          executionTimeMillisEstimate: 0,
+                          opens: 0,
+                          closes: 0,
+                          saveState: 2,
+                          restoreState: 2,
+                          isEOF: 0
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          allPlansExecution: []
+        }
+      },
+      nReturned: Long("380"),
+      executionTimeMillisEstimate: Long("11")
+    },
+    {
+      '$match': {
+        'author_info.lastName': {
+          '$eq': 'Geraghty'
+        }
+      },
+      nReturned: Long("1"),
+      executionTimeMillisEstimate: Long("13")
+    }
+  ],
+  serverInfo: {
+    host: '197490493c42',
+    port: 27017,
+    version: '6.0.5',
+    gitVersion: 'c9a99c120371d4d4c52cbb15dac34a36ce8d3b1d'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600
+  },
+  command: {
+    aggregate: 'posts',
+    pipeline: [
+      {
+        '$lookup': {
+          from: 'users',
+          localField: 'author',
+          foreignField: '_id',
+          as: 'author_info'
+        }
+      },
+      {
+        '$match': {
+          'author_info.lastName': 'Geraghty'
+        }
+      }
+    ],
+    cursor: {},
+    '$db': 'FriendWorker'
+  },
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1683116871, i: 2 }),
+    signature: {
+      hash: Binary(Buffer.from("0000000000000000000000000000000000000000", "hex"), 0),
+      keyId: Long("0")
+    }
+  },
+  operationTime: Timestamp({ t: 1683116871, i: 2 })
+}
+[
+  {
+    _id: 'post_5',
+    author: 'user_537',
+    text: 'deserunt proident deserunt fugiat aliquip nostrud sunt aute fugiat esse',
+    attachmentPath: 'images/files/1c939a57-856f-4a58-9f42-e0832bda5883.png',
+    comments: [],
+    likes: [
+      {
+        id: 'like_294'
+      },
+      {
+        id: 'like_490'
+      }
+    ],
+    author_info: [
+      {
+        _id: 'user_537',
+        firstName: 'Jamey',
+        lastName: 'Geraghty',
+        email: 'jgeraghtyew@tmall.com',
+        password: 'En1Ă·ujgQVeX',
+        dateOfBirth: ISODate("2008-10-06T04:57:35.000Z"),
+        address: {
+          city: 'Taganskiy',
+          postal: '961 585',
+          street: '6 Sunnyside Alley',
+          country: 'Russia'
+        }
+      }
+    ]
+  }
+]

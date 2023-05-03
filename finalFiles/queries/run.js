@@ -1,4 +1,5 @@
 const { exec } = require('child_process');
+const fs = require('fs');
 
 const files = [
     '1_postsByAuthor.js',
@@ -36,6 +37,7 @@ function run() {
             console.log(stdout)
             console.log(stderr)
             console.log(`Successfull running file ${file}`)
+            fs.writeFileSync(`query-${file}.log`, stdout)
         });
     })
 }

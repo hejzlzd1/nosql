@@ -1,0 +1,1932 @@
+Current Mongosh Log ID:	64525347c940738907ab74ad
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0
+Using MongoDB:		6.0.5
+Using Mongosh:		1.8.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-05-03T12:27:32.324+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2023-05-03T12:27:33.117+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-05-03T12:27:33.117+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
+   2023-05-03T12:27:33.117+00:00: vm.max_map_count is too low
+------
+
+------
+   Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+   metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+   
+   The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+   and anyone you share the URL with. MongoDB may use this information to make product
+   improvements and to suggest MongoDB products and deployment options to you.
+   
+   To enable free monitoring, run the following command: db.enableFreeMonitoring()
+   To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+------
+
+Loading file: home/2_usersWithPostPostCount_2.js
+{
+  explainVersion: '2',
+  stages: [
+    {
+      '$cursor': {
+        queryPlanner: {
+          namespace: 'FriendWorker.users',
+          indexFilterSet: false,
+          parsedQuery: {},
+          queryHash: 'A5655729',
+          planCacheKey: 'A5655729',
+          maxIndexedOrSolutionsReached: false,
+          maxIndexedAndSolutionsReached: false,
+          maxScansToExplodeReached: false,
+          winningPlan: {
+            queryPlan: {
+              stage: 'EQ_LOOKUP',
+              planNodeId: 3,
+              foreignCollection: 'FriendWorker.posts',
+              localField: '_id',
+              foreignField: 'author',
+              asField: 'posts',
+              strategy: 'HashJoin',
+              inputStage: {
+                stage: 'PROJECTION_SIMPLE',
+                planNodeId: 2,
+                transformBy: {
+                  _id: true,
+                  address: true,
+                  dateOfBirth: true,
+                  email: true,
+                  firstName: true,
+                  friends: true,
+                  lastName: true,
+                  posts: true
+                },
+                inputStage: {
+                  stage: 'COLLSCAN',
+                  planNodeId: 1,
+                  filter: {},
+                  direction: 'forward'
+                }
+              }
+            },
+            slotBasedPlan: {
+              slots: '$$RESULT=s25 env: { s1 = TimeZoneDatabase(America/Goose_Bay...America/Porto_Acre) (timeZoneDB), s2 = Nothing (SEARCH_META), s4 = 1683116872699 (NOW), s3 = Timestamp(1683116871, 2) (CLUSTER_TIME) }',
+              stages: '[3] mkobj s25 s7 [] drop [posts = s24] true false \n' +
+                '[3] project [s24 = fillEmpty (s23, [])] \n' +
+                '[3] hash_lookup [s23 = addToArray (s8)] \n' +
+                '    outer s15 \n' +
+                '        [3] nlj [s7] [s7] \n' +
+                '            left \n' +
+                '                [2] mkbson s7 s5 [_id, address, dateOfBirth, email, firstName, friends, lastName, posts] keep [] true false \n' +
+                '                [1] scan s5 s6 none none none none [] @"3ad17674-a63b-4ed4-a018-ac21a8229477" true false \n' +
+                '            right \n' +
+                '                [3] project [s15 = if (getArraySize (s13) > 0, s13, [null])] \n' +
+                '                [3] group [] [s13 = addToSet (s11)] spillSlots[s14] mergingExprs[aggSetUnion (s14)] \n' +
+                '                [3] unwind s11 s12 s10 true \n' +
+                '                [3] project [s10 = getField (s7, "_id")] \n' +
+                '                [3] limit 1 \n' +
+                '                [3] coscan \n' +
+                '            \n' +
+                '        \n' +
+                '    inner s21 [s8] \n' +
+                '        [3] nlj [s8] [s8] \n' +
+                '            left \n' +
+                '                [3] scan s8 s9 none none none none [] @"7be1d7d2-1ff0-4c52-bb41-84180c0cbf1c" true false \n' +
+                '            right \n' +
+                '                [3] group [] [s21 = addToSet (s20)] spillSlots[s22] mergingExprs[aggSetUnion (s22)] \n' +
+                '                [3] nlj [] [s16] \n' +
+                '                    left \n' +
+                '                        [3] project [s16 = fillEmpty (getField (s8, "author"), null)] \n' +
+                '                        [3] limit 1 \n' +
+                '                        [3] coscan \n' +
+                '                    right \n' +
+                '                        [3] branch {isArray (s16)} [s20] \n' +
+                '                        [s19] [3] union [s19] [\n' +
+                '                            [s17] [3] unwind s17 s18 s16 true \n' +
+                '                            [3] limit 1 \n' +
+                '                            [3] coscan , \n' +
+                '                            [s16] [3] limit 1 \n' +
+                '                            [3] coscan \n' +
+                '                       ] \n' +
+                '                        [s16] [3] limit 1 \n' +
+                '                        [3] coscan \n' +
+                '                    \n' +
+                '                \n' +
+                '            \n' +
+                '        \n' +
+                '    \n'
+            }
+          },
+          rejectedPlans: []
+        },
+        executionStats: {
+          executionSuccess: true,
+          nReturned: 1000,
+          executionTimeMillis: 5,
+          totalKeysExamined: 0,
+          totalDocsExamined: 1380,
+          executionStages: {
+            stage: 'mkobj',
+            planNodeId: 3,
+            nReturned: 1000,
+            executionTimeMillisEstimate: 3,
+            opens: 1,
+            closes: 1,
+            saveState: 2,
+            restoreState: 2,
+            isEOF: 1,
+            objSlot: 25,
+            rootSlot: 7,
+            fieldBehavior: 'drop',
+            fields: [],
+            projectFields: [
+              'posts'
+            ],
+            projectSlots: [
+              Long("24")
+            ],
+            forceNewObject: true,
+            returnOldObject: false,
+            inputStage: {
+              stage: 'project',
+              planNodeId: 3,
+              nReturned: 1000,
+              executionTimeMillisEstimate: 3,
+              opens: 1,
+              closes: 1,
+              saveState: 2,
+              restoreState: 2,
+              isEOF: 1,
+              projections: {
+                '24': 'fillEmpty (s23, []) '
+              },
+              inputStage: {
+                stage: 'hash_lookup',
+                planNodeId: 3,
+                nReturned: 1000,
+                executionTimeMillisEstimate: 3,
+                opens: 1,
+                closes: 1,
+                saveState: 2,
+                restoreState: 2,
+                isEOF: 1,
+                totalDocsExamined: 1380,
+                totalKeysExamined: 0,
+                collectionScans: 2,
+                collectionSeeks: 0,
+                indexScans: 0,
+                indexSeeks: 0,
+                indexesUsed: [],
+                usedDisk: false,
+                spilledRecords: 0,
+                spilledBytesApprox: 0,
+                inputStages: [
+                  {
+                    stage: 'nlj',
+                    planNodeId: 3,
+                    nReturned: 1000,
+                    executionTimeMillisEstimate: 2,
+                    opens: 1,
+                    closes: 1,
+                    saveState: 2,
+                    restoreState: 2,
+                    isEOF: 1,
+                    totalDocsExamined: 1000,
+                    totalKeysExamined: 0,
+                    collectionScans: 1,
+                    collectionSeeks: 0,
+                    indexScans: 0,
+                    indexSeeks: 0,
+                    indexesUsed: [],
+                    innerOpens: 1000,
+                    innerCloses: 1,
+                    outerProjects: [
+                      Long("7")
+                    ],
+                    outerCorrelated: [
+                      Long("7")
+                    ],
+                    outerStage: {
+                      stage: 'mkbson',
+                      planNodeId: 2,
+                      nReturned: 1000,
+                      executionTimeMillisEstimate: 0,
+                      opens: 1,
+                      closes: 1,
+                      saveState: 2,
+                      restoreState: 2,
+                      isEOF: 1,
+                      objSlot: 7,
+                      rootSlot: 5,
+                      fieldBehavior: 'keep',
+                      fields: [
+                        '_id',
+                        'address',
+                        'dateOfBirth',
+                        'email',
+                        'firstName',
+                        'friends',
+                        'lastName',
+                        'posts'
+                      ],
+                      projectFields: [],
+                      projectSlots: [],
+                      forceNewObject: true,
+                      returnOldObject: false,
+                      inputStage: {
+                        stage: 'scan',
+                        planNodeId: 1,
+                        nReturned: 1000,
+                        executionTimeMillisEstimate: 0,
+                        opens: 1,
+                        closes: 1,
+                        saveState: 2,
+                        restoreState: 2,
+                        isEOF: 1,
+                        numReads: 1000,
+                        recordSlot: 5,
+                        recordIdSlot: 6,
+                        fields: [],
+                        outputSlots: []
+                      }
+                    },
+                    innerStage: {
+                      stage: 'project',
+                      planNodeId: 3,
+                      nReturned: 1000,
+                      executionTimeMillisEstimate: 2,
+                      opens: 1000,
+                      closes: 1,
+                      saveState: 2,
+                      restoreState: 2,
+                      isEOF: 1,
+                      projections: {
+                        '15': 'if (getArraySize (s13) > 0, s13, [null]) '
+                      },
+                      inputStage: {
+                        stage: 'group',
+                        planNodeId: 3,
+                        nReturned: 1000,
+                        executionTimeMillisEstimate: 2,
+                        opens: 1000,
+                        closes: 1,
+                        saveState: 2,
+                        restoreState: 2,
+                        isEOF: 1,
+                        groupBySlots: [],
+                        expressions: {
+                          '13': 'addToSet (s11) '
+                        },
+                        mergingExprs: {
+                          '14': 'aggSetUnion (s14) '
+                        },
+                        usedDisk: false,
+                        numSpills: 0,
+                        spilledRecords: 0,
+                        spilledDataStorageSize: 0,
+                        inputStage: {
+                          stage: 'unwind',
+                          planNodeId: 3,
+                          nReturned: 1000,
+                          executionTimeMillisEstimate: 1,
+                          opens: 1000,
+                          closes: 1000,
+                          saveState: 2,
+                          restoreState: 2,
+                          isEOF: 1,
+                          inputSlot: 10,
+                          outSlot: 11,
+                          outIndexSlot: 12,
+                          preserveNullAndEmptyArrays: 1,
+                          inputStage: {
+                            stage: 'project',
+                            planNodeId: 3,
+                            nReturned: 1000,
+                            executionTimeMillisEstimate: 1,
+                            opens: 1000,
+                            closes: 1000,
+                            saveState: 2,
+                            restoreState: 2,
+                            isEOF: 1,
+                            projections: {
+                              '10': 'getField (s7, "_id") '
+                            },
+                            inputStage: {
+                              stage: 'limit',
+                              planNodeId: 3,
+                              nReturned: 1000,
+                              executionTimeMillisEstimate: 1,
+                              opens: 1000,
+                              closes: 1000,
+                              saveState: 2,
+                              restoreState: 2,
+                              isEOF: 1,
+                              limit: 1,
+                              inputStage: {
+                                stage: 'coscan',
+                                planNodeId: 3,
+                                nReturned: 1000,
+                                executionTimeMillisEstimate: 1,
+                                opens: 1000,
+                                closes: 1000,
+                                saveState: 2,
+                                restoreState: 2,
+                                isEOF: 0
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    stage: 'nlj',
+                    planNodeId: 3,
+                    nReturned: 380,
+                    executionTimeMillisEstimate: 0,
+                    opens: 1,
+                    closes: 1,
+                    saveState: 2,
+                    restoreState: 2,
+                    isEOF: 1,
+                    totalDocsExamined: 380,
+                    totalKeysExamined: 0,
+                    collectionScans: 1,
+                    collectionSeeks: 0,
+                    indexScans: 0,
+                    indexSeeks: 0,
+                    indexesUsed: [],
+                    innerOpens: 380,
+                    innerCloses: 1,
+                    outerProjects: [
+                      Long("8")
+                    ],
+                    outerCorrelated: [
+                      Long("8")
+                    ],
+                    outerStage: {
+                      stage: 'scan',
+                      planNodeId: 3,
+                      nReturned: 380,
+                      executionTimeMillisEstimate: 0,
+                      opens: 1,
+                      closes: 1,
+                      saveState: 2,
+                      restoreState: 2,
+                      isEOF: 1,
+                      numReads: 380,
+                      recordSlot: 8,
+                      recordIdSlot: 9,
+                      fields: [],
+                      outputSlots: []
+                    },
+                    innerStage: {
+                      stage: 'group',
+                      planNodeId: 3,
+                      nReturned: 380,
+                      executionTimeMillisEstimate: 0,
+                      opens: 380,
+                      closes: 1,
+                      saveState: 2,
+                      restoreState: 2,
+                      isEOF: 1,
+                      groupBySlots: [],
+                      expressions: {
+                        '21': 'addToSet (s20) '
+                      },
+                      mergingExprs: {
+                        '22': 'aggSetUnion (s22) '
+                      },
+                      usedDisk: false,
+                      numSpills: 0,
+                      spilledRecords: 0,
+                      spilledDataStorageSize: 0,
+                      inputStage: {
+                        stage: 'nlj',
+                        planNodeId: 3,
+                        nReturned: 380,
+                        executionTimeMillisEstimate: 0,
+                        opens: 380,
+                        closes: 380,
+                        saveState: 2,
+                        restoreState: 2,
+                        isEOF: 1,
+                        totalDocsExamined: 0,
+                        totalKeysExamined: 0,
+                        collectionScans: 0,
+                        collectionSeeks: 0,
+                        indexScans: 0,
+                        indexSeeks: 0,
+                        indexesUsed: [],
+                        innerOpens: 380,
+                        innerCloses: 380,
+                        outerProjects: [],
+                        outerCorrelated: [
+                          Long("16")
+                        ],
+                        outerStage: {
+                          stage: 'project',
+                          planNodeId: 3,
+                          nReturned: 380,
+                          executionTimeMillisEstimate: 0,
+                          opens: 380,
+                          closes: 380,
+                          saveState: 2,
+                          restoreState: 2,
+                          isEOF: 1,
+                          projections: {
+                            '16': 'fillEmpty (getField (s8, "author"), null) '
+                          },
+                          inputStage: {
+                            stage: 'limit',
+                            planNodeId: 3,
+                            nReturned: 380,
+                            executionTimeMillisEstimate: 0,
+                            opens: 380,
+                            closes: 380,
+                            saveState: 2,
+                            restoreState: 2,
+                            isEOF: 1,
+                            limit: 1,
+                            inputStage: {
+                              stage: 'coscan',
+                              planNodeId: 3,
+                              nReturned: 380,
+                              executionTimeMillisEstimate: 0,
+                              opens: 380,
+                              closes: 380,
+                              saveState: 2,
+                              restoreState: 2,
+                              isEOF: 0
+                            }
+                          }
+                        },
+                        innerStage: {
+                          stage: 'branch',
+                          planNodeId: 3,
+                          nReturned: 380,
+                          executionTimeMillisEstimate: 0,
+                          opens: 380,
+                          closes: 380,
+                          saveState: 2,
+                          restoreState: 2,
+                          isEOF: 1,
+                          numTested: 380,
+                          thenBranchOpens: 0,
+                          thenBranchCloses: 0,
+                          elseBranchOpens: 380,
+                          elseBranchCloses: 380,
+                          filter: 'isArray (s16) ',
+                          thenSlots: [
+                            Long("19")
+                          ],
+                          elseSlots: [
+                            Long("16")
+                          ],
+                          outputSlots: [
+                            Long("20")
+                          ],
+                          thenStage: {
+                            stage: 'union',
+                            planNodeId: 3,
+                            nReturned: 0,
+                            executionTimeMillisEstimate: 0,
+                            opens: 0,
+                            closes: 0,
+                            saveState: 2,
+                            restoreState: 2,
+                            isEOF: 0,
+                            inputSlots: [
+                              Long("17"),
+                              Long("16")
+                            ],
+                            outputSlots: [
+                              Long("19")
+                            ],
+                            inputStages: [
+                              {
+                                stage: 'unwind',
+                                planNodeId: 3,
+                                nReturned: 0,
+                                executionTimeMillisEstimate: 0,
+                                opens: 0,
+                                closes: 0,
+                                saveState: 2,
+                                restoreState: 2,
+                                isEOF: 0,
+                                inputSlot: 16,
+                                outSlot: 17,
+                                outIndexSlot: 18,
+                                preserveNullAndEmptyArrays: 1,
+                                inputStage: {
+                                  stage: 'limit',
+                                  planNodeId: 3,
+                                  nReturned: 0,
+                                  executionTimeMillisEstimate: 0,
+                                  opens: 0,
+                                  closes: 0,
+                                  saveState: 2,
+                                  restoreState: 2,
+                                  isEOF: 0,
+                                  limit: 1,
+                                  inputStage: {
+                                    stage: 'coscan',
+                                    planNodeId: 3,
+                                    nReturned: 0,
+                                    executionTimeMillisEstimate: 0,
+                                    opens: 0,
+                                    closes: 0,
+                                    saveState: 2,
+                                    restoreState: 2,
+                                    isEOF: 0
+                                  }
+                                }
+                              },
+                              {
+                                stage: 'limit',
+                                planNodeId: 3,
+                                nReturned: 0,
+                                executionTimeMillisEstimate: 0,
+                                opens: 0,
+                                closes: 0,
+                                saveState: 2,
+                                restoreState: 2,
+                                isEOF: 0,
+                                limit: 1,
+                                inputStage: {
+                                  stage: 'coscan',
+                                  planNodeId: 3,
+                                  nReturned: 0,
+                                  executionTimeMillisEstimate: 0,
+                                  opens: 0,
+                                  closes: 0,
+                                  saveState: 2,
+                                  restoreState: 2,
+                                  isEOF: 0
+                                }
+                              }
+                            ]
+                          },
+                          elseStage: {
+                            stage: 'limit',
+                            planNodeId: 3,
+                            nReturned: 380,
+                            executionTimeMillisEstimate: 0,
+                            opens: 380,
+                            closes: 380,
+                            saveState: 2,
+                            restoreState: 2,
+                            isEOF: 1,
+                            limit: 1,
+                            inputStage: {
+                              stage: 'coscan',
+                              planNodeId: 3,
+                              nReturned: 380,
+                              executionTimeMillisEstimate: 0,
+                              opens: 380,
+                              closes: 380,
+                              saveState: 2,
+                              restoreState: 2,
+                              isEOF: 0
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      nReturned: Long("1000"),
+      executionTimeMillisEstimate: Long("3")
+    },
+    {
+      '$match': {
+        posts: {
+          '$not': {
+            '$eq': []
+          }
+        }
+      },
+      nReturned: Long("315"),
+      executionTimeMillisEstimate: Long("4")
+    },
+    {
+      '$project': {
+        _id: true,
+        firstName: true,
+        email: true,
+        dateOfBirth: true,
+        friends: true,
+        lastName: true,
+        address: true,
+        posts_count: {
+          '$size': [
+            '$posts'
+          ]
+        }
+      },
+      nReturned: Long("315"),
+      executionTimeMillisEstimate: Long("4")
+    }
+  ],
+  serverInfo: {
+    host: '197490493c42',
+    port: 27017,
+    version: '6.0.5',
+    gitVersion: 'c9a99c120371d4d4c52cbb15dac34a36ce8d3b1d'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600
+  },
+  command: {
+    aggregate: 'users',
+    pipeline: [
+      {
+        '$lookup': {
+          from: 'posts',
+          localField: '_id',
+          foreignField: 'author',
+          as: 'posts'
+        }
+      },
+      {
+        '$match': {
+          posts: {
+            '$ne': []
+          }
+        }
+      },
+      {
+        '$project': {
+          firstName: 1,
+          lastName: 1,
+          email: 1,
+          address: 1,
+          dateOfBirth: 1,
+          friends: 1,
+          posts_count: {
+            '$size': '$posts'
+          }
+        }
+      }
+    ],
+    cursor: {},
+    '$db': 'FriendWorker'
+  },
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1683116871, i: 2 }),
+    signature: {
+      hash: Binary(Buffer.from("0000000000000000000000000000000000000000", "hex"), 0),
+      keyId: Long("0")
+    }
+  },
+  operationTime: Timestamp({ t: 1683116871, i: 2 })
+}
+[
+  {
+    _id: 'user_16',
+    firstName: 'Aubry',
+    lastName: 'Overton',
+    email: 'aovertonf@loc.gov',
+    dateOfBirth: ISODate("2015-06-27T14:34:26.000Z"),
+    address: {
+      city: 'Cascavel',
+      postal: '660 276',
+      street: '805 Lakewood Gardens Place',
+      country: 'Brazil'
+    },
+    posts_count: 2
+  },
+  {
+    _id: 'user_18',
+    firstName: 'Malorie',
+    lastName: 'Sandercock',
+    email: 'msandercockh@intel.com',
+    dateOfBirth: ISODate("1999-05-14T01:53:57.000Z"),
+    address: {
+      city: 'Sacramento',
+      postal: '062 914',
+      street: '43 Surrey Lane',
+      country: 'United States'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_21',
+    firstName: 'Malissa',
+    lastName: 'Bevir',
+    email: 'mbevirk@cnet.com',
+    dateOfBirth: ISODate("2021-12-08T02:07:44.000Z"),
+    address: {
+      city: 'Cabiguan',
+      postal: '583 784',
+      street: '8640 Sundown Drive',
+      country: 'Philippines'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_24',
+    firstName: 'Elmo',
+    lastName: 'Fincke',
+    email: 'efincken@icio.us',
+    dateOfBirth: ISODate("2009-05-27T11:35:32.000Z"),
+    address: {
+      city: 'Gucheng',
+      postal: '218 755',
+      street: '4 Novick Court',
+      country: 'China'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_27',
+    firstName: 'Ashlie',
+    lastName: 'Peckham',
+    email: 'apeckhamq@photobucket.com',
+    dateOfBirth: ISODate("2020-08-04T23:20:56.000Z"),
+    address: {
+      city: 'Shipu',
+      postal: '878 953',
+      street: '6864 Carey Junction',
+      country: 'China'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_28',
+    firstName: 'Stu',
+    lastName: 'Payze',
+    email: 'spayzer@amazon.co.jp',
+    dateOfBirth: ISODate("2015-09-30T16:58:10.000Z"),
+    address: {
+      city: 'Dodol',
+      postal: '216 065',
+      street: '65 Corscot Junction',
+      country: 'Indonesia'
+    },
+    posts_count: 2
+  },
+  {
+    _id: 'user_29',
+    firstName: 'Kessiah',
+    lastName: 'Gonet',
+    email: 'kgonets@sina.com.cn',
+    dateOfBirth: ISODate("2012-01-12T11:13:16.000Z"),
+    address: {
+      city: 'Gaoyao',
+      postal: '383 615',
+      street: '96195 Grayhawk Plaza',
+      country: 'China'
+    },
+    posts_count: 3
+  },
+  {
+    _id: 'user_31',
+    firstName: 'Hazlett',
+    lastName: 'Tysack',
+    email: 'htysacku@google.com',
+    dateOfBirth: ISODate("2020-09-23T00:43:52.000Z"),
+    address: {
+      city: 'Rayevskiy',
+      postal: '462 771',
+      street: '4258 Service Street',
+      country: 'Russia'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_33',
+    firstName: 'Sara',
+    lastName: 'Santino',
+    email: 'ssantinow@usda.gov',
+    dateOfBirth: ISODate("2011-04-14T17:17:31.000Z"),
+    address: {
+      city: 'Lunao',
+      postal: '275 938',
+      street: '8 Elmside Pass',
+      country: 'Philippines'
+    },
+    posts_count: 2
+  },
+  {
+    _id: 'user_7',
+    firstName: 'Basile',
+    lastName: 'Le Gallo',
+    email: 'blegallo6@illinois.edu',
+    dateOfBirth: ISODate("2023-04-02T09:54:57.000Z"),
+    address: {
+      city: 'Pallasovka',
+      postal: '116 047',
+      street: '16 Merrick Parkway',
+      country: 'Russia'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_6',
+    firstName: 'Johnnie',
+    lastName: 'Hedges',
+    email: 'jhedges5@hud.gov',
+    dateOfBirth: ISODate("2015-12-22T13:51:29.000Z"),
+    address: {
+      city: 'Ĺ entrupert',
+      postal: '980 235',
+      street: '3 Warner Pass',
+      country: 'Slovenia'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_10',
+    firstName: 'Georges',
+    lastName: 'Giannotti',
+    email: 'ggiannotti9@businessweek.com',
+    dateOfBirth: ISODate("2013-06-08T00:48:00.000Z"),
+    address: {
+      city: 'VĂ¤sterhaninge',
+      postal: '798 285',
+      street: '815 Westport Terrace',
+      country: 'Sweden'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_14',
+    firstName: 'Mirabelle',
+    lastName: 'Darling',
+    email: 'mdarlingd@creativecommons.org',
+    dateOfBirth: ISODate("2004-01-16T00:37:00.000Z"),
+    address: {
+      city: 'Novotroitsk',
+      postal: '600 858',
+      street: '03420 Walton Hill',
+      country: 'Russia'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_41',
+    firstName: 'Darice',
+    lastName: 'Caldecot',
+    email: 'dcaldecot14@nytimes.com',
+    dateOfBirth: ISODate("2016-03-07T03:46:59.000Z"),
+    address: {
+      city: 'Obock',
+      postal: '090 033',
+      street: '31 Mariners Cove Place',
+      country: 'Djibouti'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_44',
+    firstName: 'Drucill',
+    lastName: "O'Hengerty",
+    email: 'dohengerty17@tinyurl.com',
+    dateOfBirth: ISODate("2004-12-19T10:19:14.000Z"),
+    address: {
+      city: 'Gornyak',
+      postal: '673 987',
+      street: '5784 Sommers Trail',
+      country: 'Russia'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_53',
+    firstName: 'Pegeen',
+    lastName: 'Hamsher',
+    email: 'phamsher1g@about.me',
+    dateOfBirth: ISODate("2001-09-07T20:36:35.000Z"),
+    address: {
+      city: 'ĹžaydnÄ\x81yÄ\x81',
+      postal: '408 768',
+      street: '49 Kim Lane',
+      country: 'Syria'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_60',
+    firstName: 'Holden',
+    lastName: 'Insoll',
+    email: 'hinsoll1n@biblegateway.com',
+    dateOfBirth: ISODate("2001-04-05T14:46:10.000Z"),
+    address: {
+      city: 'Siquanpu',
+      postal: '897 156',
+      street: '83692 Shasta Junction',
+      country: 'China'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_62',
+    firstName: 'Tandie',
+    lastName: 'Causbey',
+    email: 'tcausbey1p@wordpress.com',
+    dateOfBirth: ISODate("2006-01-09T14:49:31.000Z"),
+    address: {
+      city: 'SĂ­sion',
+      postal: '208 428',
+      street: '042 Rieder Alley',
+      country: 'Greece'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_63',
+    firstName: 'Mike',
+    lastName: 'Coldbreath',
+    email: 'mcoldbreath1q@unc.edu',
+    dateOfBirth: ISODate("2003-11-15T10:52:54.000Z"),
+    address: {
+      city: 'ZargarÄ\x81n',
+      postal: '908 136',
+      street: '7 Mifflin Circle',
+      country: 'Afghanistan'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_71',
+    firstName: 'Chelsey',
+    lastName: 'Wildgoose',
+    email: 'cwildgoose1y@artisteer.com',
+    dateOfBirth: ISODate("2013-10-13T12:55:58.000Z"),
+    address: {
+      city: 'Sanhe',
+      postal: '534 203',
+      street: '20007 Swallow Parkway',
+      country: 'China'
+    },
+    posts_count: 1
+  }
+]
+Type "it" for more
+{
+  explainVersion: '2',
+  stages: [
+    {
+      '$cursor': {
+        queryPlanner: {
+          namespace: 'FriendWorker.users',
+          indexFilterSet: false,
+          parsedQuery: {},
+          queryHash: 'A5655729',
+          planCacheKey: 'A5655729',
+          maxIndexedOrSolutionsReached: false,
+          maxIndexedAndSolutionsReached: false,
+          maxScansToExplodeReached: false,
+          winningPlan: {
+            queryPlan: {
+              stage: 'EQ_LOOKUP',
+              planNodeId: 3,
+              foreignCollection: 'FriendWorker.posts',
+              localField: '_id',
+              foreignField: 'author',
+              asField: 'posts',
+              strategy: 'HashJoin',
+              inputStage: {
+                stage: 'PROJECTION_SIMPLE',
+                planNodeId: 2,
+                transformBy: {
+                  _id: true,
+                  address: true,
+                  dateOfBirth: true,
+                  email: true,
+                  firstName: true,
+                  friends: true,
+                  lastName: true,
+                  posts: true
+                },
+                inputStage: {
+                  stage: 'COLLSCAN',
+                  planNodeId: 1,
+                  filter: {},
+                  direction: 'forward'
+                }
+              }
+            },
+            slotBasedPlan: {
+              slots: '$$RESULT=s25 env: { s1 = TimeZoneDatabase(America/Goose_Bay...America/Porto_Acre) (timeZoneDB), s2 = Nothing (SEARCH_META), s4 = 1683116872726 (NOW), s3 = Timestamp(1683116871, 2) (CLUSTER_TIME) }',
+              stages: '[3] mkobj s25 s7 [] drop [posts = s24] true false \n' +
+                '[3] project [s24 = fillEmpty (s23, [])] \n' +
+                '[3] hash_lookup [s23 = addToArray (s8)] \n' +
+                '    outer s15 \n' +
+                '        [3] nlj [s7] [s7] \n' +
+                '            left \n' +
+                '                [2] mkbson s7 s5 [_id, address, dateOfBirth, email, firstName, friends, lastName, posts] keep [] true false \n' +
+                '                [1] scan s5 s6 none none none none [] @"3ad17674-a63b-4ed4-a018-ac21a8229477" true false \n' +
+                '            right \n' +
+                '                [3] project [s15 = if (getArraySize (s13) > 0, s13, [null])] \n' +
+                '                [3] group [] [s13 = addToSet (s11)] spillSlots[s14] mergingExprs[aggSetUnion (s14)] \n' +
+                '                [3] unwind s11 s12 s10 true \n' +
+                '                [3] project [s10 = getField (s7, "_id")] \n' +
+                '                [3] limit 1 \n' +
+                '                [3] coscan \n' +
+                '            \n' +
+                '        \n' +
+                '    inner s21 [s8] \n' +
+                '        [3] nlj [s8] [s8] \n' +
+                '            left \n' +
+                '                [3] scan s8 s9 none none none none [] @"7be1d7d2-1ff0-4c52-bb41-84180c0cbf1c" true false \n' +
+                '            right \n' +
+                '                [3] group [] [s21 = addToSet (s20)] spillSlots[s22] mergingExprs[aggSetUnion (s22)] \n' +
+                '                [3] nlj [] [s16] \n' +
+                '                    left \n' +
+                '                        [3] project [s16 = fillEmpty (getField (s8, "author"), null)] \n' +
+                '                        [3] limit 1 \n' +
+                '                        [3] coscan \n' +
+                '                    right \n' +
+                '                        [3] branch {isArray (s16)} [s20] \n' +
+                '                        [s19] [3] union [s19] [\n' +
+                '                            [s17] [3] unwind s17 s18 s16 true \n' +
+                '                            [3] limit 1 \n' +
+                '                            [3] coscan , \n' +
+                '                            [s16] [3] limit 1 \n' +
+                '                            [3] coscan \n' +
+                '                       ] \n' +
+                '                        [s16] [3] limit 1 \n' +
+                '                        [3] coscan \n' +
+                '                    \n' +
+                '                \n' +
+                '            \n' +
+                '        \n' +
+                '    \n'
+            }
+          },
+          rejectedPlans: []
+        },
+        executionStats: {
+          executionSuccess: true,
+          nReturned: 1000,
+          executionTimeMillis: 5,
+          totalKeysExamined: 0,
+          totalDocsExamined: 1380,
+          executionStages: {
+            stage: 'mkobj',
+            planNodeId: 3,
+            nReturned: 1000,
+            executionTimeMillisEstimate: 2,
+            opens: 1,
+            closes: 1,
+            saveState: 2,
+            restoreState: 2,
+            isEOF: 1,
+            objSlot: 25,
+            rootSlot: 7,
+            fieldBehavior: 'drop',
+            fields: [],
+            projectFields: [
+              'posts'
+            ],
+            projectSlots: [
+              Long("24")
+            ],
+            forceNewObject: true,
+            returnOldObject: false,
+            inputStage: {
+              stage: 'project',
+              planNodeId: 3,
+              nReturned: 1000,
+              executionTimeMillisEstimate: 2,
+              opens: 1,
+              closes: 1,
+              saveState: 2,
+              restoreState: 2,
+              isEOF: 1,
+              projections: {
+                '24': 'fillEmpty (s23, []) '
+              },
+              inputStage: {
+                stage: 'hash_lookup',
+                planNodeId: 3,
+                nReturned: 1000,
+                executionTimeMillisEstimate: 0,
+                opens: 1,
+                closes: 1,
+                saveState: 2,
+                restoreState: 2,
+                isEOF: 1,
+                totalDocsExamined: 1380,
+                totalKeysExamined: 0,
+                collectionScans: 2,
+                collectionSeeks: 0,
+                indexScans: 0,
+                indexSeeks: 0,
+                indexesUsed: [],
+                usedDisk: false,
+                spilledRecords: 0,
+                spilledBytesApprox: 0,
+                inputStages: [
+                  {
+                    stage: 'nlj',
+                    planNodeId: 3,
+                    nReturned: 1000,
+                    executionTimeMillisEstimate: 0,
+                    opens: 1,
+                    closes: 1,
+                    saveState: 2,
+                    restoreState: 2,
+                    isEOF: 1,
+                    totalDocsExamined: 1000,
+                    totalKeysExamined: 0,
+                    collectionScans: 1,
+                    collectionSeeks: 0,
+                    indexScans: 0,
+                    indexSeeks: 0,
+                    indexesUsed: [],
+                    innerOpens: 1000,
+                    innerCloses: 1,
+                    outerProjects: [
+                      Long("7")
+                    ],
+                    outerCorrelated: [
+                      Long("7")
+                    ],
+                    outerStage: {
+                      stage: 'mkbson',
+                      planNodeId: 2,
+                      nReturned: 1000,
+                      executionTimeMillisEstimate: 0,
+                      opens: 1,
+                      closes: 1,
+                      saveState: 2,
+                      restoreState: 2,
+                      isEOF: 1,
+                      objSlot: 7,
+                      rootSlot: 5,
+                      fieldBehavior: 'keep',
+                      fields: [
+                        '_id',
+                        'address',
+                        'dateOfBirth',
+                        'email',
+                        'firstName',
+                        'friends',
+                        'lastName',
+                        'posts'
+                      ],
+                      projectFields: [],
+                      projectSlots: [],
+                      forceNewObject: true,
+                      returnOldObject: false,
+                      inputStage: {
+                        stage: 'scan',
+                        planNodeId: 1,
+                        nReturned: 1000,
+                        executionTimeMillisEstimate: 0,
+                        opens: 1,
+                        closes: 1,
+                        saveState: 2,
+                        restoreState: 2,
+                        isEOF: 1,
+                        numReads: 1000,
+                        recordSlot: 5,
+                        recordIdSlot: 6,
+                        fields: [],
+                        outputSlots: []
+                      }
+                    },
+                    innerStage: {
+                      stage: 'project',
+                      planNodeId: 3,
+                      nReturned: 1000,
+                      executionTimeMillisEstimate: 0,
+                      opens: 1000,
+                      closes: 1,
+                      saveState: 2,
+                      restoreState: 2,
+                      isEOF: 1,
+                      projections: {
+                        '15': 'if (getArraySize (s13) > 0, s13, [null]) '
+                      },
+                      inputStage: {
+                        stage: 'group',
+                        planNodeId: 3,
+                        nReturned: 1000,
+                        executionTimeMillisEstimate: 0,
+                        opens: 1000,
+                        closes: 1,
+                        saveState: 2,
+                        restoreState: 2,
+                        isEOF: 1,
+                        groupBySlots: [],
+                        expressions: {
+                          '13': 'addToSet (s11) '
+                        },
+                        mergingExprs: {
+                          '14': 'aggSetUnion (s14) '
+                        },
+                        usedDisk: false,
+                        numSpills: 0,
+                        spilledRecords: 0,
+                        spilledDataStorageSize: 0,
+                        inputStage: {
+                          stage: 'unwind',
+                          planNodeId: 3,
+                          nReturned: 1000,
+                          executionTimeMillisEstimate: 0,
+                          opens: 1000,
+                          closes: 1000,
+                          saveState: 2,
+                          restoreState: 2,
+                          isEOF: 1,
+                          inputSlot: 10,
+                          outSlot: 11,
+                          outIndexSlot: 12,
+                          preserveNullAndEmptyArrays: 1,
+                          inputStage: {
+                            stage: 'project',
+                            planNodeId: 3,
+                            nReturned: 1000,
+                            executionTimeMillisEstimate: 0,
+                            opens: 1000,
+                            closes: 1000,
+                            saveState: 2,
+                            restoreState: 2,
+                            isEOF: 1,
+                            projections: {
+                              '10': 'getField (s7, "_id") '
+                            },
+                            inputStage: {
+                              stage: 'limit',
+                              planNodeId: 3,
+                              nReturned: 1000,
+                              executionTimeMillisEstimate: 0,
+                              opens: 1000,
+                              closes: 1000,
+                              saveState: 2,
+                              restoreState: 2,
+                              isEOF: 1,
+                              limit: 1,
+                              inputStage: {
+                                stage: 'coscan',
+                                planNodeId: 3,
+                                nReturned: 1000,
+                                executionTimeMillisEstimate: 0,
+                                opens: 1000,
+                                closes: 1000,
+                                saveState: 2,
+                                restoreState: 2,
+                                isEOF: 0
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    stage: 'nlj',
+                    planNodeId: 3,
+                    nReturned: 380,
+                    executionTimeMillisEstimate: 0,
+                    opens: 1,
+                    closes: 1,
+                    saveState: 2,
+                    restoreState: 2,
+                    isEOF: 1,
+                    totalDocsExamined: 380,
+                    totalKeysExamined: 0,
+                    collectionScans: 1,
+                    collectionSeeks: 0,
+                    indexScans: 0,
+                    indexSeeks: 0,
+                    indexesUsed: [],
+                    innerOpens: 380,
+                    innerCloses: 1,
+                    outerProjects: [
+                      Long("8")
+                    ],
+                    outerCorrelated: [
+                      Long("8")
+                    ],
+                    outerStage: {
+                      stage: 'scan',
+                      planNodeId: 3,
+                      nReturned: 380,
+                      executionTimeMillisEstimate: 0,
+                      opens: 1,
+                      closes: 1,
+                      saveState: 2,
+                      restoreState: 2,
+                      isEOF: 1,
+                      numReads: 380,
+                      recordSlot: 8,
+                      recordIdSlot: 9,
+                      fields: [],
+                      outputSlots: []
+                    },
+                    innerStage: {
+                      stage: 'group',
+                      planNodeId: 3,
+                      nReturned: 380,
+                      executionTimeMillisEstimate: 0,
+                      opens: 380,
+                      closes: 1,
+                      saveState: 2,
+                      restoreState: 2,
+                      isEOF: 1,
+                      groupBySlots: [],
+                      expressions: {
+                        '21': 'addToSet (s20) '
+                      },
+                      mergingExprs: {
+                        '22': 'aggSetUnion (s22) '
+                      },
+                      usedDisk: false,
+                      numSpills: 0,
+                      spilledRecords: 0,
+                      spilledDataStorageSize: 0,
+                      inputStage: {
+                        stage: 'nlj',
+                        planNodeId: 3,
+                        nReturned: 380,
+                        executionTimeMillisEstimate: 0,
+                        opens: 380,
+                        closes: 380,
+                        saveState: 2,
+                        restoreState: 2,
+                        isEOF: 1,
+                        totalDocsExamined: 0,
+                        totalKeysExamined: 0,
+                        collectionScans: 0,
+                        collectionSeeks: 0,
+                        indexScans: 0,
+                        indexSeeks: 0,
+                        indexesUsed: [],
+                        innerOpens: 380,
+                        innerCloses: 380,
+                        outerProjects: [],
+                        outerCorrelated: [
+                          Long("16")
+                        ],
+                        outerStage: {
+                          stage: 'project',
+                          planNodeId: 3,
+                          nReturned: 380,
+                          executionTimeMillisEstimate: 0,
+                          opens: 380,
+                          closes: 380,
+                          saveState: 2,
+                          restoreState: 2,
+                          isEOF: 1,
+                          projections: {
+                            '16': 'fillEmpty (getField (s8, "author"), null) '
+                          },
+                          inputStage: {
+                            stage: 'limit',
+                            planNodeId: 3,
+                            nReturned: 380,
+                            executionTimeMillisEstimate: 0,
+                            opens: 380,
+                            closes: 380,
+                            saveState: 2,
+                            restoreState: 2,
+                            isEOF: 1,
+                            limit: 1,
+                            inputStage: {
+                              stage: 'coscan',
+                              planNodeId: 3,
+                              nReturned: 380,
+                              executionTimeMillisEstimate: 0,
+                              opens: 380,
+                              closes: 380,
+                              saveState: 2,
+                              restoreState: 2,
+                              isEOF: 0
+                            }
+                          }
+                        },
+                        innerStage: {
+                          stage: 'branch',
+                          planNodeId: 3,
+                          nReturned: 380,
+                          executionTimeMillisEstimate: 0,
+                          opens: 380,
+                          closes: 380,
+                          saveState: 2,
+                          restoreState: 2,
+                          isEOF: 1,
+                          numTested: 380,
+                          thenBranchOpens: 0,
+                          thenBranchCloses: 0,
+                          elseBranchOpens: 380,
+                          elseBranchCloses: 380,
+                          filter: 'isArray (s16) ',
+                          thenSlots: [
+                            Long("19")
+                          ],
+                          elseSlots: [
+                            Long("16")
+                          ],
+                          outputSlots: [
+                            Long("20")
+                          ],
+                          thenStage: {
+                            stage: 'union',
+                            planNodeId: 3,
+                            nReturned: 0,
+                            executionTimeMillisEstimate: 0,
+                            opens: 0,
+                            closes: 0,
+                            saveState: 2,
+                            restoreState: 2,
+                            isEOF: 0,
+                            inputSlots: [
+                              Long("17"),
+                              Long("16")
+                            ],
+                            outputSlots: [
+                              Long("19")
+                            ],
+                            inputStages: [
+                              {
+                                stage: 'unwind',
+                                planNodeId: 3,
+                                nReturned: 0,
+                                executionTimeMillisEstimate: 0,
+                                opens: 0,
+                                closes: 0,
+                                saveState: 2,
+                                restoreState: 2,
+                                isEOF: 0,
+                                inputSlot: 16,
+                                outSlot: 17,
+                                outIndexSlot: 18,
+                                preserveNullAndEmptyArrays: 1,
+                                inputStage: {
+                                  stage: 'limit',
+                                  planNodeId: 3,
+                                  nReturned: 0,
+                                  executionTimeMillisEstimate: 0,
+                                  opens: 0,
+                                  closes: 0,
+                                  saveState: 2,
+                                  restoreState: 2,
+                                  isEOF: 0,
+                                  limit: 1,
+                                  inputStage: {
+                                    stage: 'coscan',
+                                    planNodeId: 3,
+                                    nReturned: 0,
+                                    executionTimeMillisEstimate: 0,
+                                    opens: 0,
+                                    closes: 0,
+                                    saveState: 2,
+                                    restoreState: 2,
+                                    isEOF: 0
+                                  }
+                                }
+                              },
+                              {
+                                stage: 'limit',
+                                planNodeId: 3,
+                                nReturned: 0,
+                                executionTimeMillisEstimate: 0,
+                                opens: 0,
+                                closes: 0,
+                                saveState: 2,
+                                restoreState: 2,
+                                isEOF: 0,
+                                limit: 1,
+                                inputStage: {
+                                  stage: 'coscan',
+                                  planNodeId: 3,
+                                  nReturned: 0,
+                                  executionTimeMillisEstimate: 0,
+                                  opens: 0,
+                                  closes: 0,
+                                  saveState: 2,
+                                  restoreState: 2,
+                                  isEOF: 0
+                                }
+                              }
+                            ]
+                          },
+                          elseStage: {
+                            stage: 'limit',
+                            planNodeId: 3,
+                            nReturned: 380,
+                            executionTimeMillisEstimate: 0,
+                            opens: 380,
+                            closes: 380,
+                            saveState: 2,
+                            restoreState: 2,
+                            isEOF: 1,
+                            limit: 1,
+                            inputStage: {
+                              stage: 'coscan',
+                              planNodeId: 3,
+                              nReturned: 380,
+                              executionTimeMillisEstimate: 0,
+                              opens: 380,
+                              closes: 380,
+                              saveState: 2,
+                              restoreState: 2,
+                              isEOF: 0
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      nReturned: Long("1000"),
+      executionTimeMillisEstimate: Long("2")
+    },
+    {
+      '$match': {
+        posts: {
+          '$not': {
+            '$eq': []
+          }
+        }
+      },
+      nReturned: Long("315"),
+      executionTimeMillisEstimate: Long("4")
+    },
+    {
+      '$project': {
+        _id: true,
+        address: true,
+        email: true,
+        lastName: true,
+        dateOfBirth: true,
+        friends: true,
+        firstName: true,
+        posts_count: {
+          '$size': [
+            '$posts'
+          ]
+        }
+      },
+      nReturned: Long("315"),
+      executionTimeMillisEstimate: Long("4")
+    }
+  ],
+  serverInfo: {
+    host: '197490493c42',
+    port: 27017,
+    version: '6.0.5',
+    gitVersion: 'c9a99c120371d4d4c52cbb15dac34a36ce8d3b1d'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600
+  },
+  command: {
+    aggregate: 'users',
+    pipeline: [
+      {
+        '$lookup': {
+          from: 'posts',
+          localField: '_id',
+          foreignField: 'author',
+          as: 'posts'
+        }
+      },
+      {
+        '$match': {
+          posts: {
+            '$ne': []
+          }
+        }
+      },
+      {
+        '$project': {
+          firstName: 1,
+          lastName: 1,
+          email: 1,
+          address: 1,
+          dateOfBirth: 1,
+          friends: 1,
+          posts_count: {
+            '$size': '$posts'
+          }
+        }
+      }
+    ],
+    cursor: {},
+    '$db': 'FriendWorker'
+  },
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1683116871, i: 2 }),
+    signature: {
+      hash: Binary(Buffer.from("0000000000000000000000000000000000000000", "hex"), 0),
+      keyId: Long("0")
+    }
+  },
+  operationTime: Timestamp({ t: 1683116871, i: 2 })
+}
+[
+  {
+    _id: 'user_16',
+    firstName: 'Aubry',
+    lastName: 'Overton',
+    email: 'aovertonf@loc.gov',
+    dateOfBirth: ISODate("2015-06-27T14:34:26.000Z"),
+    address: {
+      city: 'Cascavel',
+      postal: '660 276',
+      street: '805 Lakewood Gardens Place',
+      country: 'Brazil'
+    },
+    posts_count: 2
+  },
+  {
+    _id: 'user_18',
+    firstName: 'Malorie',
+    lastName: 'Sandercock',
+    email: 'msandercockh@intel.com',
+    dateOfBirth: ISODate("1999-05-14T01:53:57.000Z"),
+    address: {
+      city: 'Sacramento',
+      postal: '062 914',
+      street: '43 Surrey Lane',
+      country: 'United States'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_21',
+    firstName: 'Malissa',
+    lastName: 'Bevir',
+    email: 'mbevirk@cnet.com',
+    dateOfBirth: ISODate("2021-12-08T02:07:44.000Z"),
+    address: {
+      city: 'Cabiguan',
+      postal: '583 784',
+      street: '8640 Sundown Drive',
+      country: 'Philippines'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_24',
+    firstName: 'Elmo',
+    lastName: 'Fincke',
+    email: 'efincken@icio.us',
+    dateOfBirth: ISODate("2009-05-27T11:35:32.000Z"),
+    address: {
+      city: 'Gucheng',
+      postal: '218 755',
+      street: '4 Novick Court',
+      country: 'China'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_27',
+    firstName: 'Ashlie',
+    lastName: 'Peckham',
+    email: 'apeckhamq@photobucket.com',
+    dateOfBirth: ISODate("2020-08-04T23:20:56.000Z"),
+    address: {
+      city: 'Shipu',
+      postal: '878 953',
+      street: '6864 Carey Junction',
+      country: 'China'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_28',
+    firstName: 'Stu',
+    lastName: 'Payze',
+    email: 'spayzer@amazon.co.jp',
+    dateOfBirth: ISODate("2015-09-30T16:58:10.000Z"),
+    address: {
+      city: 'Dodol',
+      postal: '216 065',
+      street: '65 Corscot Junction',
+      country: 'Indonesia'
+    },
+    posts_count: 2
+  },
+  {
+    _id: 'user_29',
+    firstName: 'Kessiah',
+    lastName: 'Gonet',
+    email: 'kgonets@sina.com.cn',
+    dateOfBirth: ISODate("2012-01-12T11:13:16.000Z"),
+    address: {
+      city: 'Gaoyao',
+      postal: '383 615',
+      street: '96195 Grayhawk Plaza',
+      country: 'China'
+    },
+    posts_count: 3
+  },
+  {
+    _id: 'user_31',
+    firstName: 'Hazlett',
+    lastName: 'Tysack',
+    email: 'htysacku@google.com',
+    dateOfBirth: ISODate("2020-09-23T00:43:52.000Z"),
+    address: {
+      city: 'Rayevskiy',
+      postal: '462 771',
+      street: '4258 Service Street',
+      country: 'Russia'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_33',
+    firstName: 'Sara',
+    lastName: 'Santino',
+    email: 'ssantinow@usda.gov',
+    dateOfBirth: ISODate("2011-04-14T17:17:31.000Z"),
+    address: {
+      city: 'Lunao',
+      postal: '275 938',
+      street: '8 Elmside Pass',
+      country: 'Philippines'
+    },
+    posts_count: 2
+  },
+  {
+    _id: 'user_7',
+    firstName: 'Basile',
+    lastName: 'Le Gallo',
+    email: 'blegallo6@illinois.edu',
+    dateOfBirth: ISODate("2023-04-02T09:54:57.000Z"),
+    address: {
+      city: 'Pallasovka',
+      postal: '116 047',
+      street: '16 Merrick Parkway',
+      country: 'Russia'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_6',
+    firstName: 'Johnnie',
+    lastName: 'Hedges',
+    email: 'jhedges5@hud.gov',
+    dateOfBirth: ISODate("2015-12-22T13:51:29.000Z"),
+    address: {
+      city: 'Ĺ entrupert',
+      postal: '980 235',
+      street: '3 Warner Pass',
+      country: 'Slovenia'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_10',
+    firstName: 'Georges',
+    lastName: 'Giannotti',
+    email: 'ggiannotti9@businessweek.com',
+    dateOfBirth: ISODate("2013-06-08T00:48:00.000Z"),
+    address: {
+      city: 'VĂ¤sterhaninge',
+      postal: '798 285',
+      street: '815 Westport Terrace',
+      country: 'Sweden'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_14',
+    firstName: 'Mirabelle',
+    lastName: 'Darling',
+    email: 'mdarlingd@creativecommons.org',
+    dateOfBirth: ISODate("2004-01-16T00:37:00.000Z"),
+    address: {
+      city: 'Novotroitsk',
+      postal: '600 858',
+      street: '03420 Walton Hill',
+      country: 'Russia'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_41',
+    firstName: 'Darice',
+    lastName: 'Caldecot',
+    email: 'dcaldecot14@nytimes.com',
+    dateOfBirth: ISODate("2016-03-07T03:46:59.000Z"),
+    address: {
+      city: 'Obock',
+      postal: '090 033',
+      street: '31 Mariners Cove Place',
+      country: 'Djibouti'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_44',
+    firstName: 'Drucill',
+    lastName: "O'Hengerty",
+    email: 'dohengerty17@tinyurl.com',
+    dateOfBirth: ISODate("2004-12-19T10:19:14.000Z"),
+    address: {
+      city: 'Gornyak',
+      postal: '673 987',
+      street: '5784 Sommers Trail',
+      country: 'Russia'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_53',
+    firstName: 'Pegeen',
+    lastName: 'Hamsher',
+    email: 'phamsher1g@about.me',
+    dateOfBirth: ISODate("2001-09-07T20:36:35.000Z"),
+    address: {
+      city: 'ĹžaydnÄ\x81yÄ\x81',
+      postal: '408 768',
+      street: '49 Kim Lane',
+      country: 'Syria'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_60',
+    firstName: 'Holden',
+    lastName: 'Insoll',
+    email: 'hinsoll1n@biblegateway.com',
+    dateOfBirth: ISODate("2001-04-05T14:46:10.000Z"),
+    address: {
+      city: 'Siquanpu',
+      postal: '897 156',
+      street: '83692 Shasta Junction',
+      country: 'China'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_62',
+    firstName: 'Tandie',
+    lastName: 'Causbey',
+    email: 'tcausbey1p@wordpress.com',
+    dateOfBirth: ISODate("2006-01-09T14:49:31.000Z"),
+    address: {
+      city: 'SĂ­sion',
+      postal: '208 428',
+      street: '042 Rieder Alley',
+      country: 'Greece'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_63',
+    firstName: 'Mike',
+    lastName: 'Coldbreath',
+    email: 'mcoldbreath1q@unc.edu',
+    dateOfBirth: ISODate("2003-11-15T10:52:54.000Z"),
+    address: {
+      city: 'ZargarÄ\x81n',
+      postal: '908 136',
+      street: '7 Mifflin Circle',
+      country: 'Afghanistan'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_71',
+    firstName: 'Chelsey',
+    lastName: 'Wildgoose',
+    email: 'cwildgoose1y@artisteer.com',
+    dateOfBirth: ISODate("2013-10-13T12:55:58.000Z"),
+    address: {
+      city: 'Sanhe',
+      postal: '534 203',
+      street: '20007 Swallow Parkway',
+      country: 'China'
+    },
+    posts_count: 1
+  }
+]
+Type "it" for more
