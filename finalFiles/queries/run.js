@@ -1,13 +1,13 @@
 const { exec } = require('child_process');
 
 const files = [
-    //'1_postsByAuthor.js',
-    //'2_usersWithPostPostCount.js',
+    '1_postsByAuthor.js',
+    '2_usersWithPostPostCount.js',
     '2_usersWithPostPostCount_2.js',
-    //'3_postsWithLikeLikeCount.js',
-    //'4_friendOfFriendOfFriend.js',
-    //'5_userMessages.js',
-    //'5_userMessages_2.js',
+    '3_postsWithLikeLikeCount.js',
+    '4_friendOfFriendOfFriend.js',
+    '5_userMessages.js',
+    '5_userMessages_2.js',
 ]
 
 copy();
