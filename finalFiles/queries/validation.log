@@ -1,4 +1,4 @@
-Current Mongosh Log ID:	6450ec654d0e84e06bed9f4e
+Current Mongosh Log ID:	6458e181c5a56b782b542e92
 Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0
 Using MongoDB:		6.0.5
 Using Mongosh:		1.8.0
@@ -7,10 +7,10 @@ For mongosh info see: https://docs.mongodb.com/mongodb-shell/
 
 ------
    The server generated these startup warnings when booting
-   2023-05-02T10:11:02.264+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
-   2023-05-02T10:11:03.349+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
-   2023-05-02T10:11:03.350+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
-   2023-05-02T10:11:03.350+00:00: vm.max_map_count is too low
+   2023-05-08T11:46:51.911+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2023-05-08T11:46:52.499+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-05-08T11:46:52.499+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
+   2023-05-08T11:46:52.499+00:00: vm.max_map_count is too low
 ------
 
 ------
@@ -28,7 +28,7 @@ For mongosh info see: https://docs.mongodb.com/mongodb-shell/
 Loading file: home/CheckValidation.js
 User validator error (value validation)
 {
-  failingDocumentId: ObjectId("6450ec668b24d376949236c6"),
+  failingDocumentId: ObjectId("6458e1811b96bc3c6277590a"),
   details: {
     operatorName: '$jsonSchema',
     title: 'User validator',
@@ -156,7 +156,7 @@ User validator error (value validation)
 
 User validator error (missing required)
 {
-  failingDocumentId: ObjectId("6450ec668b24d376949236c7"),
+  failingDocumentId: ObjectId("6458e1811b96bc3c6277590b"),
   details: {
     operatorName: '$jsonSchema',
     title: 'User validator',
@@ -212,7 +212,7 @@ Post validator error (value validation)
 
 Post validator error (missing required)
 {
-  failingDocumentId: ObjectId("6450ec668b24d376949236c8"),
+  failingDocumentId: ObjectId("6458e1811b96bc3c6277590c"),
   details: {
     operatorName: '$jsonSchema',
     title: 'Post validator',
@@ -237,7 +237,7 @@ Post validator error (missing required)
 
 Message validator error (value validation)
 {
-  failingDocumentId: ObjectId("6450ec668b24d376949236c9"),
+  failingDocumentId: ObjectId("6458e1811b96bc3c6277590d"),
   details: {
     operatorName: '$jsonSchema',
     title: 'Message validator',
@@ -312,7 +312,7 @@ Message validator error (value validation)
 
 Message validator error (missing required)
 {
-  failingDocumentId: ObjectId("6450ec668b24d376949236ca"),
+  failingDocumentId: ObjectId("6458e1811b96bc3c6277590e"),
   details: {
     operatorName: '$jsonSchema',
     title: 'Message validator',

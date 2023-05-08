@@ -1,4 +1,4 @@
-Current Mongosh Log ID:	645253473333145b741dc283
+Current Mongosh Log ID:	6458e19736a0dca00ee048d0
 Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0
 Using MongoDB:		6.0.5
 Using Mongosh:		1.8.0
@@ -7,10 +7,10 @@ For mongosh info see: https://docs.mongodb.com/mongodb-shell/
 
 ------
    The server generated these startup warnings when booting
-   2023-05-03T12:27:32.324+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
-   2023-05-03T12:27:33.117+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
-   2023-05-03T12:27:33.117+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
-   2023-05-03T12:27:33.117+00:00: vm.max_map_count is too low
+   2023-05-08T11:46:51.911+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2023-05-08T11:46:52.499+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-05-08T11:46:52.499+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
+   2023-05-08T11:46:52.499+00:00: vm.max_map_count is too low
 ------
 
 ------
@@ -69,7 +69,7 @@ Loading file: home/3_postsWithLikeLikeCount.js
               }
             },
             slotBasedPlan: {
-              slots: '$$RESULT=s25 env: { s3 = Timestamp(1683116871, 2) (CLUSTER_TIME), s4 = 1683116872371 (NOW), s1 = TimeZoneDatabase(America/Goose_Bay...America/Porto_Acre) (timeZoneDB), s2 = Nothing (SEARCH_META) }',
+              slots: '$$RESULT=s25 env: { s3 = Timestamp(1683546520, 2) (CLUSTER_TIME), s2 = Nothing (SEARCH_META), s1 = TimeZoneDatabase(Australia/Brisbane...Pacific/Chuuk) (timeZoneDB), s4 = 1683546520916 (NOW) }',
               stages: '[3] mkobj s25 s7 [] drop [likes = s24] true false \n' +
                 '[3] project [s24 = fillEmpty (s23, [])] \n' +
                 '[3] hash_lookup [s23 = addToArray (s8)] \n' +
@@ -77,7 +77,7 @@ Loading file: home/3_postsWithLikeLikeCount.js
                 '        [3] nlj [s7] [s7] \n' +
                 '            left \n' +
                 '                [2] mkbson s7 s5 [_id, attachmentPath, author, comments, likes, text] keep [] true false \n' +
-                '                [1] scan s5 s6 none none none none [] @"7be1d7d2-1ff0-4c52-bb41-84180c0cbf1c" true false \n' +
+                '                [1] scan s5 s6 none none none none [] @"26c1b4fe-061d-4963-aa92-9e25709fe9e6" true false \n' +
                 '            right \n' +
                 '                [3] project [s15 = if (getArraySize (s13) > 0, s13, [null])] \n' +
                 '                [3] group [] [s13 = addToSet (s11)] spillSlots[s14] mergingExprs[aggSetUnion (s14)] \n' +
@@ -90,7 +90,7 @@ Loading file: home/3_postsWithLikeLikeCount.js
                 '    inner s21 [s8] \n' +
                 '        [3] nlj [s8] [s8] \n' +
                 '            left \n' +
-                '                [3] scan s8 s9 none none none none [] @"f70cf398-0449-4042-9d6a-d5f6fe3853f0" true false \n' +
+                '                [3] scan s8 s9 none none none none [] @"9534d683-7893-4bb7-9596-70fa4704be1f" true false \n' +
                 '            right \n' +
                 '                [3] group [] [s21 = addToSet (s20)] spillSlots[s22] mergingExprs[aggSetUnion (s22)] \n' +
                 '                [3] nlj [] [s16] \n' +
@@ -121,14 +121,14 @@ Loading file: home/3_postsWithLikeLikeCount.js
         executionStats: {
           executionSuccess: true,
           nReturned: 380,
-          executionTimeMillis: 6,
+          executionTimeMillis: 5,
           totalKeysExamined: 0,
           totalDocsExamined: 550,
           executionStages: {
             stage: 'mkobj',
             planNodeId: 3,
             nReturned: 380,
-            executionTimeMillisEstimate: 4,
+            executionTimeMillisEstimate: 3,
             opens: 1,
             closes: 1,
             saveState: 1,
@@ -150,7 +150,7 @@ Loading file: home/3_postsWithLikeLikeCount.js
               stage: 'project',
               planNodeId: 3,
               nReturned: 380,
-              executionTimeMillisEstimate: 4,
+              executionTimeMillisEstimate: 3,
               opens: 1,
               closes: 1,
               saveState: 1,
@@ -163,7 +163,7 @@ Loading file: home/3_postsWithLikeLikeCount.js
                 stage: 'hash_lookup',
                 planNodeId: 3,
                 nReturned: 380,
-                executionTimeMillisEstimate: 4,
+                executionTimeMillisEstimate: 3,
                 opens: 1,
                 closes: 1,
                 saveState: 1,
@@ -234,7 +234,7 @@ Loading file: home/3_postsWithLikeLikeCount.js
                         stage: 'scan',
                         planNodeId: 1,
                         nReturned: 380,
-                        executionTimeMillisEstimate: 0,
+                        executionTimeMillisEstimate: 1,
                         opens: 1,
                         closes: 1,
                         saveState: 1,
@@ -285,7 +285,7 @@ Loading file: home/3_postsWithLikeLikeCount.js
                           stage: 'unwind',
                           planNodeId: 3,
                           nReturned: 380,
-                          executionTimeMillisEstimate: 1,
+                          executionTimeMillisEstimate: 0,
                           opens: 380,
                           closes: 380,
                           saveState: 1,
@@ -299,7 +299,7 @@ Loading file: home/3_postsWithLikeLikeCount.js
                             stage: 'project',
                             planNodeId: 3,
                             nReturned: 380,
-                            executionTimeMillisEstimate: 1,
+                            executionTimeMillisEstimate: 0,
                             opens: 380,
                             closes: 380,
                             saveState: 1,
@@ -613,9 +613,9 @@ Loading file: home/3_postsWithLikeLikeCount.js
     {
       '$project': {
         _id: true,
-        text: true,
         author: true,
         attachmentPath: true,
+        text: true,
         comments: true,
         likes_count: {
           '$size': [
@@ -628,7 +628,7 @@ Loading file: home/3_postsWithLikeLikeCount.js
     }
   ],
   serverInfo: {
-    host: '197490493c42',
+    host: '5840582b630e',
     port: 27017,
     version: '6.0.5',
     gitVersion: 'c9a99c120371d4d4c52cbb15dac34a36ce8d3b1d'
@@ -678,15 +678,80 @@ Loading file: home/3_postsWithLikeLikeCount.js
   },
   ok: 1,
   '$clusterTime': {
-    clusterTime: Timestamp({ t: 1683116871, i: 2 }),
+    clusterTime: Timestamp({ t: 1683546520, i: 2 }),
     signature: {
       hash: Binary(Buffer.from("0000000000000000000000000000000000000000", "hex"), 0),
       keyId: Long("0")
     }
   },
-  operationTime: Timestamp({ t: 1683116871, i: 2 })
+  operationTime: Timestamp({ t: 1683546520, i: 2 })
 }
 [
+  {
+    _id: 'post_5',
+    author: 'user_537',
+    text: 'deserunt proident deserunt fugiat aliquip nostrud sunt aute fugiat esse',
+    attachmentPath: 'images/files/1c939a57-856f-4a58-9f42-e0832bda5883.png',
+    comments: [],
+    likes_count: 1
+  },
+  {
+    _id: 'post_6',
+    author: 'user_574',
+    text: 'sunt voluptate nulla pariatur consectetur incididunt do eu qui ullamco',
+    attachmentPath: 'images/files/8cb19714-8924-4a40-bc3e-399e882a2c4c.png',
+    comments: [
+      {
+        id: 'comment_147'
+      },
+      {
+        id: 'comment_144'
+      }
+    ],
+    likes_count: 1
+  },
+  {
+    _id: 'post_8',
+    author: 'user_737',
+    text: 'excepteur sit dolor minim ipsum occaecat tempor officia ea amet',
+    attachmentPath: 'images/files/d818cd04-4a06-47ae-a45b-7f6d261d7b27.png',
+    comments: [
+      {
+        id: 'comment_451'
+      },
+      {
+        id: 'comment_271'
+      }
+    ],
+    likes_count: 2
+  },
+  {
+    _id: 'post_10',
+    author: 'user_785',
+    text: 'elit minim velit ullamco sint incididunt ullamco excepteur ad elit',
+    attachmentPath: 'images/files/ddb1d4db-766b-42bb-a708-953dcf02d42c.png',
+    comments: [
+      {
+        id: 'comment_387'
+      },
+      {
+        id: 'comment_461'
+      }
+    ],
+    likes_count: 2
+  },
+  {
+    _id: 'post_7',
+    author: 'user_419',
+    text: 'amet pariatur voluptate nisi ut ut in dolor occaecat minim',
+    attachmentPath: 'images/files/ba706497-cedc-49a2-b184-aa0fe225a9d3.png',
+    comments: [
+      {
+        id: 'comment_380'
+      }
+    ],
+    likes_count: 3
+  },
   {
     _id: 'post_17',
     author: 'user_256',
@@ -711,19 +776,16 @@ Loading file: home/3_postsWithLikeLikeCount.js
     likes_count: 1
   },
   {
-    _id: 'post_6',
-    author: 'user_574',
-    text: 'sunt voluptate nulla pariatur consectetur incididunt do eu qui ullamco',
-    attachmentPath: 'images/files/8cb19714-8924-4a40-bc3e-399e882a2c4c.png',
+    _id: 'post_14',
+    author: 'user_526',
+    text: 'fugiat mollit occaecat fugiat voluptate cupidatat excepteur commodo cupidatat sit',
+    attachmentPath: 'images/files/eb23fe91-0347-4354-8e98-216b6b75594c.png',
     comments: [
       {
-        id: 'comment_147'
-      },
-      {
-        id: 'comment_144'
+        id: 'comment_441'
       }
     ],
-    likes_count: 1
+    likes_count: 3
   },
   {
     _id: 'post_20',
@@ -739,6 +801,22 @@ Loading file: home/3_postsWithLikeLikeCount.js
       }
     ],
     likes_count: 2
+  },
+  {
+    _id: 'post_23',
+    author: 'user_753',
+    text: 'labore nostrud incididunt excepteur do ea cupidatat adipisicing ipsum ut',
+    attachmentPath: 'images/files/75696e07-23a1-4611-bd74-2559c49cb41e.png',
+    comments: [],
+    likes_count: 2
+  },
+  {
+    _id: 'post_21',
+    author: 'user_387',
+    text: 'et Lorem nostrud in ullamco magna pariatur minim esse est',
+    attachmentPath: 'images/files/6d249f72-f604-4970-a939-6790700321e9.png',
+    comments: [],
+    likes_count: 1
   },
   {
     _id: 'post_11',
@@ -769,14 +847,6 @@ Loading file: home/3_postsWithLikeLikeCount.js
       }
     ],
     likes_count: 1
-  },
-  {
-    _id: 'post_23',
-    author: 'user_753',
-    text: 'labore nostrud incididunt excepteur do ea cupidatat adipisicing ipsum ut',
-    attachmentPath: 'images/files/75696e07-23a1-4611-bd74-2559c49cb41e.png',
-    comments: [],
-    likes_count: 2
   },
   {
     _id: 'post_26',
@@ -814,14 +884,6 @@ Loading file: home/3_postsWithLikeLikeCount.js
     likes_count: 1
   },
   {
-    _id: 'post_5',
-    author: 'user_537',
-    text: 'deserunt proident deserunt fugiat aliquip nostrud sunt aute fugiat esse',
-    attachmentPath: 'images/files/1c939a57-856f-4a58-9f42-e0832bda5883.png',
-    comments: [],
-    likes_count: 1
-  },
-  {
     _id: 'post_29',
     author: 'user_816',
     text: 'do id tempor ad pariatur voluptate ipsum voluptate labore excepteur',
@@ -832,21 +894,6 @@ Loading file: home/3_postsWithLikeLikeCount.js
       },
       {
         id: 'comment_185'
-      }
-    ],
-    likes_count: 2
-  },
-  {
-    _id: 'post_8',
-    author: 'user_737',
-    text: 'excepteur sit dolor minim ipsum occaecat tempor officia ea amet',
-    attachmentPath: 'images/files/d818cd04-4a06-47ae-a45b-7f6d261d7b27.png',
-    comments: [
-      {
-        id: 'comment_451'
-      },
-      {
-        id: 'comment_271'
       }
     ],
     likes_count: 2
@@ -885,53 +932,6 @@ Loading file: home/3_postsWithLikeLikeCount.js
     attachmentPath: 'images/files/b04c6382-cb57-442d-8129-08989d3f9fa0.png',
     comments: [],
     likes_count: 1
-  },
-  {
-    _id: 'post_7',
-    author: 'user_419',
-    text: 'amet pariatur voluptate nisi ut ut in dolor occaecat minim',
-    attachmentPath: 'images/files/ba706497-cedc-49a2-b184-aa0fe225a9d3.png',
-    comments: [
-      {
-        id: 'comment_380'
-      }
-    ],
-    likes_count: 3
-  },
-  {
-    _id: 'post_14',
-    author: 'user_526',
-    text: 'fugiat mollit occaecat fugiat voluptate cupidatat excepteur commodo cupidatat sit',
-    attachmentPath: 'images/files/eb23fe91-0347-4354-8e98-216b6b75594c.png',
-    comments: [
-      {
-        id: 'comment_441'
-      }
-    ],
-    likes_count: 3
-  },
-  {
-    _id: 'post_21',
-    author: 'user_387',
-    text: 'et Lorem nostrud in ullamco magna pariatur minim esse est',
-    attachmentPath: 'images/files/6d249f72-f604-4970-a939-6790700321e9.png',
-    comments: [],
-    likes_count: 1
-  },
-  {
-    _id: 'post_10',
-    author: 'user_785',
-    text: 'elit minim velit ullamco sint incididunt ullamco excepteur ad elit',
-    attachmentPath: 'images/files/ddb1d4db-766b-42bb-a708-953dcf02d42c.png',
-    comments: [
-      {
-        id: 'comment_387'
-      },
-      {
-        id: 'comment_461'
-      }
-    ],
-    likes_count: 2
   }
 ]
 Type "it" for more

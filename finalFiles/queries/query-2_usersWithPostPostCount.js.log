@@ -1,4 +1,4 @@
-Current Mongosh Log ID:	64525347dcf662d1bb29e419
+Current Mongosh Log ID:	6458e198fcbf78e8fbac154b
 Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0
 Using MongoDB:		6.0.5
 Using Mongosh:		1.8.0
@@ -7,10 +7,10 @@ For mongosh info see: https://docs.mongodb.com/mongodb-shell/
 
 ------
    The server generated these startup warnings when booting
-   2023-05-03T12:27:32.324+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
-   2023-05-03T12:27:33.117+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
-   2023-05-03T12:27:33.117+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
-   2023-05-03T12:27:33.117+00:00: vm.max_map_count is too low
+   2023-05-08T11:46:51.911+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2023-05-08T11:46:52.499+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-05-08T11:46:52.499+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
+   2023-05-08T11:46:52.499+00:00: vm.max_map_count is too low
 ------
 
 ------
@@ -71,7 +71,7 @@ Loading file: home/2_usersWithPostPostCount.js
               }
             },
             slotBasedPlan: {
-              slots: '$$RESULT=s25 env: { s4 = 1683116872344 (NOW), s3 = Timestamp(1683116871, 2) (CLUSTER_TIME), s2 = Nothing (SEARCH_META), s1 = TimeZoneDatabase(America/Goose_Bay...America/Porto_Acre) (timeZoneDB) }',
+              slots: '$$RESULT=s25 env: { s3 = Timestamp(1683546520, 2) (CLUSTER_TIME), s2 = Nothing (SEARCH_META), s1 = TimeZoneDatabase(Australia/Brisbane...Pacific/Chuuk) (timeZoneDB), s4 = 1683546520961 (NOW) }',
               stages: '[3] mkobj s25 s7 [] drop [posts = s24] true false \n' +
                 '[3] project [s24 = fillEmpty (s23, [])] \n' +
                 '[3] hash_lookup [s23 = addToArray (s8)] \n' +
@@ -79,7 +79,7 @@ Loading file: home/2_usersWithPostPostCount.js
                 '        [3] nlj [s7] [s7] \n' +
                 '            left \n' +
                 '                [2] mkbson s7 s5 [_id, address, dateOfBirth, email, firstName, friends, lastName, posts] keep [] true false \n' +
-                '                [1] scan s5 s6 none none none none [] @"3ad17674-a63b-4ed4-a018-ac21a8229477" true false \n' +
+                '                [1] scan s5 s6 none none none none [] @"fbcb99a2-7907-4021-9be3-8b40d3a6932a" true false \n' +
                 '            right \n' +
                 '                [3] project [s15 = if (getArraySize (s13) > 0, s13, [null])] \n' +
                 '                [3] group [] [s13 = addToSet (s11)] spillSlots[s14] mergingExprs[aggSetUnion (s14)] \n' +
@@ -92,7 +92,7 @@ Loading file: home/2_usersWithPostPostCount.js
                 '    inner s21 [s8] \n' +
                 '        [3] nlj [s8] [s8] \n' +
                 '            left \n' +
-                '                [3] scan s8 s9 none none none none [] @"7be1d7d2-1ff0-4c52-bb41-84180c0cbf1c" true false \n' +
+                '                [3] scan s8 s9 none none none none [] @"26c1b4fe-061d-4963-aa92-9e25709fe9e6" true false \n' +
                 '            right \n' +
                 '                [3] group [] [s21 = addToSet (s20)] spillSlots[s22] mergingExprs[aggSetUnion (s22)] \n' +
                 '                [3] nlj [] [s16] \n' +
@@ -123,14 +123,14 @@ Loading file: home/2_usersWithPostPostCount.js
         executionStats: {
           executionSuccess: true,
           nReturned: 1000,
-          executionTimeMillis: 10,
+          executionTimeMillis: 11,
           totalKeysExamined: 0,
           totalDocsExamined: 1380,
           executionStages: {
             stage: 'mkobj',
             planNodeId: 3,
             nReturned: 1000,
-            executionTimeMillisEstimate: 6,
+            executionTimeMillisEstimate: 8,
             opens: 1,
             closes: 1,
             saveState: 2,
@@ -152,7 +152,7 @@ Loading file: home/2_usersWithPostPostCount.js
               stage: 'project',
               planNodeId: 3,
               nReturned: 1000,
-              executionTimeMillisEstimate: 4,
+              executionTimeMillisEstimate: 5,
               opens: 1,
               closes: 1,
               saveState: 2,
@@ -165,7 +165,7 @@ Loading file: home/2_usersWithPostPostCount.js
                 stage: 'hash_lookup',
                 planNodeId: 3,
                 nReturned: 1000,
-                executionTimeMillisEstimate: 4,
+                executionTimeMillisEstimate: 5,
                 opens: 1,
                 closes: 1,
                 saveState: 2,
@@ -186,7 +186,7 @@ Loading file: home/2_usersWithPostPostCount.js
                     stage: 'nlj',
                     planNodeId: 3,
                     nReturned: 1000,
-                    executionTimeMillisEstimate: 3,
+                    executionTimeMillisEstimate: 4,
                     opens: 1,
                     closes: 1,
                     saveState: 2,
@@ -289,7 +289,7 @@ Loading file: home/2_usersWithPostPostCount.js
                           stage: 'unwind',
                           planNodeId: 3,
                           nReturned: 1000,
-                          executionTimeMillisEstimate: 0,
+                          executionTimeMillisEstimate: 1,
                           opens: 1000,
                           closes: 1000,
                           saveState: 2,
@@ -344,7 +344,7 @@ Loading file: home/2_usersWithPostPostCount.js
                     stage: 'nlj',
                     planNodeId: 3,
                     nReturned: 380,
-                    executionTimeMillisEstimate: 0,
+                    executionTimeMillisEstimate: 1,
                     opens: 1,
                     closes: 1,
                     saveState: 2,
@@ -369,7 +369,7 @@ Loading file: home/2_usersWithPostPostCount.js
                       stage: 'scan',
                       planNodeId: 3,
                       nReturned: 380,
-                      executionTimeMillisEstimate: 0,
+                      executionTimeMillisEstimate: 1,
                       opens: 1,
                       closes: 1,
                       saveState: 2,
@@ -603,7 +603,7 @@ Loading file: home/2_usersWithPostPostCount.js
         }
       },
       nReturned: Long("1000"),
-      executionTimeMillisEstimate: Long("7")
+      executionTimeMillisEstimate: Long("8")
     },
     {
       '$match': {
@@ -612,17 +612,17 @@ Loading file: home/2_usersWithPostPostCount.js
         }
       },
       nReturned: Long("315"),
-      executionTimeMillisEstimate: Long("7")
+      executionTimeMillisEstimate: Long("9")
     },
     {
       '$project': {
         _id: true,
         firstName: true,
-        email: true,
-        address: true,
-        lastName: true,
         dateOfBirth: true,
         friends: true,
+        email: true,
+        lastName: true,
+        address: true,
         posts_count: {
           '$size': [
             '$posts'
@@ -630,11 +630,11 @@ Loading file: home/2_usersWithPostPostCount.js
         }
       },
       nReturned: Long("315"),
-      executionTimeMillisEstimate: Long("7")
+      executionTimeMillisEstimate: Long("9")
     }
   ],
   serverInfo: {
-    host: '197490493c42',
+    host: '5840582b630e',
     port: 27017,
     version: '6.0.5',
     gitVersion: 'c9a99c120371d4d4c52cbb15dac34a36ce8d3b1d'
@@ -686,15 +686,43 @@ Loading file: home/2_usersWithPostPostCount.js
   },
   ok: 1,
   '$clusterTime': {
-    clusterTime: Timestamp({ t: 1683116871, i: 2 }),
+    clusterTime: Timestamp({ t: 1683546520, i: 2 }),
     signature: {
       hash: Binary(Buffer.from("0000000000000000000000000000000000000000", "hex"), 0),
       keyId: Long("0")
     }
   },
-  operationTime: Timestamp({ t: 1683116871, i: 2 })
+  operationTime: Timestamp({ t: 1683546520, i: 2 })
 }
 [
+  {
+    _id: 'user_10',
+    firstName: 'Georges',
+    lastName: 'Giannotti',
+    email: 'ggiannotti9@businessweek.com',
+    dateOfBirth: ISODate("2013-06-08T00:48:00.000Z"),
+    address: {
+      city: 'VĂ¤sterhaninge',
+      postal: '798 285',
+      street: '815 Westport Terrace',
+      country: 'Sweden'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_14',
+    firstName: 'Mirabelle',
+    lastName: 'Darling',
+    email: 'mdarlingd@creativecommons.org',
+    dateOfBirth: ISODate("2004-01-16T00:37:00.000Z"),
+    address: {
+      city: 'Novotroitsk',
+      postal: '600 858',
+      street: '03420 Walton Hill',
+      country: 'Russia'
+    },
+    posts_count: 1
+  },
   {
     _id: 'user_16',
     firstName: 'Aubry',
@@ -710,16 +738,30 @@ Loading file: home/2_usersWithPostPostCount.js
     posts_count: 2
   },
   {
-    _id: 'user_18',
-    firstName: 'Malorie',
-    lastName: 'Sandercock',
-    email: 'msandercockh@intel.com',
-    dateOfBirth: ISODate("1999-05-14T01:53:57.000Z"),
+    _id: 'user_6',
+    firstName: 'Johnnie',
+    lastName: 'Hedges',
+    email: 'jhedges5@hud.gov',
+    dateOfBirth: ISODate("2015-12-22T13:51:29.000Z"),
     address: {
-      city: 'Sacramento',
-      postal: '062 914',
-      street: '43 Surrey Lane',
-      country: 'United States'
+      city: 'Ĺ entrupert',
+      postal: '980 235',
+      street: '3 Warner Pass',
+      country: 'Slovenia'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_24',
+    firstName: 'Elmo',
+    lastName: 'Fincke',
+    email: 'efincken@icio.us',
+    dateOfBirth: ISODate("2009-05-27T11:35:32.000Z"),
+    address: {
+      city: 'Gucheng',
+      postal: '218 755',
+      street: '4 Novick Court',
+      country: 'China'
     },
     posts_count: 1
   },
@@ -738,16 +780,30 @@ Loading file: home/2_usersWithPostPostCount.js
     posts_count: 1
   },
   {
-    _id: 'user_24',
-    firstName: 'Elmo',
-    lastName: 'Fincke',
-    email: 'efincken@icio.us',
-    dateOfBirth: ISODate("2009-05-27T11:35:32.000Z"),
+    _id: 'user_18',
+    firstName: 'Malorie',
+    lastName: 'Sandercock',
+    email: 'msandercockh@intel.com',
+    dateOfBirth: ISODate("1999-05-14T01:53:57.000Z"),
     address: {
-      city: 'Gucheng',
-      postal: '218 755',
-      street: '4 Novick Court',
-      country: 'China'
+      city: 'Sacramento',
+      postal: '062 914',
+      street: '43 Surrey Lane',
+      country: 'United States'
+    },
+    posts_count: 1
+  },
+  {
+    _id: 'user_7',
+    firstName: 'Basile',
+    lastName: 'Le Gallo',
+    email: 'blegallo6@illinois.edu',
+    dateOfBirth: ISODate("2023-04-02T09:54:57.000Z"),
+    address: {
+      city: 'Pallasovka',
+      postal: '116 047',
+      street: '16 Merrick Parkway',
+      country: 'Russia'
     },
     posts_count: 1
   },
@@ -820,62 +876,6 @@ Loading file: home/2_usersWithPostPostCount.js
       country: 'Philippines'
     },
     posts_count: 2
-  },
-  {
-    _id: 'user_7',
-    firstName: 'Basile',
-    lastName: 'Le Gallo',
-    email: 'blegallo6@illinois.edu',
-    dateOfBirth: ISODate("2023-04-02T09:54:57.000Z"),
-    address: {
-      city: 'Pallasovka',
-      postal: '116 047',
-      street: '16 Merrick Parkway',
-      country: 'Russia'
-    },
-    posts_count: 1
-  },
-  {
-    _id: 'user_6',
-    firstName: 'Johnnie',
-    lastName: 'Hedges',
-    email: 'jhedges5@hud.gov',
-    dateOfBirth: ISODate("2015-12-22T13:51:29.000Z"),
-    address: {
-      city: 'Ĺ entrupert',
-      postal: '980 235',
-      street: '3 Warner Pass',
-      country: 'Slovenia'
-    },
-    posts_count: 1
-  },
-  {
-    _id: 'user_10',
-    firstName: 'Georges',
-    lastName: 'Giannotti',
-    email: 'ggiannotti9@businessweek.com',
-    dateOfBirth: ISODate("2013-06-08T00:48:00.000Z"),
-    address: {
-      city: 'VĂ¤sterhaninge',
-      postal: '798 285',
-      street: '815 Westport Terrace',
-      country: 'Sweden'
-    },
-    posts_count: 1
-  },
-  {
-    _id: 'user_14',
-    firstName: 'Mirabelle',
-    lastName: 'Darling',
-    email: 'mdarlingd@creativecommons.org',
-    dateOfBirth: ISODate("2004-01-16T00:37:00.000Z"),
-    address: {
-      city: 'Novotroitsk',
-      postal: '600 858',
-      street: '03420 Walton Hill',
-      country: 'Russia'
-    },
-    posts_count: 1
   },
   {
     _id: 'user_41',

@@ -1,4 +1,4 @@
-Current Mongosh Log ID:	645253477b2f0476ac6d9fb7
+Current Mongosh Log ID:	6458e197db9f4016edf6ceca
 Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0
 Using MongoDB:		6.0.5
 Using Mongosh:		1.8.0
@@ -7,10 +7,10 @@ For mongosh info see: https://docs.mongodb.com/mongodb-shell/
 
 ------
    The server generated these startup warnings when booting
-   2023-05-03T12:27:32.324+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
-   2023-05-03T12:27:33.117+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
-   2023-05-03T12:27:33.117+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
-   2023-05-03T12:27:33.117+00:00: vm.max_map_count is too low
+   2023-05-08T11:46:51.911+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2023-05-08T11:46:52.499+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-05-08T11:46:52.499+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
+   2023-05-08T11:46:52.499+00:00: vm.max_map_count is too low
 ------
 
 ------
@@ -62,7 +62,7 @@ Loading file: home/5_userMessages.js
         executionStats: {
           executionSuccess: true,
           nReturned: 1000,
-          executionTimeMillis: 212,
+          executionTimeMillis: 767,
           totalKeysExamined: 0,
           totalDocsExamined: 1000,
           executionStages: {
@@ -105,7 +105,7 @@ Loading file: home/5_userMessages.js
         }
       },
       nReturned: Long("1000"),
-      executionTimeMillisEstimate: Long("1")
+      executionTimeMillisEstimate: Long("2")
     },
     {
       '$lookup': {
@@ -146,16 +146,16 @@ Loading file: home/5_userMessages.js
       collectionScans: Long("2000"),
       indexesUsed: [],
       nReturned: Long("1000"),
-      executionTimeMillisEstimate: Long("210")
+      executionTimeMillisEstimate: Long("753")
     },
     {
       '$project': {
         _id: true,
         firstName: true,
-        email: true,
         dateOfBirth: true,
         friends: true,
         lastName: true,
+        email: true,
         address: true,
         sent_messages_count: {
           '$size': [
@@ -191,11 +191,11 @@ Loading file: home/5_userMessages.js
         }
       },
       nReturned: Long("1000"),
-      executionTimeMillisEstimate: Long("212")
+      executionTimeMillisEstimate: Long("757")
     }
   ],
   serverInfo: {
-    host: '197490493c42',
+    host: '5840582b630e',
     port: 27017,
     version: '6.0.5',
     gitVersion: 'c9a99c120371d4d4c52cbb15dac34a36ce8d3b1d'
@@ -290,29 +290,44 @@ Loading file: home/5_userMessages.js
   },
   ok: 1,
   '$clusterTime': {
-    clusterTime: Timestamp({ t: 1683116871, i: 2 }),
+    clusterTime: Timestamp({ t: 1683546520, i: 2 }),
     signature: {
       hash: Binary(Buffer.from("0000000000000000000000000000000000000000", "hex"), 0),
       keyId: Long("0")
     }
   },
-  operationTime: Timestamp({ t: 1683116871, i: 2 })
+  operationTime: Timestamp({ t: 1683546520, i: 2 })
 }
 [
   {
-    _id: 'user_3',
-    firstName: 'Miller',
-    lastName: 'Weller',
-    email: 'mweller2@purevolume.com',
-    dateOfBirth: ISODate("2014-05-13T07:35:50.000Z"),
+    _id: 'user_1',
+    firstName: 'Rickert',
+    lastName: 'Reolfo',
+    email: 'rreolfo0@sciencedaily.com',
+    dateOfBirth: ISODate("2007-07-31T13:06:00.000Z"),
     address: {
-      city: 'Doblas',
-      postal: '971 904',
-      street: '745 Bunker Hill Avenue',
-      country: 'Argentina'
+      city: 'Cagnes-sur-Mer',
+      postal: '629 392',
+      street: '311 American Alley',
+      country: 'France'
     },
     sent_messages_count: 0,
-    received_messages_count: 0
+    received_messages_count: 1
+  },
+  {
+    _id: 'user_8',
+    firstName: 'Honey',
+    lastName: 'Varnam',
+    email: 'hvarnam7@kickstarter.com',
+    dateOfBirth: ISODate("2003-10-15T12:37:10.000Z"),
+    address: {
+      city: 'Fengchan',
+      postal: '323 147',
+      street: '2990 Colorado Place',
+      country: 'China'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 1
   },
   {
     _id: 'user_9',
@@ -325,6 +340,141 @@ Loading file: home/5_userMessages.js
       postal: '020 884',
       street: '90 Chive Court',
       country: 'Philippines'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_10',
+    firstName: 'Georges',
+    lastName: 'Giannotti',
+    email: 'ggiannotti9@businessweek.com',
+    dateOfBirth: ISODate("2013-06-08T00:48:00.000Z"),
+    address: {
+      city: 'VĂ¤sterhaninge',
+      postal: '798 285',
+      street: '815 Westport Terrace',
+      country: 'Sweden'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_4',
+    firstName: 'Rosabel',
+    lastName: 'Higounet',
+    email: 'rhigounet3@netvibes.com',
+    dateOfBirth: ISODate("2020-08-23T03:18:16.000Z"),
+    address: {
+      city: 'Toyohashi',
+      postal: '253 524',
+      street: '90862 Warner Road',
+      country: 'Japan'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_11',
+    firstName: 'Rebecca',
+    lastName: 'Paylie',
+    email: 'rpayliea@google.com.hk',
+    dateOfBirth: ISODate("2000-09-28T08:03:32.000Z"),
+    address: {
+      city: 'Azaruja',
+      postal: '756 771',
+      street: '82731 Buhler Drive',
+      country: 'Portugal'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 1
+  },
+  {
+    _id: 'user_12',
+    firstName: 'Israel',
+    lastName: 'Kyncl',
+    email: 'ikynclb@flavors.me',
+    dateOfBirth: ISODate("2005-01-27T01:03:35.000Z"),
+    address: {
+      city: 'Char BhadrÄ\x81san',
+      postal: '484 277',
+      street: '14526 Goodland Terrace',
+      country: 'Bangladesh'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_13',
+    firstName: 'Emlen',
+    lastName: 'Haughey',
+    email: 'ehaugheyc@wikia.com',
+    dateOfBirth: ISODate("2000-05-23T10:11:35.000Z"),
+    address: {
+      city: 'Obernai',
+      postal: '168 490',
+      street: '9773 Russell Place',
+      country: 'France'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_14',
+    firstName: 'Mirabelle',
+    lastName: 'Darling',
+    email: 'mdarlingd@creativecommons.org',
+    dateOfBirth: ISODate("2004-01-16T00:37:00.000Z"),
+    address: {
+      city: 'Novotroitsk',
+      postal: '600 858',
+      street: '03420 Walton Hill',
+      country: 'Russia'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_15',
+    firstName: 'Elvin',
+    lastName: 'Bradane',
+    email: 'ebradanee@nhs.uk',
+    dateOfBirth: ISODate("1999-07-22T09:42:25.000Z"),
+    address: {
+      city: 'Changle',
+      postal: '890 964',
+      street: '32128 Fieldstone Drive',
+      country: 'China'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_16',
+    firstName: 'Aubry',
+    lastName: 'Overton',
+    email: 'aovertonf@loc.gov',
+    dateOfBirth: ISODate("2015-06-27T14:34:26.000Z"),
+    address: {
+      city: 'Cascavel',
+      postal: '660 276',
+      street: '805 Lakewood Gardens Place',
+      country: 'Brazil'
+    },
+    sent_messages_count: 1,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_6',
+    firstName: 'Johnnie',
+    lastName: 'Hedges',
+    email: 'jhedges5@hud.gov',
+    dateOfBirth: ISODate("2015-12-22T13:51:29.000Z"),
+    address: {
+      city: 'Ĺ entrupert',
+      postal: '980 235',
+      street: '3 Warner Pass',
+      country: 'Slovenia'
     },
     sent_messages_count: 0,
     received_messages_count: 0
@@ -345,91 +495,31 @@ Loading file: home/5_userMessages.js
     received_messages_count: 0
   },
   {
-    _id: 'user_16',
-    firstName: 'Aubry',
-    lastName: 'Overton',
-    email: 'aovertonf@loc.gov',
-    dateOfBirth: ISODate("2015-06-27T14:34:26.000Z"),
+    _id: 'user_5',
+    firstName: 'Tybi',
+    lastName: 'Dafter',
+    email: 'tdafter4@nationalgeographic.com',
+    dateOfBirth: ISODate("2006-11-11T17:16:58.000Z"),
     address: {
-      city: 'Cascavel',
-      postal: '660 276',
-      street: '805 Lakewood Gardens Place',
-      country: 'Brazil'
+      city: 'Dhidhdhoo',
+      postal: '363 328',
+      street: '7 Hintze Pass',
+      country: 'Maldives'
     },
     sent_messages_count: 1,
-    received_messages_count: 0
+    received_messages_count: 1
   },
   {
-    _id: 'user_18',
-    firstName: 'Malorie',
-    lastName: 'Sandercock',
-    email: 'msandercockh@intel.com',
-    dateOfBirth: ISODate("1999-05-14T01:53:57.000Z"),
+    _id: 'user_3',
+    firstName: 'Miller',
+    lastName: 'Weller',
+    email: 'mweller2@purevolume.com',
+    dateOfBirth: ISODate("2014-05-13T07:35:50.000Z"),
     address: {
-      city: 'Sacramento',
-      postal: '062 914',
-      street: '43 Surrey Lane',
-      country: 'United States'
-    },
-    sent_messages_count: 1,
-    received_messages_count: 0
-  },
-  {
-    _id: 'user_19',
-    firstName: 'Jereme',
-    lastName: 'Guerriero',
-    email: 'jguerrieroi@goo.ne.jp',
-    dateOfBirth: ISODate("2004-05-27T00:57:41.000Z"),
-    address: {
-      city: 'VĂłlos',
-      postal: '442 832',
-      street: '5 Schlimgen Crossing',
-      country: 'Greece'
-    },
-    sent_messages_count: 0,
-    received_messages_count: 0
-  },
-  {
-    _id: 'user_20',
-    firstName: 'Catharina',
-    lastName: 'Punchard',
-    email: 'cpunchardj@addtoany.com',
-    dateOfBirth: ISODate("2011-01-25T05:01:06.000Z"),
-    address: {
-      city: 'Tianxing',
-      postal: '788 339',
-      street: '5 Messerschmidt Circle',
-      country: 'China'
-    },
-    sent_messages_count: 0,
-    received_messages_count: 0
-  },
-  {
-    _id: 'user_21',
-    firstName: 'Malissa',
-    lastName: 'Bevir',
-    email: 'mbevirk@cnet.com',
-    dateOfBirth: ISODate("2021-12-08T02:07:44.000Z"),
-    address: {
-      city: 'Cabiguan',
-      postal: '583 784',
-      street: '8640 Sundown Drive',
-      country: 'Philippines'
-    },
-    sent_messages_count: 0,
-    received_messages_count: 0
-  },
-  {
-    _id: 'user_22',
-    firstName: 'Pammi',
-    lastName: "Maggill'Andreis",
-    email: 'pmaggillandreisl@wunderground.com',
-    dateOfBirth: ISODate("2010-02-24T16:27:15.000Z"),
-    address: {
-      city: 'Mqabba',
-      postal: '803 073',
-      street: '12090 Burning Wood Plaza',
-      country: 'Malta'
+      city: 'Doblas',
+      postal: '971 904',
+      street: '745 Bunker Hill Avenue',
+      country: 'Argentina'
     },
     sent_messages_count: 0,
     received_messages_count: 0
@@ -447,6 +537,36 @@ Loading file: home/5_userMessages.js
       country: 'Mongolia'
     },
     sent_messages_count: 0,
+    received_messages_count: 1
+  },
+  {
+    _id: 'user_22',
+    firstName: 'Pammi',
+    lastName: "Maggill'Andreis",
+    email: 'pmaggillandreisl@wunderground.com',
+    dateOfBirth: ISODate("2010-02-24T16:27:15.000Z"),
+    address: {
+      city: 'Mqabba',
+      postal: '803 073',
+      street: '12090 Burning Wood Plaza',
+      country: 'Malta'
+    },
+    sent_messages_count: 0,
+    received_messages_count: 0
+  },
+  {
+    _id: 'user_2',
+    firstName: 'Ray',
+    lastName: 'Bunworth',
+    email: 'rbunworth1@hao123.com',
+    dateOfBirth: ISODate("2001-06-18T14:06:00.000Z"),
+    address: {
+      city: 'Jingtan',
+      postal: '959 257',
+      street: '6 Commercial Hill',
+      country: 'China'
+    },
+    sent_messages_count: 1,
     received_messages_count: 1
   },
   {
@@ -477,126 +597,6 @@ Loading file: home/5_userMessages.js
       country: 'Portugal'
     },
     sent_messages_count: 0,
-    received_messages_count: 0
-  },
-  {
-    _id: 'user_26',
-    firstName: 'Langston',
-    lastName: 'Yuryatin',
-    email: 'lyuryatinp@telegraph.co.uk',
-    dateOfBirth: ISODate("2006-11-05T22:37:14.000Z"),
-    address: {
-      city: 'Kambing',
-      postal: '319 386',
-      street: '16849 Boyd Center',
-      country: 'Philippines'
-    },
-    sent_messages_count: 1,
-    received_messages_count: 0
-  },
-  {
-    _id: 'user_27',
-    firstName: 'Ashlie',
-    lastName: 'Peckham',
-    email: 'apeckhamq@photobucket.com',
-    dateOfBirth: ISODate("2020-08-04T23:20:56.000Z"),
-    address: {
-      city: 'Shipu',
-      postal: '878 953',
-      street: '6864 Carey Junction',
-      country: 'China'
-    },
-    sent_messages_count: 0,
-    received_messages_count: 1
-  },
-  {
-    _id: 'user_28',
-    firstName: 'Stu',
-    lastName: 'Payze',
-    email: 'spayzer@amazon.co.jp',
-    dateOfBirth: ISODate("2015-09-30T16:58:10.000Z"),
-    address: {
-      city: 'Dodol',
-      postal: '216 065',
-      street: '65 Corscot Junction',
-      country: 'Indonesia'
-    },
-    sent_messages_count: 0,
-    received_messages_count: 0
-  },
-  {
-    _id: 'user_29',
-    firstName: 'Kessiah',
-    lastName: 'Gonet',
-    email: 'kgonets@sina.com.cn',
-    dateOfBirth: ISODate("2012-01-12T11:13:16.000Z"),
-    address: {
-      city: 'Gaoyao',
-      postal: '383 615',
-      street: '96195 Grayhawk Plaza',
-      country: 'China'
-    },
-    sent_messages_count: 0,
-    received_messages_count: 0
-  },
-  {
-    _id: 'user_31',
-    firstName: 'Hazlett',
-    lastName: 'Tysack',
-    email: 'htysacku@google.com',
-    dateOfBirth: ISODate("2020-09-23T00:43:52.000Z"),
-    address: {
-      city: 'Rayevskiy',
-      postal: '462 771',
-      street: '4258 Service Street',
-      country: 'Russia'
-    },
-    sent_messages_count: 0,
-    received_messages_count: 0
-  },
-  {
-    _id: 'user_30',
-    firstName: 'Edvard',
-    lastName: 'Sircomb',
-    email: 'esircombt@unicef.org',
-    dateOfBirth: ISODate("2013-07-07T22:00:20.000Z"),
-    address: {
-      city: 'Al Jawf',
-      postal: '546 441',
-      street: '5 Melvin Pass',
-      country: 'Libya'
-    },
-    sent_messages_count: 0,
-    received_messages_count: 0
-  },
-  {
-    _id: 'user_12',
-    firstName: 'Israel',
-    lastName: 'Kyncl',
-    email: 'ikynclb@flavors.me',
-    dateOfBirth: ISODate("2005-01-27T01:03:35.000Z"),
-    address: {
-      city: 'Char BhadrÄ\x81san',
-      postal: '484 277',
-      street: '14526 Goodland Terrace',
-      country: 'Bangladesh'
-    },
-    sent_messages_count: 0,
-    received_messages_count: 0
-  },
-  {
-    _id: 'user_33',
-    firstName: 'Sara',
-    lastName: 'Santino',
-    email: 'ssantinow@usda.gov',
-    dateOfBirth: ISODate("2011-04-14T17:17:31.000Z"),
-    address: {
-      city: 'Lunao',
-      postal: '275 938',
-      street: '8 Elmside Pass',
-      country: 'Philippines'
-    },
-    sent_messages_count: 2,
     received_messages_count: 0
   }
 ]

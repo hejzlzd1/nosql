@@ -1,4 +1,4 @@
-Current Mongosh Log ID:	6452534787d99605f0ec1306
+Current Mongosh Log ID:	6458e19874d34386ec1290e4
 Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0
 Using MongoDB:		6.0.5
 Using Mongosh:		1.8.0
@@ -7,10 +7,10 @@ For mongosh info see: https://docs.mongodb.com/mongodb-shell/
 
 ------
    The server generated these startup warnings when booting
-   2023-05-03T12:27:32.324+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
-   2023-05-03T12:27:33.117+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
-   2023-05-03T12:27:33.117+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
-   2023-05-03T12:27:33.117+00:00: vm.max_map_count is too low
+   2023-05-08T11:46:51.911+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2023-05-08T11:46:52.499+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-05-08T11:46:52.499+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
+   2023-05-08T11:46:52.499+00:00: vm.max_map_count is too low
 ------
 
 ------
@@ -231,7 +231,7 @@ Loading file: home/4_friendOfFriendOfFriend.js
     }
   ],
   serverInfo: {
-    host: '197490493c42',
+    host: '5840582b630e',
     port: 27017,
     version: '6.0.5',
     gitVersion: 'c9a99c120371d4d4c52cbb15dac34a36ce8d3b1d'
@@ -308,12 +308,12 @@ Loading file: home/4_friendOfFriendOfFriend.js
   },
   ok: 1,
   '$clusterTime': {
-    clusterTime: Timestamp({ t: 1683116871, i: 2 }),
+    clusterTime: Timestamp({ t: 1683546520, i: 2 }),
     signature: {
       hash: Binary(Buffer.from("0000000000000000000000000000000000000000", "hex"), 0),
       keyId: Long("0")
     }
   },
-  operationTime: Timestamp({ t: 1683116871, i: 2 })
+  operationTime: Timestamp({ t: 1683546520, i: 2 })
 }
 
